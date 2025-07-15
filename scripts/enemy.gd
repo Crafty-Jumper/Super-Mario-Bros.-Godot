@@ -209,3 +209,8 @@ func _on_wake_timer_timeout() -> void:
 	isInShell = false
 	animated_sprite_2d.animation = "default"
 	canMove = true
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite_2d.animation == "stomp" and not shellEnemy:
+		queue_free()
