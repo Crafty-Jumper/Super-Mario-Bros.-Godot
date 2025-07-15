@@ -1,0 +1,14 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cvukrqyqgvkux"
+
+[deps]
+
+source_file="res://Level Data/SMB/1-2.3_Enemies.csv"
+
+[params]
+
+compress=true
+delimiter=0
