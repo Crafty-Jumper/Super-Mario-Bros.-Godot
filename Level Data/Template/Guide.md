@@ -24,7 +24,7 @@ The properties "marioX" and "marioY" define where in the level mario starts.
 
 If you set any value in the pipescreen or pipes to an array, that screen is treated as a warp zone. These only go up to 3 values, for each pipe.
 
-Then there is the "song" property, which determines what song to play. The values are the same as theme, plus 5 = Star, and beyond can be added new songs.
+Then there is the "song" property, which determines what song to play. The values are the same as theme, increased by one, plus 6 = Star, and new songs can be added later.
 
 There is the "intermission" property, which treats that area like the beginning of 1-2, 2-2, 4-2, and 7-2.
 
