@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://vewa2fpvxbge"]
+
+[ext_resource type="Script" uid="uid://b4vrnw1dsovs6" path="res://scripts/firebar.gd" id="1_g6xlb"]
+[ext_resource type="PackedScene" uid="uid://cbytu2d2n4a8t" path="res://scenes/firebar_fireball.tscn" id="2_p746n"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_g6xlb")
+speed = -3
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+
+[node name="Fireball1" parent="Node2D" instance=ExtResource("2_p746n")]
+
+[node name="Fireball2" parent="Node2D" instance=ExtResource("2_p746n")]
+position = Vector2(8, 0)
+
+[node name="Fireball3" parent="Node2D" instance=ExtResource("2_p746n")]
+position = Vector2(16, 0)
+
+[node name="Fireball4" parent="Node2D" instance=ExtResource("2_p746n")]
+position = Vector2(24, 0)
+
+[node name="Fireball5" parent="Node2D" instance=ExtResource("2_p746n")]
+position = Vector2(32, 0)
+
+[node name="Fireball6" parent="Node2D" instance=ExtResource("2_p746n")]
+position = Vector2(40, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-8.9407e-08, -8.9407e-08)
+scale = Vector2(0.2, 0.2)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq7juy6eqbu2a"]
+
+[ext_resource type="FontFile" uid="uid://3jce0po554i7" path="res://Fonts/SMB Score Font.ttf" id="1_bak1h"]
+[ext_resource type="Script" uid="uid://cajxkg3tswbdj" path="res://scripts/score.gd" id="2_plgac"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+texture_filter = 1
+offset_right = 1672.0
+offset_bottom = 874.0
+theme_override_fonts/normal_font = ExtResource("1_bak1h")
+theme_override_font_sizes/normal_font_size = 8
+text = "1000"
+script = ExtResource("2_plgac")

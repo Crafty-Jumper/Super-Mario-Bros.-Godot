@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://tesmv1yomxnl"]
+
+[ext_resource type="PackedScene" uid="uid://dlv8kg74yx8e3" path="res://scenes/blocks/block.tscn" id="1_oyc27"]
+[ext_resource type="Texture2D" uid="uid://b4s1c81j1n0xc" path="res://images/block.png" id="2_lnnhk"]
+[ext_resource type="PackedScene" uid="uid://crk5nurkhs76a" path="res://scenes/selfDelete.tscn" id="2_pfktm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pfktm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lnnhk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="StaticBody2D" instance=ExtResource("1_oyc27")]
+use_parent_material = true
+item = ExtResource("2_pfktm")
+marioHit = 2
+metadata/canHit = true
+
+[node name="Node" parent="." index="3"]
+use_parent_material = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node" index="0"]
+texture_filter = 1
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_pfktm")

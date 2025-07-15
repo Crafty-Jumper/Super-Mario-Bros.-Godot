@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://ddu3d3l0d2xxe"]
+
+[ext_resource type="PackedScene" uid="uid://bffcf7iwcgdw8" path="res://scenes/entities/enemy.tscn" id="1_ecpfc"]
+[ext_resource type="Texture2D" uid="uid://benl8aq8a5n2y" path="res://images/koopa.png" id="2_8m31d"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_mer1x"]
+[ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="3_ccfcw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyqym"]
+shader = ExtResource("2_mer1x")
+shader_parameter/palette = ExtResource("3_ccfcw")
+shader_parameter/accessRow = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccfcw"]
+atlas = ExtResource("2_8m31d")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mer1x"]
+atlas = ExtResource("2_8m31d")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecpfc"]
+atlas = ExtResource("2_8m31d")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m31d"]
+atlas = ExtResource("2_8m31d")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyqym"]
+atlas = ExtResource("2_8m31d")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tyqym"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccfcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mer1x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecpfc")
+}],
+"loop": true,
+"name": &"stomp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8m31d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyqym")
+}],
+"loop": true,
+"name": &"wakeUp",
+"speed": 8.0
+}]
+
+[node name="CharacterBody2D" instance=ExtResource("1_ecpfc")]
+palette = 2
+movementType = 1
+moveSpeed = 40
+bounceSpeed = 250
+gravity = 10
+maxFallSpeed = 400
+marioJumpAction = 1
+fireballAction = 1
+starAction = 1
+shellEnemy = true
+wakeUpTime = 8
+shellSpeed = 160
+score = 100
+fireballScore = 100
+
+[node name="Area2D" parent="." index="1"]
+collision_layer = 2
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_tyqym")
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_tyqym")

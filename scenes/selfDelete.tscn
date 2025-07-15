@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crk5nurkhs76a"]
+
+[ext_resource type="Script" uid="uid://cc21bl1i6q6mu" path="res://scripts/self_delete.gd" id="1_y1urp"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_y1urp")

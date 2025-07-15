@@ -1,0 +1,286 @@
+[gd_scene load_steps=31 format=4 uid="uid://jdyx0sdk71r8"]
+
+[ext_resource type="Script" uid="uid://ctnt2olrhhc1f" path="res://scripts/title_screen.gd" id="1_h7nan"]
+[ext_resource type="PackedScene" uid="uid://u3rxnc0qfoau" path="res://scenes/HUD.tscn" id="2_kmjn6"]
+[ext_resource type="Shader" uid="uid://buksk5ouc5wba" path="res://shaders/PaletteSwapTiles.gdshader" id="3_c3a1m"]
+[ext_resource type="Texture2D" uid="uid://g5fdvo73o3ou" path="res://images/palettes/tilePalette.png" id="4_34fcq"]
+[ext_resource type="Texture2D" uid="uid://bkx3a688qm0n5" path="res://images/tiles.png" id="5_50bt7"]
+[ext_resource type="PackedScene" uid="uid://crr7wd058gblm" path="res://scenes/blocks/qblock.tscn" id="6_tf2d2"]
+[ext_resource type="PackedScene" uid="uid://di71jqagsmnai" path="res://scenes/blocks/qblock_mushroom.tscn" id="7_qv6qq"]
+[ext_resource type="PackedScene" uid="uid://tesmv1yomxnl" path="res://scenes/blocks/brickBlock.tscn" id="8_wnbcl"]
+[ext_resource type="PackedScene" uid="uid://dtw8ydupe7kjo" path="res://scenes/blocks/brickBlock10Coin.tscn" id="9_lw2sn"]
+[ext_resource type="PackedScene" uid="uid://sdens1bta7y4" path="res://scenes/blocks/pipe.tscn" id="10_quc56"]
+[ext_resource type="PackedScene" uid="uid://bn8fnjkh4p5xh" path="res://scenes/blocks/brickBlockMushroom.tscn" id="11_h3atg"]
+[ext_resource type="PackedScene" uid="uid://bypbsaos681uo" path="res://scenes/blocks/pipeLeft.tscn" id="12_qt8ul"]
+[ext_resource type="PackedScene" uid="uid://1nl3h0tmxqmu" path="res://scenes/blocks/brickBlockStar.tscn" id="13_kdp1s"]
+[ext_resource type="PackedScene" uid="uid://k2r703mpq3t8" path="res://scenes/blocks/coin.tscn" id="14_jms7e"]
+[ext_resource type="Script" uid="uid://cpbm10o4slycl" path="res://scripts/level_read.gd" id="15_jsfa5"]
+[ext_resource type="Texture2D" uid="uid://3hopto2kro8a" path="res://images/Title.png" id="16_5hhym"]
+[ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Mystery Font.ttf" id="17_k7t25"]
+[ext_resource type="Texture2D" uid="uid://8a6r6esd3f0n" path="res://images/mushroom-select.png" id="18_vuke4"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="19_7q7jk"]
+[ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="20_tmweu"]
+[ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://images/mario.png" id="21_qoa36"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_25oec"]
+shader = ExtResource("3_c3a1m")
+shader_parameter/palette = ExtResource("4_34fcq")
+shader_parameter/accessRow = 1
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_wc255"]
+tile_data = PackedInt32Array(0, 131075, 4, 1, 196611, 4, 2, 196611, 4, 3, 262147, 4)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e4yps"]
+texture = ExtResource("5_50bt7")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0, -8, -0.0267353)
+8:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0/custom_data_0 = 1
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0/custom_data_0 = 1
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0/custom_data_0 = 1
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:3/0/custom_data_0 = 1
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:3/0/custom_data_0 = 1
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:3/0/custom_data_0 = 1
+7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:3/0/custom_data_0 = 1
+8:3/0 = 0
+8:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:3/0/custom_data_0 = 1
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:4/0/custom_data_0 = 1
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0/custom_data_0 = 1
+2:4/0 = 0
+2:4/0/custom_data_0 = 1
+3:4/0 = 0
+3:4/0/custom_data_0 = 1
+4:4/0 = 0
+4:4/0/custom_data_0 = 1
+5:4/0 = 0
+5:4/0/custom_data_0 = 1
+6:4/0 = 0
+6:4/0/custom_data_0 = 1
+7:4/0 = 0
+7:4/0/custom_data_0 = 1
+8:4/0 = 0
+8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:4/0/custom_data_0 = 1
+0:5/0 = 0
+0:5/0/custom_data_0 = 1
+1:5/0 = 0
+1:5/0/custom_data_0 = 1
+2:5/0 = 0
+2:5/0/custom_data_0 = 1
+3:5/0 = 0
+3:5/0/custom_data_0 = 1
+4:5/0 = 0
+4:5/0/custom_data_0 = 1
+5:5/0 = 0
+5:5/0/custom_data_0 = 1
+6:5/0 = 0
+6:5/0/custom_data_0 = 1
+7:5/0 = 0
+7:5/0/custom_data_0 = 1
+8:5/0 = 0
+8:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:5/0/custom_data_0 = 1
+0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:6/0/custom_data_0 = 1
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:6/0/custom_data_0 = 1
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:6/0/custom_data_0 = 1
+3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:6/0/custom_data_0 = 1
+4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:6/0/custom_data_0 = 1
+5:6/0 = 0
+5:6/0/custom_data_0 = 1
+6:6/0 = 0
+6:6/0/custom_data_0 = 1
+7:6/0 = 0
+7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:7/0 = 0
+8:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_n6f6p"]
+scenes/1/scene = ExtResource("6_tf2d2")
+scenes/2/scene = ExtResource("7_qv6qq")
+scenes/3/scene = ExtResource("8_wnbcl")
+scenes/4/scene = ExtResource("9_lw2sn")
+scenes/5/scene = ExtResource("10_quc56")
+scenes/6/scene = ExtResource("11_h3atg")
+scenes/7/scene = ExtResource("12_qt8ul")
+scenes/8/scene = ExtResource("13_kdp1s")
+scenes/9/scene = ExtResource("14_jms7e")
+
+[sub_resource type="TileSet" id="TileSet_0hog8"]
+physics_layer_0/collision_layer = 4294967295
+custom_data_layer_0/name = "Palette"
+custom_data_layer_0/type = 2
+sources/1 = SubResource("TileSetScenesCollectionSource_n6f6p")
+sources/0 = SubResource("TileSetAtlasSource_e4yps")
+pattern_0 = SubResource("TileMapPattern_wc255")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86dtu"]
+shader = ExtResource("3_c3a1m")
+shader_parameter/palette = ExtResource("4_34fcq")
+shader_parameter/accessRow = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvog1"]
+shader = ExtResource("19_7q7jk")
+shader_parameter/palette = ExtResource("20_tmweu")
+shader_parameter/accessRow = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nob0"]
+atlas = ExtResource("21_qoa36")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6advc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nob0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_h7nan")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 3025.0
+offset_bottom = 343.0
+color = Color(0.580392, 0.580392, 1, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_25oec")
+tile_map_data = PackedByteArray("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")
+tile_set = SubResource("TileSet_0hog8")
+script = ExtResource("15_jsfa5")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+limit_left = 0
+limit_top = 0
+limit_bottom = 240
+
+[node name="Title" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_86dtu")
+position = Vector2(120, 76)
+texture = ExtResource("16_5hhym")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 80.0
+offset_top = 128.0
+offset_right = 184.0
+offset_bottom = 160.0
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("17_k7t25")
+theme_override_font_sizes/font_size = 8
+text = "1 PLAYER GAME
+
+SETTINGS
+
+FUN STUFF
+
+QUIT"
+
+[node name="Mushroom-select" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_25oec")
+position = Vector2(68, 132)
+texture = ExtResource("18_vuke4")
+
+[node name="Area2D" type="CharacterBody2D" parent="."]
+
+[node name="Mario" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qvog1")
+position = Vector2(48, 192)
+sprite_frames = SubResource("SpriteFrames_6advc")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 263
+offset_right = 37727.0
+offset_bottom = 10936.0
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("2_kmjn6")]
