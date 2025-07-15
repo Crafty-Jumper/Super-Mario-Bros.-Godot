@@ -39,9 +39,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_adqrc")
 }],
-"loop": true,
+"loop": false,
 "name": &"stomp",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [node name="CharacterBody2D" instance=ExtResource("1_adqrc")]
@@ -55,3 +55,4 @@ fireballAction = 1
 [node name="AnimatedSprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_fqyfu")
 sprite_frames = SubResource("SpriteFrames_mkp1w")
+animation = &"stomp"
