@@ -6,10 +6,11 @@ extends StaticBody2D
 @onready var node: Node = $Node
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 @export_enum ("Do Nothing","Small Break","Big Break","Spawn Item","Bump Only","Don't Break")
 var marioHit = 0
-
+@export var invisible : bool = false
 
 
 var bumped = 0
@@ -26,8 +27,14 @@ func _process(_delta: float) -> void:
 	if GlobalVariables.paused:
 		return
 	
+	if invisible and not hasBeenHit:
+		node.hide()
+		collision_shape_2d.disabled = true
+	
 	node.position.y = (16 - (-8*(cos(bumped)+1))) - 32
 	if hasBeenHit:
+		node.show()
+		collision_shape_2d.disabled = false
 		if bumped > 0:
 			bumped -= 1
 		if bumped <= 0:
