@@ -1,16 +1,16 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var big_jump: AudioStreamPlayer2D = $BigJump
+@onready var big_jump: AudioStreamPlayer = $BigJump
 @onready var timer: Timer = $Timer
-@onready var small_jump: AudioStreamPlayer2D = $SmallJump
+@onready var small_jump: AudioStreamPlayer = $SmallJump
 @onready var ColDown: CollisionShape2D = $ColDown
 @onready var ColUp: CollisionShape2D = $ColUp
-@onready var dead_music: AudioStreamPlayer2D = $DeadMusic
-@onready var powerup: AudioStreamPlayer2D = $Powerup
-@onready var hurt_pipe: AudioStreamPlayer2D = $"Hurt&Pipe"
-@onready var coin_sfx: AudioStreamPlayer2D = $CoinSFX
-@onready var swim_sfx: AudioStreamPlayer2D = $SwimSFX
+@onready var dead_music: AudioStreamPlayer = $DeadMusic
+@onready var powerup: AudioStreamPlayer = $Powerup
+@onready var hurt_pipe: AudioStreamPlayer = $"Hurt&Pipe"
+@onready var coin_sfx: AudioStreamPlayer = $CoinSFX
+@onready var swim_sfx: AudioStreamPlayer = $SwimSFX
 
 signal goal_pole
 
