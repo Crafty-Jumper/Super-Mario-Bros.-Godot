@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="room1bonus.csv" format="csv"/>
  </editorsettings>
- <tileset firstgid="1" source="../tilesmb.tsx"/>
- <tileset firstgid="257" source="../enemiessmb.tsx"/>
+ <tileset firstgid="1" source="../../tilesmb.tsx"/>
+ <tileset firstgid="257" source="../../enemiessmb.tsx"/>
  <layer id="1" name="Tiles" width="16" height="15">
   <properties>
    <property name="marioStartY" type="int" value="192"/>
