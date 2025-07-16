@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkj8j3l7j6u33"]
+
+[ext_resource type="PackedScene" uid="uid://bffcf7iwcgdw8" path="res://scenes/entities/enemy.tscn" id="1_adqrc"]
+[ext_resource type="Texture2D" uid="uid://deeaoeu24kald" path="res://images/goomba.png" id="2_0dten"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_82u26"]
+[ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="3_c625i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqyfu"]
+shader = ExtResource("2_82u26")
+shader_parameter/palette = ExtResource("3_c625i")
+shader_parameter/accessRow = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ukby"]
+atlas = ExtResource("2_0dten")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmnno"]
+atlas = ExtResource("2_0dten")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adqrc"]
+atlas = ExtResource("2_0dten")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkp1w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ukby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmnno")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adqrc")
+}],
+"loop": false,
+"name": &"stomp",
+"speed": 2.0
+}]
+
+[node name="CharacterBody2D" instance=ExtResource("1_adqrc")]
+movementType = 1
+moveSpeed = 40
+gravity = 40
+maxFallSpeed = 400
+marioJumpAction = 1
+fireballAction = 1
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_fqyfu")
+sprite_frames = SubResource("SpriteFrames_mkp1w")
+animation = &"stomp"

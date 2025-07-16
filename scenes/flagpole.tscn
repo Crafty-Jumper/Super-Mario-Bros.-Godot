@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://dchtemg20llqb"]
+
+[ext_resource type="Script" uid="uid://dcrtdntnaj177" path="res://scripts/flagpole.gd" id="1_qln48"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_bbwq4"]
+[ext_resource type="Texture2D" uid="uid://cibd5w5nj5nqw" path="res://images/flag.png" id="2_d7hrp"]
+[ext_resource type="AudioStream" uid="uid://bqvuu4sa3mrp1" path="res://audio/flagpole.mp3" id="3_d7hrp"]
+[ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="3_heuab"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmpsl"]
+shader = ExtResource("2_bbwq4")
+shader_parameter/palette = ExtResource("3_heuab")
+shader_parameter/accessRow = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7u70"]
+size = Vector2(2, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qln48"]
+size = Vector2(3, 0)
+
+[node name="Node" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_qln48")
+
+[node name="Flag" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_rmpsl")
+position = Vector2(1, 0)
+texture = ExtResource("2_d7hrp")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(9, 64)
+shape = SubResource("RectangleShape2D_s7u70")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.5, 8)
+shape = SubResource("RectangleShape2D_qln48")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_d7hrp")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

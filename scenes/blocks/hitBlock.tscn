@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://dpsf8jf6ucapr"]
+
+[ext_resource type="PackedScene" uid="uid://dlv8kg74yx8e3" path="res://scenes/blocks/block.tscn" id="1_sul3w"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_pyci4"]
+[ext_resource type="Texture2D" uid="uid://g5fdvo73o3ou" path="res://images/palettes/tilePalette.png" id="3_pyci4"]
+[ext_resource type="Texture2D" uid="uid://bkx3a688qm0n5" path="res://images/tiles.png" id="4_vduu4"]
+[ext_resource type="Script" uid="uid://dn28q7sxukk1a" path="res://scripts/single_palette.gd" id="5_t4f64"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lq3e"]
+shader = ExtResource("2_pyci4")
+shader_parameter/palette = ExtResource("3_pyci4")
+shader_parameter/accessRow = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21un4"]
+atlas = ExtResource("4_vduu4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dx06q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21un4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="StaticBody2D" instance=ExtResource("1_sul3w")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_7lq3e")
+sprite_frames = SubResource("SpriteFrames_dx06q")
+script = ExtResource("5_t4f64")

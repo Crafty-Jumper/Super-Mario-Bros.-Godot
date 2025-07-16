@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://1nl3h0tmxqmu"]
+
+[ext_resource type="PackedScene" uid="uid://tesmv1yomxnl" path="res://scenes/blocks/brickBlock.tscn" id="1_0sidy"]
+[ext_resource type="PackedScene" uid="uid://hnsq0f7ct8fa" path="res://scenes/entities/star.tscn" id="2_uo882"]
+[ext_resource type="PackedScene" uid="uid://dpsf8jf6ucapr" path="res://scenes/blocks/hitBlock.tscn" id="3_fc44t"]
+
+[node name="StaticBody2D" instance=ExtResource("1_0sidy")]
+item = ExtResource("2_uo882")
+replacementScene = ExtResource("3_fc44t")
+marioHit = 3
+metadata/getsReplaced = true

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjyupywymit1b"]
+
+[ext_resource type="PackedScene" uid="uid://b1aeundxx2iru" path="res://scenes/loading1.tscn" id="1_hcws6"]
+[ext_resource type="Script" uid="uid://c56nnpycqqtg2" path="res://scripts/gameover.gd" id="2_bcsd2"]
+[ext_resource type="AudioStream" uid="uid://b5j4ej3jfi14h" path="res://audio/music/gameover.mp3" id="3_bcsd2"]
+
+[node name="Node2D" instance=ExtResource("1_hcws6")]
+script = ExtResource("2_bcsd2")
+
+[node name="LivesLabel" parent="." index="3"]
+offset_left = 56.0
+offset_top = 87.0
+offset_right = 200.0
+offset_bottom = 127.0
+text = "SHIFT  - CONTINUE
+SPACE  - RESTART
+ENTER  - QUIT
+DELETE - CRASH"
+
+[node name="WorldLabel" parent="." index="4"]
+offset_top = 64.0
+offset_bottom = 72.0
+text = "GAME OVER"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="6"]
+stream = ExtResource("3_bcsd2")

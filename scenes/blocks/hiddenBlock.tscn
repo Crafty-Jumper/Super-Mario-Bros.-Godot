@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://7yjgj2bujgeg"]
+
+[ext_resource type="PackedScene" uid="uid://dlv8kg74yx8e3" path="res://scenes/blocks/block.tscn" id="1_7dcwi"]
+[ext_resource type="PackedScene" uid="uid://i78oy0dlmnjx" path="res://scenes/spinning_coin.tscn" id="2_7fx6n"]
+[ext_resource type="PackedScene" uid="uid://dpsf8jf6ucapr" path="res://scenes/blocks/hitBlock.tscn" id="3_7jdtg"]
+[ext_resource type="Texture2D" uid="uid://bkx3a688qm0n5" path="res://images/tiles.png" id="4_eeb5d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyl3i"]
+atlas = ExtResource("4_eeb5d")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xidf7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyl3i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="StaticBody2D" instance=ExtResource("1_7dcwi")]
+use_parent_material = true
+item = ExtResource("2_7fx6n")
+replacementScene = ExtResource("3_7jdtg")
+marioHit = 3
+invisible = true
+
+[node name="Node" parent="." index="3"]
+use_parent_material = true
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Node" index="0"]
+texture_filter = 1
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_xidf7")
