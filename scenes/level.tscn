@@ -1,16 +1,17 @@
-[gd_scene load_steps=43 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=44 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
 [ext_resource type="Script" uid="uid://c1lf2w74abeu1" path="res://scripts/level.gd" id="2_aicyk"]
-[ext_resource type="Shader" uid="uid://buksk5ouc5wba" path="res://shaders/PaletteSwapTiles.gdshader" id="2_i2t4f"]
 [ext_resource type="PackedScene" uid="uid://cndnoly72gxh6" path="res://scenes/pausemenu.tscn" id="2_kih21"]
 [ext_resource type="PackedScene" uid="uid://crr7wd058gblm" path="res://scenes/blocks/qblock.tscn" id="2_oi3di"]
 [ext_resource type="PackedScene" uid="uid://u3rxnc0qfoau" path="res://scenes/HUD.tscn" id="2_wu01b"]
 [ext_resource type="PackedScene" uid="uid://di71jqagsmnai" path="res://scenes/blocks/qblock_mushroom.tscn" id="3_0b4ue"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="3_2e2fo"]
 [ext_resource type="Texture2D" uid="uid://g5fdvo73o3ou" path="res://images/palettes/tilePalette.png" id="3_i2t4f"]
 [ext_resource type="PackedScene" uid="uid://tesmv1yomxnl" path="res://scenes/blocks/brickBlock.tscn" id="4_f2txt"]
 [ext_resource type="Texture2D" uid="uid://bkx3a688qm0n5" path="res://images/tiles.png" id="7_8cye3"]
+[ext_resource type="PackedScene" uid="uid://7yjgj2bujgeg" path="res://scenes/blocks/hiddenBlock.tscn" id="7_gur6y"]
 [ext_resource type="PackedScene" uid="uid://sdens1bta7y4" path="res://scenes/blocks/pipe.tscn" id="9_arp2o"]
 [ext_resource type="PackedScene" uid="uid://dtw8ydupe7kjo" path="res://scenes/blocks/brickBlock10Coin.tscn" id="10_arp2o"]
 [ext_resource type="PackedScene" uid="uid://bn8fnjkh4p5xh" path="res://scenes/blocks/brickBlockMushroom.tscn" id="10_ux5qa"]
@@ -33,10 +34,10 @@
 [ext_resource type="PackedScene" uid="uid://g0ngj3ah0fex" path="res://scenes/entities/koopa-red.tscn" id="30_2e2fo"]
 [ext_resource type="AudioStream" uid="uid://rp7d3q01hibi" path="res://audio/pause.mp3" id="31_w3o6u"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8cye3"]
-shader = ExtResource("2_i2t4f")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gur6y"]
+shader = ExtResource("3_2e2fo")
 shader_parameter/palette = ExtResource("3_i2t4f")
-shader_parameter/accessRow = 3
+shader_parameter/accessRow = 1
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_wc255"]
 tile_data = PackedInt32Array(0, 131075, 4, 1, 196611, 4, 2, 196611, 4, 3, 262147, 4)
@@ -190,6 +191,7 @@ scenes/6/scene = ExtResource("10_ux5qa")
 scenes/7/scene = ExtResource("11_82cfe")
 scenes/8/scene = ExtResource("12_gunhw")
 scenes/9/scene = ExtResource("13_5k0ak")
+scenes/10/scene = ExtResource("7_gur6y")
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
 physics_layer_0/collision_layer = 4294967295
@@ -201,17 +203,6 @@ pattern_0 = SubResource("TileMapPattern_wc255")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aicyk"]
 shader = ExtResource("1_8cye3")
-
-[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_gur6y"]
-stream_count = 4
-stream_0/stream = ExtResource("20_7agi7")
-stream_0/volume = 0.0
-stream_1/stream = ExtResource("21_kih21")
-stream_1/volume = 0.0
-stream_2/stream = ExtResource("22_w3o6u")
-stream_2/volume = 0.0
-stream_3/stream = ExtResource("23_2e2fo")
-stream_3/volume = 0.0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_arp2o"]
 resource_name = "Enemies"
@@ -228,6 +219,10 @@ sources/0 = SubResource("TileSetScenesCollectionSource_arp2o")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_arp2o"]
 size = Vector2(10, 20)
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_2e2fo"]
+stream_count = 1
+stream_0/volume = 0.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_aicyk")
@@ -246,7 +241,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_8cye3")
+material = SubResource("ShaderMaterial_gur6y")
 tile_set = SubResource("TileSet_oi3di")
 script = ExtResource("10_wc255")
 metadata/groundPalette = 0
@@ -264,12 +259,6 @@ position = Vector2(63, 83)
 [node name="StarMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_8gofh")
 volume_db = -5.0
-
-[node name="OverworldMusic" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamSynchronized_gur6y")
-volume_db = -5.0
-autoplay = true
-playback_type = 1
 
 [node name="GoalMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_fpun6")
@@ -295,14 +284,36 @@ limit_top = 0
 limit_right = 4096
 limit_bottom = 256
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("31_w3o6u")
+volume_db = -5.0
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("2_kih21")]
 visible = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("31_w3o6u")
-volume_db = -5.0
+[node name="Song" type="Node" parent="."]
+
+[node name="Pulse1" type="AudioStreamPlayer" parent="Song"]
+stream = ExtResource("20_7agi7")
+parameters/looping = true
+
+[node name="Pulse2" type="AudioStreamPlayer" parent="Song"]
+stream = ExtResource("21_kih21")
+parameters/looping = true
+
+[node name="Triangle" type="AudioStreamPlayer" parent="Song"]
+stream = ExtResource("22_w3o6u")
+parameters/looping = true
+
+[node name="Noise" type="AudioStreamPlayer" parent="Song"]
+stream = ExtResource("23_2e2fo")
+parameters/looping = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Song"]
+stream = SubResource("AudioStreamSynchronized_2e2fo")
+autoplay = true
 
 [connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]
