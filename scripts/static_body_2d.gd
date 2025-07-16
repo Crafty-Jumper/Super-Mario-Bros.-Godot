@@ -49,6 +49,8 @@ func _process(_delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Mario":
+		if body.velocity.y > 0 and invisible:
+			return
 		if marioHit == 0:
 			return
 		if marioHit > 0 and not marioHit == 5:
