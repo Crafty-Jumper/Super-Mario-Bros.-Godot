@@ -5,7 +5,7 @@ extends StaticBody2D
 @export var itemCount = 0
 @onready var node: Node = $Node
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var audio_stream_player_2d: AudioStreamPlayer = $AudioStreamPlayer2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 @export_enum ("Do Nothing","Small Break","Big Break","Spawn Item","Bump Only","Don't Break")
