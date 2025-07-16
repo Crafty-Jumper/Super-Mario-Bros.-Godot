@@ -11,4 +11,4 @@ Well, it's iconic. It's super popular. And, It's fun.
 - Player physics? Check. 
 - Original Levels? No problem.
 - Enemy AI? Yup.
-- Enemy physics? Uhhhhhh...
+- Enemy physics? Uhhhhhh... yesn't.
