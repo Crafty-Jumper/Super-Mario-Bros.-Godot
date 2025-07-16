@@ -1,5 +1,5 @@
 # Super-Mario-Bros.-Godot
-A remake of super mario bros made in the godot game engine
+A remake of super mario bros made in the godot game engine.
 
 # Why this game?
 Well, it's iconic. It's super popular. And, It's fun.
