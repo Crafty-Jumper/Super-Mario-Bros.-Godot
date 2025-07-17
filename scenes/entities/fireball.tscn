@@ -48,7 +48,7 @@ shader = ExtResource("1_1kocc")
 shader_parameter/palette = ExtResource("2_snu06")
 shader_parameter/accessRow = 5
 
-[node name="fireball" type="CharacterBody2D"]
+[node name="fireball" type="CharacterBody2D" groups=["fireball"]]
 collision_layer = 8
 script = ExtResource("1_snu06")
 

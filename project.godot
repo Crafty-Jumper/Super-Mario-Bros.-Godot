@@ -30,6 +30,7 @@ window/dpi/allow_hidpi=false
 [global_group]
 
 enemy=""
+fireball=""
 
 [input]
 
