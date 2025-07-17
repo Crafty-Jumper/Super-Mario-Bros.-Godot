@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=45 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://l2ndioya70d5" path="res://audio/music/Overworld-Noi.mp3" id="23_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://cdexvmfu6tdli" path="res://scenes/entities/bowser.tscn" id="25_3ies3"]
 [ext_resource type="PackedScene" uid="uid://ddu3d3l0d2xxe" path="res://scenes/entities/koopa-green.tscn" id="26_xy2fk"]
+[ext_resource type="PackedScene" uid="uid://cbakr6xm68j4r" path="res://scenes/entities/piranha-plant.tscn" id="28_v3why"]
 [ext_resource type="PackedScene" uid="uid://g0ngj3ah0fex" path="res://scenes/entities/koopa-red.tscn" id="30_2e2fo"]
 [ext_resource type="AudioStream" uid="uid://rp7d3q01hibi" path="res://audio/pause.mp3" id="31_w3o6u"]
 
@@ -212,6 +213,7 @@ scenes/3/scene = ExtResource("22_pqd0y")
 scenes/4/scene = ExtResource("25_3ies3")
 scenes/5/scene = ExtResource("26_xy2fk")
 scenes/6/scene = ExtResource("30_2e2fo")
+scenes/7/scene = ExtResource("28_v3why")
 
 [sub_resource type="TileSet" id="TileSet_ux5qa"]
 tile_size = Vector2i(8, 16)
