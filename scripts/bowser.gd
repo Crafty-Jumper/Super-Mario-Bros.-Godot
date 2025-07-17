@@ -4,6 +4,9 @@ extends CharacterBody2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var area_2d: Area2D = $Area2D
 
+@export var isFake : bool = true
+@export var EnemyImpostor = ""
+
 const gravity = 10
 var health = 10
 
@@ -16,11 +19,11 @@ func _physics_process(delta: float) -> void:
 		if randi_range(1,250) == 1:
 			velocity.y = -250
 	
-	if health == 0:
+	if health == 0 and not animated_sprite_2d.flip_v:
 		flip()
+		$AudioStreamPlayer.play()
 	
-
-
+	
 	move_and_slide()
 
 
