@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbakr6xm68j4r"]
+[gd_scene load_steps=10 format=3 uid="uid://cbakr6xm68j4r"]
 
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_j6xss"]
 [ext_resource type="Script" uid="uid://cbqbx6sh7fg6x" path="res://scenes/entities/piranha_plant.gd" id="1_k00gf"]
@@ -35,33 +35,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prpjl"]
 size = Vector2(14, 14)
 
-[sub_resource type="Animation" id="Animation_k00gf"]
-resource_name = "movemen"
-length = 6.0
-loop_mode = 1
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1, 3),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"moveUp"
-}, {
-"args": [],
-"method": &"moveDown"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ms8nk"]
-_data = {
-&"movemen": SubResource("Animation_k00gf")
-}
-
 [node name="Area2D" type="Area2D" groups=["enemy"]]
 collision_mask = 13
 script = ExtResource("1_k00gf")
@@ -71,13 +44,15 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_qc28s")
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_6jkvr")
+autoplay = "default"
 frame_progress = 0.280414
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_prpjl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ms8nk")
-}
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

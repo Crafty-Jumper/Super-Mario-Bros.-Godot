@@ -22,7 +22,6 @@ GlobalVariables="*res://scripts/global_variables.gd"
 
 window/size/viewport_width=768
 window/size/viewport_height=720
-window/size/initial_position_type=4
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/dpi/allow_hidpi=false
