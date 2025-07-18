@@ -3,7 +3,6 @@ extends Node2D
 @onready var color_rect: ColorRect = $CanvasLayer/ColorRect
 
 @onready var goal_music: AudioStreamPlayer = $GoalMusic
-@onready var star_music: AudioStreamPlayer = $StarMusic
 @onready var mario: CharacterBody2D = $Mario
 @onready var area_2d: CharacterBody2D = $Area2D
 @onready var static_body_2d: StaticBody2D = $StaticBody2D
@@ -37,14 +36,11 @@ func _ready() -> void:
 	
 	
 	
-	bgm.stream.set_sync_stream(0,load("res://audio/music/" + songNames[song] + "-Pul1.mp3"))
-	bgm.stream.set_sync_stream(1,load("res://audio/music/" + songNames[song] + "-Pul2.mp3"))
-	bgm.stream.set_sync_stream(2,load("res://audio/music/" + songNames[song] + "-Tri.mp3"))
-	bgm.stream.set_sync_stream(3,load("res://audio/music/" + songNames[song] + "-Noi.mp3"))
-	bgm.play()
+	loadtrack(song)
 	
 func _process(delta: float) -> void:
-	
+	if not bgm.playing:
+		bgm.play()
 	
 	
 	if GlobalVariables.pauseMenuOpen:
@@ -68,14 +64,13 @@ func _process(delta: float) -> void:
 		bgm.stop()
 	
 	if GlobalVariables.marioInvinc > 60:
-		if not star_music.playing:
-			star_music.play()
-			bgm.stop()
-			musicVolume([-80,-80,-80,-80])
+		if not song == 5:
+			loadtrack(5)
 	
 	
 	if GlobalVariables.marioInvinc < 60:
-		star_music.stop()
+		if not song == GlobalVariables.song:
+			loadtrack(GlobalVariables.song)
 	
 	if mario.position.x > camera_2d.position.x - 8:
 		if mario.velocity.x > 0:
@@ -126,3 +121,11 @@ func musicVolume(tracks:Array) -> void:
 	bgm.stream.set_sync_stream_volume(1,tracks[1])
 	bgm.stream.set_sync_stream_volume(2,tracks[2])
 	bgm.stream.set_sync_stream_volume(3,tracks[3])
+
+func loadtrack(track: int) -> void:
+	song = track
+	bgm.stream.set_sync_stream(0,load("res://audio/music/" + songNames[song] + "-Pul1.mp3"))
+	bgm.stream.set_sync_stream(1,load("res://audio/music/" + songNames[song] + "-Pul2.mp3"))
+	bgm.stream.set_sync_stream(2,load("res://audio/music/" + songNames[song] + "-Tri.mp3"))
+	bgm.stream.set_sync_stream(3,load("res://audio/music/" + songNames[song] + "-Noi.mp3"))
+	bgm.play()

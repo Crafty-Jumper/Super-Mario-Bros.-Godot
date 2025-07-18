@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=44 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://dchtemg20llqb" path="res://scenes/flagpole.tscn" id="13_64w2a"]
 [ext_resource type="AudioStream" uid="uid://w5eiy3dtll1c" path="res://audio/music/goalpole.mp3" id="14_fpun6"]
 [ext_resource type="PackedScene" uid="uid://bkj8j3l7j6u33" path="res://scenes/entities/goomb.tscn" id="15_wc255"]
-[ext_resource type="AudioStream" uid="uid://cm1gho3lm3l30" path="res://audio/music/star.mp3" id="17_8gofh"]
 [ext_resource type="PackedScene" uid="uid://vewa2fpvxbge" path="res://scenes/entities/firebar.tscn" id="21_h6wmr"]
 [ext_resource type="PackedScene" uid="uid://buaocyjfxqq3" path="res://scenes/entities/firebarcounter.tscn" id="22_pqd0y"]
 [ext_resource type="PackedScene" uid="uid://cdexvmfu6tdli" path="res://scenes/entities/bowser.tscn" id="25_3ies3"]
@@ -264,10 +263,6 @@ position = Vector2(-61, 62)
 material = SubResource("ShaderMaterial_aicyk")
 use_parent_material = true
 position = Vector2(63, 83)
-
-[node name="StarMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_8gofh")
-volume_db = -5.0
 
 [node name="GoalMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_fpun6")
