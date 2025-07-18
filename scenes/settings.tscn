@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccfilkoqarkgv"]
+[gd_scene load_steps=13 format=3 uid="uid://ccfilkoqarkgv"]
 
 [ext_resource type="AudioStream" uid="uid://cu2xnv2h4eedn" path="res://audio/music/settings.mp3" id="1_6wm04"]
 [ext_resource type="Script" uid="uid://b0fywl2325bue" path="res://scripts/settings.gd" id="1_83j8s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="3_gis3k"]
 [ext_resource type="Texture2D" uid="uid://g5fdvo73o3ou" path="res://images/palettes/tilePalette.png" id="4_83j8s"]
 [ext_resource type="Texture2D" uid="uid://nubvpgdj84sa" path="res://images/arrow.png" id="7_gjs24"]
+[ext_resource type="PackedScene" uid="uid://c8l5vnynqpdbi" path="res://scenes/option_selector.tscn" id="8_gjs24"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gjs24"]
 shader = ExtResource("3_gis3k")
@@ -76,61 +77,33 @@ TITLE"
 [node name="OptionsLabel" type="RichTextLabel" parent="."]
 texture_filter = 1
 offset_left = 148.0
-offset_top = 24.0
+offset_top = 16.0
 offset_right = 248.0
-offset_bottom = 216.0
+offset_bottom = 208.0
 theme_override_constants/line_separation = 0
 theme_override_fonts/normal_font = ExtResource("2_f4mfi")
 theme_override_font_sizes/normal_font_size = 8
+text = "A
 
-[node name="Brick-background" type="Sprite2D" parent="."]
-texture_filter = 1
-texture_repeat = 2
-material = SubResource("ShaderMaterial_gjs24")
-texture = ExtResource("3_es4n0")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 256, 8)
 
-[node name="Brick-background3" type="Sprite2D" parent="."]
-texture_filter = 1
-texture_repeat = 2
-material = SubResource("ShaderMaterial_am25x")
-position = Vector2(-992, 0)
-texture = ExtResource("3_es4n0")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 1000, 240)
 
-[node name="Brick-background4" type="Sprite2D" parent="."]
-texture_filter = 1
-texture_repeat = 2
-material = SubResource("ShaderMaterial_4ppmf")
-position = Vector2(248, 0)
-texture = ExtResource("3_es4n0")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 1000, 240)
+A
 
-[node name="Brick-background5" type="Sprite2D" parent="."]
-texture_filter = 1
-texture_repeat = 2
-material = SubResource("ShaderMaterial_4ppmf")
-position = Vector2(124, 4)
-texture = ExtResource("3_es4n0")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 8, 240)
 
-[node name="Brick-background2" type="Sprite2D" parent="."]
-texture_filter = 1
-texture_repeat = 2
-material = SubResource("ShaderMaterial_uhhto")
-position = Vector2(0, 232)
-texture = ExtResource("3_es4n0")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 256, 8)
+
+A
+
+
+
+A
+
+
+
+A
+
+
+
+A"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(128, 120)
@@ -140,3 +113,127 @@ zoom = Vector2(3, 3)
 texture_filter = 1
 position = Vector2(21, 28)
 texture = ExtResource("7_gjs24")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Brick-background" type="Sprite2D" parent="CanvasGroup"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_gjs24")
+texture = ExtResource("3_es4n0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 8)
+
+[node name="Brick-background3" type="Sprite2D" parent="CanvasGroup"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_am25x")
+position = Vector2(-992, 0)
+texture = ExtResource("3_es4n0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1000, 240)
+
+[node name="Brick-background4" type="Sprite2D" parent="CanvasGroup"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4ppmf")
+position = Vector2(248, 0)
+texture = ExtResource("3_es4n0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1000, 240)
+
+[node name="Brick-background5" type="Sprite2D" parent="CanvasGroup"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4ppmf")
+position = Vector2(124, 4)
+texture = ExtResource("3_es4n0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 240)
+
+[node name="Brick-background2" type="Sprite2D" parent="CanvasGroup"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_uhhto")
+position = Vector2(0, 232)
+texture = ExtResource("3_es4n0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 8)
+
+[node name="OptionSelector" parent="." instance=ExtResource("8_gjs24")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 148.0
+offset_top = 24.0
+offset_right = 188.0
+offset_bottom = 32.0
+grow_horizontal = 1
+grow_vertical = 1
+text = ""
+options = ["SMB", "NEW LEVELS"]
+
+[node name="OptionSelector2" parent="." instance=ExtResource("8_gjs24")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 148.0
+offset_top = 56.0
+offset_right = 188.0
+offset_bottom = 64.0
+grow_horizontal = 1
+grow_vertical = 1
+text = ""
+
+[node name="OptionSelector3" parent="." instance=ExtResource("8_gjs24")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 148.0
+offset_top = 88.0
+offset_right = 188.0
+offset_bottom = 96.0
+grow_horizontal = 1
+grow_vertical = 1
+text = ""
+
+[node name="OptionSelector4" parent="." instance=ExtResource("8_gjs24")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 148.0
+offset_top = 120.0
+offset_right = 188.0
+offset_bottom = 128.0
+grow_horizontal = 1
+grow_vertical = 1
+text = ""
+
+[node name="OptionSelector5" parent="." instance=ExtResource("8_gjs24")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 148.0
+offset_top = 152.0
+offset_right = 188.0
+offset_bottom = 160.0
+grow_horizontal = 1
+grow_vertical = 1
+text = ""
+
+[node name="OptionSelector6" parent="." instance=ExtResource("8_gjs24")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 148.0
+offset_top = 184.0
+offset_right = 188.0
+offset_bottom = 192.0
+grow_horizontal = 1
+grow_vertical = 1
+text = ""

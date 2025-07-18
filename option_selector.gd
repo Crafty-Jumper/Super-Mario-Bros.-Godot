@@ -15,7 +15,10 @@ func _process(delta: float) -> void:
 		selected = 0
 	if selected < 0:
 		selected = options.size() - 1
-	text = str(options.get(selected))
+	if options.size() == 0:
+		text = ""
+	else:
+		text = str(options.get(selected))
 	
 	if focused:
 		if Input.is_action_just_pressed("left"):
