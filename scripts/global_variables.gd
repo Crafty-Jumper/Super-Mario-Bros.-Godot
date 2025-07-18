@@ -34,6 +34,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		if pauseMenuOpen:
+			pauseMenuOpen = false
+		else:
+			pauseMenuOpen = true
+	
+	if pauseMenuOpen:
+		return
+	
 	fixpath()
 	
 	if marioState == 0:
@@ -52,11 +61,7 @@ func _process(delta: float) -> void:
 		marioInvinc = 0
 		
 	
-	if Input.is_action_just_pressed("pause"):
-		if pauseMenuOpen:
-			pauseMenuOpen = false
-		else:
-			pauseMenuOpen = true
+	
 		
 	
 

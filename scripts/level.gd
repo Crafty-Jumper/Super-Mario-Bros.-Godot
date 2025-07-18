@@ -20,7 +20,7 @@ extends Node2D
 
 var canStartGoalMusic : bool = true
 const songNames = ["None","Overworld","Underground","Underwater","Castle","Star"]
-
+var overrideBgmVolume : bool = false
 
 
 func _ready() -> void:
@@ -46,22 +46,25 @@ func _process(delta: float) -> void:
 	if GlobalVariables.pauseMenuOpen:
 		_pause_process(true)
 		pause_menu.show()
-		musicVolume([-80,-80,0,0])
+		if not overrideBgmVolume:
+			musicVolume([-80,-80,0,0])
 	else:
 		pause_menu.hide()
 		_pause_process(false)
-		musicVolume([0,0,0,0])
+		if not overrideBgmVolume:
+			musicVolume([0,0,0,0])
 	
 	
 	color_rect.color = Color(GlobalVariables.levelBGColor)
 	if mario.goal_walk and canStartGoalMusic:
 		goal_music.play()
 		canStartGoalMusic = false
-	
+		
+		
 	static_body_2d.position.y = mario.position.y
 	
 	if GlobalVariables.marioState == -3:
-		bgm.stop()
+		musicVolume([-80,-80,-80,-80])
 	
 	if GlobalVariables.marioInvinc > 60:
 		if not song == 5:
@@ -91,7 +94,8 @@ func _process(delta: float) -> void:
 
 
 func _on_mario_goal_pole() -> void:
-	bgm.stop()
+	musicVolume([-80,-80,-80,-80])
+	overrideBgmVolume = true
 
 func _on_goal_music_finished() -> void:
 	GlobalVariables.level += 1
