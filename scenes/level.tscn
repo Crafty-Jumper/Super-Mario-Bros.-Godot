@@ -23,17 +23,17 @@
 [ext_resource type="AudioStream" uid="uid://w5eiy3dtll1c" path="res://audio/music/goalpole.mp3" id="14_fpun6"]
 [ext_resource type="PackedScene" uid="uid://bkj8j3l7j6u33" path="res://scenes/entities/goomb.tscn" id="15_wc255"]
 [ext_resource type="AudioStream" uid="uid://cm1gho3lm3l30" path="res://audio/music/star.mp3" id="17_8gofh"]
-[ext_resource type="AudioStream" uid="uid://cj4gen12wupi0" path="res://audio/music/Overworld-Pul1.mp3" id="20_7agi7"]
 [ext_resource type="PackedScene" uid="uid://vewa2fpvxbge" path="res://scenes/entities/firebar.tscn" id="21_h6wmr"]
-[ext_resource type="AudioStream" uid="uid://dr0uytwxx6y54" path="res://audio/music/Overworld-Pul2.mp3" id="21_kih21"]
 [ext_resource type="PackedScene" uid="uid://buaocyjfxqq3" path="res://scenes/entities/firebarcounter.tscn" id="22_pqd0y"]
-[ext_resource type="AudioStream" uid="uid://12i7galbc1ei" path="res://audio/music/Overworld-Tri.mp3" id="22_w3o6u"]
-[ext_resource type="AudioStream" uid="uid://l2ndioya70d5" path="res://audio/music/Overworld-Noi.mp3" id="23_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://cdexvmfu6tdli" path="res://scenes/entities/bowser.tscn" id="25_3ies3"]
 [ext_resource type="PackedScene" uid="uid://ddu3d3l0d2xxe" path="res://scenes/entities/koopa-green.tscn" id="26_xy2fk"]
 [ext_resource type="PackedScene" uid="uid://cbakr6xm68j4r" path="res://scenes/entities/piranha-plant.tscn" id="28_v3why"]
 [ext_resource type="PackedScene" uid="uid://g0ngj3ah0fex" path="res://scenes/entities/koopa-red.tscn" id="30_2e2fo"]
 [ext_resource type="AudioStream" uid="uid://rp7d3q01hibi" path="res://audio/pause.mp3" id="31_w3o6u"]
+[ext_resource type="AudioStream" uid="uid://c14o64jy7nmln" path="res://audio/music/Castle-Pul1.mp3" id="35_asl66"]
+[ext_resource type="AudioStream" uid="uid://c3k2ewplw2rw3" path="res://audio/music/Castle-Pul2.mp3" id="36_svjb4"]
+[ext_resource type="AudioStream" uid="uid://c1b5nas20qnpl" path="res://audio/music/Castle-Tri.mp3" id="37_c1pbi"]
+[ext_resource type="AudioStream" uid="uid://d23fh35jy7wlp" path="res://audio/music/Castle-Noi.mp3" id="38_535f6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gur6y"]
 shader = ExtResource("3_2e2fo")
@@ -223,8 +223,15 @@ sources/0 = SubResource("TileSetScenesCollectionSource_arp2o")
 size = Vector2(10, 20)
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_2e2fo"]
-stream_count = 1
+stream_count = 4
+stream_0/stream = ExtResource("35_asl66")
 stream_0/volume = 0.0
+stream_1/stream = ExtResource("36_svjb4")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("37_c1pbi")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("38_535f6")
+stream_3/volume = 0.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_aicyk")
@@ -295,27 +302,8 @@ volume_db = -5.0
 [node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("2_kih21")]
 visible = false
 
-[node name="Song" type="Node" parent="."]
-
-[node name="Pulse1" type="AudioStreamPlayer" parent="Song"]
-stream = ExtResource("20_7agi7")
-parameters/looping = true
-
-[node name="Pulse2" type="AudioStreamPlayer" parent="Song"]
-stream = ExtResource("21_kih21")
-parameters/looping = true
-
-[node name="Triangle" type="AudioStreamPlayer" parent="Song"]
-stream = ExtResource("22_w3o6u")
-parameters/looping = true
-
-[node name="Noise" type="AudioStreamPlayer" parent="Song"]
-stream = ExtResource("23_2e2fo")
-parameters/looping = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Song"]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_2e2fo")
-autoplay = true
 
 [connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]

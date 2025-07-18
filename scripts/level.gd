@@ -11,18 +11,18 @@ extends Node2D
 @onready var pause_menu: Control = $CanvasLayer2/PauseMenu
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var tile_map_layer_2: TileMapLayer = $TileMapLayer2
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var pause: AudioStreamPlayer = $AudioStreamPlayer
+@onready var bgm: AudioStreamPlayer = $BGM
 
-@onready var pulse_1: AudioStreamPlayer = $Song/Pulse1
-@onready var pulse_2: AudioStreamPlayer = $Song/Pulse2
-@onready var triangle: AudioStreamPlayer = $Song/Triangle
-@onready var noise: AudioStreamPlayer = $Song/Noise
+
 
 @export var song = GlobalVariables.song
 @export var underwater : bool = false
 
 var canStartGoalMusic : bool = true
-const songNames = ["None","Overworld","Underground","Underwater","Castle"]
+const songNames = ["None","Overworld","Underground","Underwater","Castle","Star"]
+
+
 
 func _ready() -> void:
 	mario.position = Vector2(GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioX"],GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioY"])
@@ -35,25 +35,26 @@ func _ready() -> void:
 	
 	song = GlobalVariables.song
 	
-	pulse_1.stream = load("res://audio/music/" + songNames[song] + "-Pul1.mp3")
-	pulse_2.stream = load("res://audio/music/" + songNames[song] + "-Pul2.mp3")
-	triangle.stream = load("res://audio/music/" + songNames[song] + "-Tri.mp3")
-	noise.stream = load("res://audio/music/" + songNames[song] + "-Noi.mp3")
 	
-	pulse_1.play()
-	pulse_2.play()
-	triangle.play()
-	noise.play()
 	
+	bgm.stream.set_sync_stream(0,load("res://audio/music/" + songNames[song] + "-Pul1.mp3"))
+	bgm.stream.set_sync_stream(1,load("res://audio/music/" + songNames[song] + "-Pul2.mp3"))
+	bgm.stream.set_sync_stream(2,load("res://audio/music/" + songNames[song] + "-Tri.mp3"))
+	bgm.stream.set_sync_stream(3,load("res://audio/music/" + songNames[song] + "-Noi.mp3"))
+	bgm.play()
 	
 func _process(delta: float) -> void:
+	
+	
+	
 	if GlobalVariables.pauseMenuOpen:
 		_pause_process(true)
 		pause_menu.show()
+		musicVolume([-80,-80,0,0])
 	else:
 		pause_menu.hide()
 		_pause_process(false)
-	
+		musicVolume([0,0,0,0])
 	
 	
 	color_rect.color = Color(GlobalVariables.levelBGColor)
@@ -64,14 +65,13 @@ func _process(delta: float) -> void:
 	static_body_2d.position.y = mario.position.y
 	
 	if GlobalVariables.marioState == -3:
-		pulse_1.stop()
-		pulse_2.stop()
-		triangle.stop()
-		noise.stop()
+		bgm.stop()
 	
 	if GlobalVariables.marioInvinc > 60:
 		if not star_music.playing:
 			star_music.play()
+			bgm.stop()
+			musicVolume([-80,-80,-80,-80])
 	
 	
 	if GlobalVariables.marioInvinc < 60:
@@ -90,16 +90,13 @@ func _process(delta: float) -> void:
 	
 	
 	if Input.is_action_just_pressed("pause"):
-		audio_stream_player.play()
+		pause.play()
 	
 
 
 
 func _on_mario_goal_pole() -> void:
-	pulse_1.stop()
-	pulse_2.stop()
-	triangle.stop()
-	noise.stop()
+	bgm.stop()
 
 func _on_goal_music_finished() -> void:
 	GlobalVariables.level += 1
@@ -121,3 +118,11 @@ func _pause_process(pause: bool) -> void:
 		static_body_2d.process_mode = Node.PROCESS_MODE_ALWAYS
 		tile_map_layer_2.process_mode = Node.PROCESS_MODE_ALWAYS
 		goal_music.process_mode = Node.PROCESS_MODE_ALWAYS
+
+
+
+func musicVolume(tracks:Array) -> void:
+	bgm.stream.set_sync_stream_volume(0,tracks[0])
+	bgm.stream.set_sync_stream_volume(1,tracks[1])
+	bgm.stream.set_sync_stream_volume(2,tracks[2])
+	bgm.stream.set_sync_stream_volume(3,tracks[3])
