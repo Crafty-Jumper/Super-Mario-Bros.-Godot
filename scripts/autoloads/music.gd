@@ -1,6 +1,6 @@
 extends AudioStreamPlayer
 
-const songs = ["None","Overworld","Underground","Underwater","Castle","Star"]
+var song = ""
 var looping : bool = false
 
 func _ready() -> void:
@@ -12,6 +12,10 @@ func _process(delta: float) -> void:
 			play()
 
 func loadtrack(track: String,loop: bool = false) -> void:
+	if song == track:
+		return
+	song = track
+	
 	looping = loop
 	var checkPath = "user://Level Packs/" + GlobalVariables.levelpack + "/audio/music/"
 	for i in 2:
