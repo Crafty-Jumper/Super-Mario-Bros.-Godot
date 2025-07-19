@@ -14,7 +14,7 @@ extends Node2D
 
 
 
-@export var song = GlobalVariables.song
+@export var song : int = GlobalVariables.song
 @export var underwater : bool = false
 
 var canStartGoalMusic : bool = true
@@ -32,8 +32,10 @@ func _ready() -> void:
 	GlobalVariables.pauseMenuOpen = false
 	
 	song = GlobalVariables.song
-	Music.loadtrack(songNames[song],true)
-	
+	if song > -1:
+		Music.loadtrack(songNames[song],true)
+	else:
+		Music.loadtrack("custom" + str(abs(song)),true)
 	
 	
 	
@@ -44,12 +46,12 @@ func _process(delta: float) -> void:
 		_pause_process(true)
 		pause_menu.show()
 		if not overrideBgmVolume:
-			pass
+			Music.musicVolume([-80,-80,0,0,0])
 	else:
 		pause_menu.hide()
 		_pause_process(false)
 		if not overrideBgmVolume:
-			pass
+			Music.musicVolume([0,0,0,0,0])
 	
 	
 	color_rect.color = Color(GlobalVariables.levelBGColor)
@@ -61,11 +63,13 @@ func _process(delta: float) -> void:
 	static_body_2d.position.y = mario.position.y
 	
 	if GlobalVariables.marioState == -3:
-		pass
+		Music.loadtrack("None",false)
+	
+	
 	
 	if GlobalVariables.marioInvinc > 60:
 		if not song == 5:
-			pass
+			Music.loadtrack("Star",true)
 	
 	
 	if GlobalVariables.marioInvinc < 60:

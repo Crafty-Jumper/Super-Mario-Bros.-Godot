@@ -30,3 +30,4 @@ func musicVolume(tracks:Array) -> void:
 	stream.set_sync_stream_volume(1,tracks[1])
 	stream.set_sync_stream_volume(2,tracks[2])
 	stream.set_sync_stream_volume(3,tracks[3])
+	stream.set_sync_stream_volume(4,tracks[4])
