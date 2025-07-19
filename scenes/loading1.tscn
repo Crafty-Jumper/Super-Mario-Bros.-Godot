@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1aeundxx2iru"]
 
-[ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Fonts/Mystery Font.ttf" id="1_i2b0d"]
+[ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Mystery Font.ttf" id="1_i2b0d"]
 [ext_resource type="Script" uid="uid://d3wp32ywttypa" path="res://scripts/loading_1.gd" id="1_s40p7"]
 [ext_resource type="PackedScene" uid="uid://u3rxnc0qfoau" path="res://scenes/HUD.tscn" id="3_1inv1"]
 

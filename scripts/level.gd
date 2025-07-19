@@ -32,7 +32,7 @@ func _ready() -> void:
 	GlobalVariables.pauseMenuOpen = false
 	
 	song = GlobalVariables.song
-	
+	Music.loadtrack(songNames[song],true)
 	
 	
 	

@@ -1,20 +1,18 @@
 extends AudioStreamPlayer
 
-const songs = ["Overworld","Underground","Underwater","Castle","Star"]
+const songs = ["None","Overworld","Underground","Underwater","Castle","Star"]
+var looping : bool = false
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	stream = load("res://music.tres")
-	loadtrack(songs[GlobalVariables.song - 1])
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	if looping:
+		if not playing:
+			play()
 
-
-
-func loadtrack(track: String) -> void:
+func loadtrack(track: String,loop: bool) -> void:
+	looping = loop
 	var checkPath = "user://" + GlobalVariables.levelpack + "/audio/music/"
 	for i in 2:
 		stream.set_sync_stream(0,load(checkPath + track + "-Pul1.mp3"))
@@ -25,13 +23,7 @@ func loadtrack(track: String) -> void:
 		if FileAccess.file_exists(checkPath + track + "-Pul1.mp3"):
 			play()
 			return
-		else: if FileAccess.file_exists(checkPath + track + ".mp3"):
-			stream.set_sync_stream(5,checkPath + track + ".mp3")
-			stream.set_sync_stream(5,checkPath + track + "-pause.mp3")
-			play()
-			return
 		checkPath = "res://audio/music/"
-
 
 func musicVolume(tracks:Array) -> void:
 	stream.set_sync_stream_volume(0,tracks[0])

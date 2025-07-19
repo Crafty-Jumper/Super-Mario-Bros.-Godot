@@ -7,7 +7,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	pass
+	Music.loadtrack("None",false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

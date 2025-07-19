@@ -12,7 +12,7 @@ var fading : bool = false
 var targetString : String = ""
 
 func _ready() -> void:
-	pass
+	Music.loadtrack("None",false)
 
 
 
