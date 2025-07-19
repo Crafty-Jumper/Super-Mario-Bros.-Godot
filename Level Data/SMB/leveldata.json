@@ -1,27 +1,4 @@
 {
-	"0-0.0":{
-		"levelTheme":0,
-		"levelHeight":15,
-		"levelWidth":176,
-		"bgCol":"000000",
-		"marioX":48,
-		"marioY":112,
-		"pipes":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-		"pipescreen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-		"song":0
-	},
-	"yes":{
-		"nextRoom":"room1",
-		"levelTheme":1,
-		"levelHeight":15,
-		"levelWidth":256,
-		"bgCol":"9494ff",
-		"marioX":48,
-		"marioY":192,
-		"pipes":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-		"pipescreen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		"song":0
-		},
 	"1-1.0":{
 		"levelTheme":0,
 		"levelHeight":15,

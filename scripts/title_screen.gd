@@ -15,7 +15,6 @@ func _ready() -> void:
 	Music.loadtrack("None",false)
 
 
-
 func _process(delta: float) -> void:
 	mushroom_select.position.y = 132 + selectedButton * 16
 	mario.position = Vector2(GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioX"],GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioY"])

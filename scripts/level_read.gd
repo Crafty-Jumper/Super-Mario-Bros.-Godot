@@ -49,7 +49,7 @@ const enemyIDs = [
 ]
 
 func _ready() -> void:
-	
+	GlobalVariables.fixpath()
 	
 	# tiles
 	levelFile = FileAccess.open(GlobalVariables.levelPath + "_Tiles.csv", FileAccess.READ)

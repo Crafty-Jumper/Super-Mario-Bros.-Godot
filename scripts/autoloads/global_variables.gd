@@ -74,6 +74,7 @@ func map(input_min: float, input_max: float, output_min: float, output_max: floa
 
 
 func fixpath() -> void:
+	
 	song = leveldatajson[levelPrefix]["song"]
 	levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
 	levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix
