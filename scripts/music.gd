@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 		if not playing:
 			play()
 
-func loadtrack(track: String,loop: bool) -> void:
+func loadtrack(track: String,loop: bool = false) -> void:
 	looping = loop
 	var checkPath = "user://" + GlobalVariables.levelpack + "/audio/music/"
 	for i in 2:
