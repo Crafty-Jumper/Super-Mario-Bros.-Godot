@@ -3,7 +3,7 @@ extends Control
 @onready var texture_rect: TextureRect = $TextureRect
 var selectedButton = 0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	texture_rect.position.y = 276.0 + selectedButton * 64
 	
 	if GlobalVariables.pauseMenuOpen:

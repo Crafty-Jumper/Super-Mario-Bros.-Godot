@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 [autoload]
 
 GlobalVariables="*res://scripts/global_variables.gd"
+Music="*res://scripts/music.gd"
 
 [display]
 

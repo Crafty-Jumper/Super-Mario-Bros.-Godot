@@ -11,7 +11,6 @@ extends Node2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var tile_map_layer_2: TileMapLayer = $TileMapLayer2
 @onready var pause: AudioStreamPlayer = $AudioStreamPlayer
-@onready var bgm: AudioStreamPlayer = $BGM
 
 
 
@@ -36,23 +35,21 @@ func _ready() -> void:
 	
 	
 	
-	loadtrack(song)
+	
 	
 func _process(delta: float) -> void:
-	if not bgm.playing:
-		bgm.play()
 	
 	
 	if GlobalVariables.pauseMenuOpen:
 		_pause_process(true)
 		pause_menu.show()
 		if not overrideBgmVolume:
-			musicVolume([-80,-80,0,0])
+			pass
 	else:
 		pause_menu.hide()
 		_pause_process(false)
 		if not overrideBgmVolume:
-			musicVolume([0,0,0,0])
+			pass
 	
 	
 	color_rect.color = Color(GlobalVariables.levelBGColor)
@@ -64,16 +61,15 @@ func _process(delta: float) -> void:
 	static_body_2d.position.y = mario.position.y
 	
 	if GlobalVariables.marioState == -3:
-		musicVolume([-80,-80,-80,-80])
+		pass
 	
 	if GlobalVariables.marioInvinc > 60:
 		if not song == 5:
-			loadtrack(5)
+			pass
 	
 	
 	if GlobalVariables.marioInvinc < 60:
-		if not song == GlobalVariables.song:
-			loadtrack(GlobalVariables.song)
+		pass
 	
 	if mario.position.x > camera_2d.position.x - 8:
 		if mario.velocity.x > 0:
@@ -94,7 +90,6 @@ func _process(delta: float) -> void:
 
 
 func _on_mario_goal_pole() -> void:
-	musicVolume([-80,-80,-80,-80])
 	overrideBgmVolume = true
 
 func _on_goal_music_finished() -> void:
@@ -104,8 +99,8 @@ func _on_goal_music_finished() -> void:
 	get_tree().change_scene_to_file("res://scenes/loading1.tscn")
 	
 	
-func _pause_process(pause: bool) -> void:
-	if pause:
+func _pause_process(startPause: bool) -> void:
+	if startPause:
 		mario.process_mode = Node.PROCESS_MODE_DISABLED
 		area_2d.process_mode = Node.PROCESS_MODE_DISABLED
 		static_body_2d.process_mode = Node.PROCESS_MODE_DISABLED
@@ -117,19 +112,3 @@ func _pause_process(pause: bool) -> void:
 		static_body_2d.process_mode = Node.PROCESS_MODE_ALWAYS
 		tile_map_layer_2.process_mode = Node.PROCESS_MODE_ALWAYS
 		goal_music.process_mode = Node.PROCESS_MODE_ALWAYS
-
-
-
-func musicVolume(tracks:Array) -> void:
-	bgm.stream.set_sync_stream_volume(0,tracks[0])
-	bgm.stream.set_sync_stream_volume(1,tracks[1])
-	bgm.stream.set_sync_stream_volume(2,tracks[2])
-	bgm.stream.set_sync_stream_volume(3,tracks[3])
-
-func loadtrack(track: int) -> void:
-	song = track
-	bgm.stream.set_sync_stream(0,load("res://audio/music/" + songNames[song] + "-Pul1.mp3"))
-	bgm.stream.set_sync_stream(1,load("res://audio/music/" + songNames[song] + "-Pul2.mp3"))
-	bgm.stream.set_sync_stream(2,load("res://audio/music/" + songNames[song] + "-Tri.mp3"))
-	bgm.stream.set_sync_stream(3,load("res://audio/music/" + songNames[song] + "-Noi.mp3"))
-	bgm.play()
