@@ -7,14 +7,11 @@ extends Label
 var selected = 0
 var focused : bool = false
 
-
+signal value_changed
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if options.size() - 1 < selected:
-		selected = 0
-	if selected < 0:
-		selected = options.size() - 1
+	
 	if options.size() == 0:
 		text = ""
 	else:
@@ -23,8 +20,18 @@ func _process(delta: float) -> void:
 	if focused:
 		if Input.is_action_just_pressed("left"):
 			selected -= 1
+			if options.size() - 1 < selected:
+				selected = 0
+			if selected < 0:
+				selected = options.size() - 1
+			value_changed.emit()
 		if Input.is_action_just_pressed("right"):
 			selected += 1
+			if options.size() - 1 < selected:
+				selected = 0
+			if selected < 0:
+				selected = options.size() - 1
+			value_changed.emit()
 		arrow_left.show()
 		arrow_right.show()
 	else:

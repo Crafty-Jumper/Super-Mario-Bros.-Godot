@@ -9,8 +9,15 @@ extends Node2D
 @onready var option_selector_5: Label = $OptionSelector5
 @onready var option_selector_6: Label = $OptionSelector6
 
-
-
+const categories = ["Misc","Audio","","","",""]
+const saveValues = [
+	["levelPack","character","","","",""],
+	["master","pul1","pul2","tri","noi","dpcm"],
+	["","","","","",""],
+	["","","","","",""],
+	["","","","","",""],
+	["","","","","",""]
+]
 
 
 
@@ -18,17 +25,17 @@ var selectedButtonLeft = 0
 var selectedButtonRight = 0
 var isRight : bool = false
 var option = [
-	["LEVEL PACK","","","","",""],
+	["LEVEL PACK","CHARACTER","","","",""],
 	["MASTER","PUL1","PUL2","TRI","NOI","DPCM"],
-	["CHARACTER","","","","",""],
+	["","","","","",""],
 	["","","","","",""],
 	["","","","","",""],
 	["","","","","",""]
 ]
 var options = [
-	[["SMB","NEW LEVELS"],[""],[""],[""],[""],[""]],
+	[["SMB","NEW LEVELS"],["MARIO","LUIGI","TOAD","WARIO","WALUIGI"],[""],[""],[""],[""]],
 	[[0,1,2,3,4,5,6,7,8,9,10],[0,1,2,3,4,5,6,7,8,9,10],[0,1,2,3,4,5,6,7,8,9,10],[0,1,2,3,4,5,6,7,8,9,10],[0,1,2,3,4,5,6,7,8,9,10],[0,1,2,3,4,5,6,7,8,9,10]],
-	[["MARIO","LUIGI","TOAD","WARIO","WALUIGI"],[],[],[],[],[]],
+	[[],[],[],[],[],[]],
 	[[],[],[],[],[],[]],
 	[[],[],[],[],[],[]],
 	[[],[],[],[],[],[]]
@@ -108,5 +115,33 @@ func _process(delta: float) -> void:
 	selectedButtonRight = clamp(selectedButtonRight,0,5)
 	options_label.text = option[selectedButtonLeft][0] + "\n\n\n\n" + option[selectedButtonLeft][1] + "\n\n\n\n" + option[selectedButtonLeft][2] + "\n\n\n\n" + option[selectedButtonLeft][3] + "\n\n\n\n" + option[selectedButtonLeft][4] + "\n\n\n\n" + option[selectedButtonLeft][5]
 	
+	option_selector.selected = option_selector.options.find(Save.config.get_value(categories[selectedButtonLeft],saveValues[selectedButtonLeft][0]))
+	option_selector_2.selected = option_selector_2.options.find(Save.config.get_value(categories[selectedButtonLeft],saveValues[selectedButtonLeft][1]))
+	option_selector_3.selected = option_selector_3.options.find(Save.config.get_value(categories[selectedButtonLeft],saveValues[selectedButtonLeft][2]))
+	option_selector_4.selected = option_selector_4.options.find(Save.config.get_value(categories[selectedButtonLeft],saveValues[selectedButtonLeft][3]))
+	option_selector_5.selected = option_selector_5.options.find(Save.config.get_value(categories[selectedButtonLeft],saveValues[selectedButtonLeft][4]))
+	option_selector_6.selected = option_selector_6.options.find(Save.config.get_value(categories[selectedButtonLeft],saveValues[selectedButtonLeft][5]))
 	
-	
+
+func _on_option_selector_value_changed() -> void:
+	Save.saveSetting(categories[selectedButtonLeft],saveValues[selectedButtonLeft][0],option_selector.options[option_selector.selected])
+
+
+func _on_option_selector_2_value_changed() -> void:
+	Save.saveSetting(categories[selectedButtonLeft],saveValues[selectedButtonLeft][1],option_selector_2.options[option_selector_2.selected])
+
+
+func _on_option_selector_3_value_changed() -> void:
+	Save.saveSetting(categories[selectedButtonLeft],saveValues[selectedButtonLeft][2],option_selector_3.options[option_selector_3.selected])
+
+
+func _on_option_selector_4_value_changed() -> void:
+	Save.saveSetting(categories[selectedButtonLeft],saveValues[selectedButtonLeft][3],option_selector_4.options[option_selector_4.selected])
+
+
+func _on_option_selector_5_value_changed() -> void:
+	Save.saveSetting(categories[selectedButtonLeft],saveValues[selectedButtonLeft][4],option_selector_5.options[option_selector_5.selected])
+
+
+func _on_option_selector_6_value_changed() -> void:
+	Save.saveSetting(categories[selectedButtonLeft],saveValues[selectedButtonLeft][5],option_selector_6.options[option_selector_6.selected])

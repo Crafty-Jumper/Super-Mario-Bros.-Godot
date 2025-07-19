@@ -45,7 +45,7 @@ offset_bottom = 216.0
 theme_override_constants/line_separation = 0
 theme_override_fonts/normal_font = ExtResource("2_f4mfi")
 theme_override_font_sizes/normal_font_size = 8
-text = "LEVEL PACK
+text = "MISC
 
 
 
@@ -53,7 +53,7 @@ VOLUME
 
 
 
-CHARACTER
+UNUSED 1
 
 
 
@@ -231,3 +231,10 @@ offset_bottom = 192.0
 grow_horizontal = 1
 grow_vertical = 1
 text = ""
+
+[connection signal="value_changed" from="OptionSelector" to="." method="_on_option_selector_value_changed"]
+[connection signal="value_changed" from="OptionSelector2" to="." method="_on_option_selector_2_value_changed"]
+[connection signal="value_changed" from="OptionSelector3" to="." method="_on_option_selector_3_value_changed"]
+[connection signal="value_changed" from="OptionSelector4" to="." method="_on_option_selector_4_value_changed"]
+[connection signal="value_changed" from="OptionSelector5" to="." method="_on_option_selector_5_value_changed"]
+[connection signal="value_changed" from="OptionSelector6" to="." method="_on_option_selector_6_value_changed"]
