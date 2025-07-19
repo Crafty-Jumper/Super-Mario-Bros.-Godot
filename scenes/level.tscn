@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=40 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
@@ -28,11 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://ddu3d3l0d2xxe" path="res://scenes/entities/koopa-green.tscn" id="26_xy2fk"]
 [ext_resource type="PackedScene" uid="uid://cbakr6xm68j4r" path="res://scenes/entities/piranha-plant.tscn" id="28_v3why"]
 [ext_resource type="PackedScene" uid="uid://g0ngj3ah0fex" path="res://scenes/entities/koopa-red.tscn" id="30_2e2fo"]
+[ext_resource type="AudioStream" uid="uid://cry15fmrwg25v" path="res://music.tres" id="30_kih21"]
 [ext_resource type="AudioStream" uid="uid://rp7d3q01hibi" path="res://audio/pause.mp3" id="31_w3o6u"]
-[ext_resource type="AudioStream" uid="uid://c14o64jy7nmln" path="res://audio/music/Castle-Pul1.mp3" id="35_asl66"]
-[ext_resource type="AudioStream" uid="uid://c3k2ewplw2rw3" path="res://audio/music/Castle-Pul2.mp3" id="36_svjb4"]
-[ext_resource type="AudioStream" uid="uid://c1b5nas20qnpl" path="res://audio/music/Castle-Tri.mp3" id="37_c1pbi"]
-[ext_resource type="AudioStream" uid="uid://d23fh35jy7wlp" path="res://audio/music/Castle-Noi.mp3" id="38_535f6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gur6y"]
 shader = ExtResource("3_2e2fo")
@@ -221,20 +218,6 @@ sources/0 = SubResource("TileSetScenesCollectionSource_arp2o")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_arp2o"]
 size = Vector2(10, 20)
 
-[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_2e2fo"]
-stream_count = 7
-stream_0/stream = ExtResource("35_asl66")
-stream_0/volume = 0.0
-stream_1/stream = ExtResource("36_svjb4")
-stream_1/volume = 0.0
-stream_2/stream = ExtResource("37_c1pbi")
-stream_2/volume = 0.0
-stream_3/stream = ExtResource("38_535f6")
-stream_3/volume = 0.0
-stream_4/volume = 0.0
-stream_5/volume = 0.0
-stream_6/volume = 0.0
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_aicyk")
 
@@ -301,7 +284,7 @@ volume_db = -5.0
 visible = false
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamSynchronized_2e2fo")
+stream = ExtResource("30_kih21")
 
 [connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]

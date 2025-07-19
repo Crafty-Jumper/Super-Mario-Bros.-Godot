@@ -1,0 +1,20 @@
+[gd_resource type="AudioStreamSynchronized" load_steps=5 format=3 uid="uid://cry15fmrwg25v"]
+
+[ext_resource type="AudioStream" uid="uid://c14o64jy7nmln" path="res://audio/music/Castle-Pul1.mp3" id="1_87reg"]
+[ext_resource type="AudioStream" uid="uid://c3k2ewplw2rw3" path="res://audio/music/Castle-Pul2.mp3" id="2_v68j5"]
+[ext_resource type="AudioStream" uid="uid://c1b5nas20qnpl" path="res://audio/music/Castle-Tri.mp3" id="3_ltf6w"]
+[ext_resource type="AudioStream" uid="uid://d23fh35jy7wlp" path="res://audio/music/Castle-Noi.mp3" id="4_e88pq"]
+
+[resource]
+stream_count = 7
+stream_0/stream = ExtResource("1_87reg")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_v68j5")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("3_ltf6w")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("4_e88pq")
+stream_3/volume = 0.0
+stream_4/volume = 0.0
+stream_5/volume = 0.0
+stream_6/volume = 0.0
