@@ -49,6 +49,7 @@ const enemyIDs = [
 ]
 
 func _ready() -> void:
+	
 	GlobalVariables.fixpath()
 	
 	# tiles

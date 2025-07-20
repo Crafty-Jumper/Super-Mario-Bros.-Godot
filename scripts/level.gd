@@ -70,7 +70,11 @@ func _process(delta: float) -> void:
 	if GlobalVariables.marioInvinc > 60:
 		if not song == 5:
 			Music.loadtrack("Star",true)
-	
+	else:
+		if song > -1:
+			Music.loadtrack(songNames[song],true)
+		else:
+			Music.loadtrack("custom" + str(abs(song)),true)
 	
 	if GlobalVariables.marioInvinc < 60:
 		pass
@@ -95,6 +99,7 @@ func _process(delta: float) -> void:
 
 func _on_mario_goal_pole() -> void:
 	overrideBgmVolume = true
+	Music.musicVolume([-80,-80,-80,-80,-80])
 
 func _on_goal_music_finished() -> void:
 	GlobalVariables.level += 1

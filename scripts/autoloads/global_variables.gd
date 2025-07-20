@@ -7,7 +7,7 @@ var marioInvuln = 0
 var marioLives = 1000
 var marioInvinc = 0
 var world : int = 1
-var level : int = 1
+var level : int = 4
 var sub : int = 0
 var coin : int = 0
 var score : int = 0
@@ -74,13 +74,20 @@ func map(input_min: float, input_max: float, output_min: float, output_max: floa
 
 
 func fixpath() -> void:
-	
+	GlobalVariables.levelpack = Save.config.get_value("Misc","levelPack","SMB")
 	song = leveldatajson[levelPrefix]["song"]
 	levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
-	levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix
-	leveldata = FileAccess.open("res://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
+	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + "_Tiles.csv"):
+		levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix
+	else:
+		levelPath = "user://Level Packs/" + levelpack + "/" + levelPrefix
+	if FileAccess.file_exists("res://Level Data/" + levelpack + "/leveldata.json"):
+		leveldata = FileAccess.open("res://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
+	else:
+		leveldata = FileAccess.open("user://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
 	theme = leveldatajson[levelPrefix]["levelTheme"]
 	levelHeight = leveldatajson[levelPrefix]["levelHeight"]
 	levelWidth = leveldatajson[levelPrefix]["levelWidth"]
 	levelBGColor = leveldatajson[levelPrefix]["bgCol"]
 	marioOffset = leveldatajson[levelPrefix]["pipescreen"][marioScreen]
+	
