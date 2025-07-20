@@ -17,7 +17,7 @@ func loadtrack(track: String,loop: bool = false) -> void:
 	song = track
 	
 	looping = loop
-	var checkPath = "user://Level Packs/" + GlobalVariables.levelpack + "/audio/music/"
+	var checkPath = "user://data/Level Packs/" + GlobalVariables.levelpack + "/audio/music/"
 	for i in 2:
 		stream.set_sync_stream(0,load_custom_mp3(checkPath + track + "-Pul1.mp3"))
 		stream.set_sync_stream(1,load_custom_mp3(checkPath + track + "-Pul2.mp3"))

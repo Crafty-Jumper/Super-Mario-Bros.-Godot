@@ -7,7 +7,7 @@ var marioInvuln = 0
 var marioLives = 1000
 var marioInvinc = 0
 var world : int = 1
-var level : int = 4
+var level : int = 1
 var sub : int = 0
 var coin : int = 0
 var score : int = 0
@@ -80,11 +80,11 @@ func fixpath() -> void:
 	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + "_Tiles.csv"):
 		levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix
 	else:
-		levelPath = "user://Level Packs/" + levelpack + "/" + levelPrefix
+		levelPath = "user://data/Level Packs/" + levelpack + "/" + levelPrefix
 	if FileAccess.file_exists("res://Level Data/" + levelpack + "/leveldata.json"):
 		leveldata = FileAccess.open("res://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
 	else:
-		leveldata = FileAccess.open("user://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
+		leveldata = FileAccess.open("user://data/Level Packs/" + levelpack + "/leveldata.json", FileAccess.READ)
 	theme = leveldatajson[levelPrefix]["levelTheme"]
 	levelHeight = leveldatajson[levelPrefix]["levelHeight"]
 	levelWidth = leveldatajson[levelPrefix]["levelWidth"]

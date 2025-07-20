@@ -1,7 +1,7 @@
 extends Node
 
 var config = ConfigFile.new()
-const savePath = "user://settings.ini"
+const savePath = "user://data/settings.ini"
 
 func _ready() -> void:
 	if not FileAccess.file_exists(savePath):
