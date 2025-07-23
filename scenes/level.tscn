@@ -252,7 +252,6 @@ position = Vector2(63, 83)
 
 [node name="GoalMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_fpun6")
-volume_db = -5.0
 playback_type = 1
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
