@@ -138,6 +138,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	
 	
 	if body.name == "Mario":
+		if GlobalVariables.marioInvinc > 0:
+			if starAction == 1:
+				flip()
+				return
+			if starAction == 0:
+				return
+		
 		if isInShell and not hasKicked:
 			kick_sound.play()
 			hasKicked = true

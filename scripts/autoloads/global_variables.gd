@@ -7,8 +7,8 @@ var marioInvuln = 0
 var marioLives = 1000
 var marioInvinc = 0
 var world : int = 1
-var level : int = 1
-var sub : int = 0
+var level : int = 2
+var sub : int = 1
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
@@ -24,11 +24,15 @@ var levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix
 var levelHeight = leveldatajson[levelPrefix]["levelHeight"]
 var levelWidth = leveldatajson[levelPrefix]["levelWidth"]
 var levelBGColor = leveldatajson[levelPrefix]["bgCol"]
-var marioScreen = 0
+var marioScreen : int = 0
 var marioOffset = 0
+var marioTileX : int = 0
+var marioTileY : int = 0
 
 func _ready() -> void:
 	fixpath()
+	var timer = Timer.new()
+	add_child(timer)
 
 
 

@@ -67,7 +67,8 @@ var isDrain : bool = false
 func _physics_process(delta: float) -> void:
 	canPipe = get_meta("canPipe")
 	GlobalVariables.marioScreen = floor(position.x/256)
-	
+	GlobalVariables.marioTileX = int(fmod(position.x/16,16))
+	GlobalVariables.marioTileY = int(position.y/16)
 	
 	
 	if GlobalVariables.marioInvinc == 0:
@@ -403,7 +404,16 @@ func _on_timer_timeout() -> void:
 		velocity.y = -300
 		GlobalVariables.marioState = -4
 	if isPipe:
-		GlobalVariables.sub = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]
+		var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]
+		if checkType is int or checkType is float:
+			GlobalVariables.sub = checkType
+		if checkType is Array:
+			GlobalVariables.world = checkType[GlobalVariables.marioTileX/4]
+			GlobalVariables.level = 1
+			GlobalVariables.sub = 0
+			GlobalVariables.marioScreen = 0
+			get_tree().change_scene_to_file("res://scenes/loading1.tscn")
+			return
 		GlobalVariables.marioScreen = 0
 		GlobalVariables.fixpath()
 		get_tree().change_scene_to_file("res://scenes/level.tscn")

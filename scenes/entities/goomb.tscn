@@ -51,6 +51,7 @@ gravity = 40
 maxFallSpeed = 400
 marioJumpAction = 1
 fireballAction = 1
+starAction = 1
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_fqyfu")
