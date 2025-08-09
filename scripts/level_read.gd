@@ -3,11 +3,11 @@ extends TileMapLayer
 @onready var flag: CharacterBody2D = $"../Area2D"
 @onready var tile_map_layer_2: TileMapLayer = $"../TileMapLayer2"
 
-var levelFile = FileAccess.open(GlobalVariables.levelPath + "_Tiles.csv", FileAccess.READ)
+var levelFile = FileAccess.open(GlobalVariables.levelPath, FileAccess.READ)
 var index = 0
 var tilePosX = 0
 var tilePosY = 0
-var levelString = levelFile.get_as_text()
+var levelString = ""
 
 
 
@@ -51,13 +51,16 @@ const enemyIDs = [
 func _ready() -> void:
 	
 	GlobalVariables.fixpath()
+	print(get_properties("res://Level Data/SMB/2-3.0.tmx"))
 	
 	# tiles
-	levelFile = FileAccess.open(GlobalVariables.levelPath + "_Tiles.csv", FileAccess.READ)
+	levelFile = FileAccess.open(GlobalVariables.levelPath, FileAccess.READ)
 	levelString = levelFile.get_as_text()
 	
-	for i in GlobalVariables.levelHeight*GlobalVariables.levelWidth:
+	for i in 15*256:
 		_place_tiles()
+	return
+
 
 	# enemies
 	var enemyFile = FileAccess.open(GlobalVariables.levelPath + "_Enemies.csv", FileAccess.READ)
@@ -65,7 +68,7 @@ func _ready() -> void:
 	
 	index = 0
 	tilePosY = 0
-	for i in GlobalVariables.levelHeight*GlobalVariables.levelWidth:
+	for i in 15*256:
 		enemyString = enemyString.replace("\n",",")
 		var tileID = int((enemyString.get_slice(",",index)))
 		
@@ -86,6 +89,17 @@ func _process(_delta: float) -> void:
 	material.set_shader_parameter("accessRow",GlobalVariables.theme + 1)
 
 func _place_tiles() -> void:
+	var xml = XMLParser.new()
+	if xml.open("res://levels/world1-1.tmx") == OK:
+		while xml.read() == OK:
+			if xml.get_node_name() == "property":
+				var prop_name = xml.get_named_attribute_value("name")
+				var prop_value = xml.get_named_attribute_value("value")
+				print(prop_name + ": " + prop_value)
+
+	
+	
+	
 	levelString = levelString.replace("\n",",")
 		
 	var tileID = int((levelString.get_slice(",",index)))
@@ -94,25 +108,41 @@ func _place_tiles() -> void:
 	if tileIDs[tileID] is Array:
 		pass
 	else:
-		tilePos = Vector2i(fmod(tileIDs[tileID],9),floor(tileIDs[tileID]/9))
+		tilePos = Vector2i(fmod(tileIDs[tileID-2],9),floor(tileIDs[tileID-2]/9))
 	
 	
-	if fmod(index,GlobalVariables.levelWidth) == 0 and index > 0:
+	if fmod(index,256) == 0 and index > 0:
 		tilePosY += 1
-	tilePosX = fmod(index,GlobalVariables.levelWidth)
+	tilePosX = fmod(index,256)
 	index += 1
 	
-	if tileID == 96:
+	if tileID-2 == 96:
 		flag.position.x = tilePosX * 16 - 1
 		flag.position.y = tilePosY * 16 + 24
 	
-	if tileID == 13:
+	if tileID-2 == 13:
 		if fmod(index,GlobalVariables.levelWidth) > 15:
 			if int((levelString.get_slice(",",index - 2))) == 5:
 				tilePos = Vector2i(8,7)
 	
 	
-	if tileIDs[tileID] is Array:
+	if tileIDs[tileID-2] is Array:
 		set_cell(Vector2i(tilePosX,tilePosY),1,Vector2i(0,0),tileIDs[tileID][0])
 	else:
 		set_cell(Vector2i(tilePosX,tilePosY),0,tilePos)
+	
+	
+
+func get_properties(path: String, id: int = 0):
+	var parser = XMLParser.new()
+	var properties = []
+	parser.open(path)
+	while parser.read() != ERR_FILE_EOF:
+		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			var node_name = parser.get_node_name()
+			var attributes_dict = {}
+			for idx in range(parser.get_attribute_count()):
+				attributes_dict[parser.get_attribute_name(idx)] = parser.get_attribute_value(idx)
+				properties.resize(properties.size() + 1)
+				properties[idx] = attributes_dict
+	return properties

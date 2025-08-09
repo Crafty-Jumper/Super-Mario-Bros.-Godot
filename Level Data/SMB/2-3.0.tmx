@@ -7,7 +7,7 @@
   <property name="marioX" type="int" value="48"/>
   <property name="marioY" type="int" value="192"/>
   <property name="pipeExitScreens" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
-  <property name="pipeExitSubs" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+  <property name="pipeExitSubs" value=""/>
   <property name="song" type="int" value="1"/>
   <property name="theme" type="int" value="0"/>
   <property name="underwater" type="bool" value="false"/>
