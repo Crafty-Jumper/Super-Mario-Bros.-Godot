@@ -1,0 +1,14 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bqd68r7dhncjb"
+
+[deps]
+
+source_file="res://Level Data/SMB/1-4.0_Tiles.csv"
+
+[params]
+
+compress=true
+delimiter=0
