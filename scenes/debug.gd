@@ -22,3 +22,6 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("debugmenu"):
 		visible = bool(1-int(visible))
+	
+	
+	print(int(0x7FFFFFFFFFFFFFFF))

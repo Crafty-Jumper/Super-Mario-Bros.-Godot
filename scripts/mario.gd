@@ -63,7 +63,6 @@ var canPipe : bool = false
 var isPipe : bool = false
 var fireball : PackedScene = load("res://scenes/entities/fireball.tscn")
 var isDrain : bool = false
-var gravity = 100
 
 func _physics_process(delta: float) -> void:
 	canPipe = get_meta("canPipe")
@@ -206,24 +205,22 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		if not get_parent().underwater:
-			if velocity.y < 0:
-				if Input.is_action_just_pressed("jump"):
-					if abs(velocity.x) < 60:
-						gravity = gravityJumpStand
-					else: if abs(velocity.x) < 138.75:
-						gravity = gravityJumpWalk
-					else:
-						gravity = gravityJumpRun
+			if Input.is_action_pressed("jump") and velocity.y < 0:
+				if abs(velocity.x) < 60:
+					velocity.y += gravityJumpStand * delta
+				else: if abs(velocity.x) < 138.75:
+					velocity.y += gravityJumpWalk * delta
+				else:
+					velocity.y += gravityJumpRun * delta
 			else:
 				if abs(velocity.x) < 60:
-					gravity = gravityStand
+					velocity.y += gravityStand * delta
 				else: if abs(velocity.x) < 138.75:
-					gravity = gravityWalk
+					velocity.y += gravityWalk * delta
 				else:
-					gravity = gravityRun
+					velocity.y += gravityRun * delta
 			if velocity.y > maxFall:
 				velocity.y = maxFall
-			velocity.y += gravity * delta
 		else:
 			# water physics amirite
 			if Input.is_action_pressed("jump"):
