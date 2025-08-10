@@ -200,7 +200,7 @@ func flip() -> void:
 	animated_sprite_2d.flip_v = true
 	kick_sound.play()
 	gravity = 30
-	collision_shape_2d.disabled = true
+	collision_shape_2d.set_deferred("disabled",true)
 	area_2d.queue_free()
 
 

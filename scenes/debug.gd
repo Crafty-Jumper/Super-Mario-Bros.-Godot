@@ -8,7 +8,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	text = "Tile X: " + str(GlobalVariables.marioTileX) + "\n"
 	text = text + "Tile Y: " + str(GlobalVariables.marioTileY) + "\n"
 	text = text + "Screen: " + str(GlobalVariables.marioScreen) + "\n"
@@ -22,3 +22,6 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("debugmenu"):
 		visible = bool(1-int(visible))
+	
+	
+	print(int(0x7FFFFFFFFFFFFFFF))

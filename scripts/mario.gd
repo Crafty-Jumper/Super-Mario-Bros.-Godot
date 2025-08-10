@@ -90,6 +90,8 @@ func _physics_process(delta: float) -> void:
 				isPipe = true
 				hurt_pipe.play()
 	if isPipe:
+		if GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen] is Array:
+			Music.loadtrack("None")
 		set_meta("canPipe",false)
 		animated_sprite_2d.speed_scale = 1
 		if get_meta("pipeDirection") == 0:

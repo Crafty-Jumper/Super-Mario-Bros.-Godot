@@ -6,7 +6,7 @@ var looping : bool = false
 func _ready() -> void:
 	stream = load("res://music.tres")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if looping:
 		if not playing:
 			play()
@@ -39,7 +39,7 @@ func musicVolume(tracks:Array) -> void:
 func load_custom_mp3(path: String) -> AudioStreamMP3:
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file:
-		var stream = AudioStreamMP3.new()
-		stream.data = file.get_buffer(file.get_length())
-		return stream
+		var audio = AudioStreamMP3.new()
+		audio.data = file.get_buffer(file.get_length())
+		return audio
 	return null
