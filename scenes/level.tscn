@@ -233,9 +233,9 @@ offset_bottom = 2430.0
 color = Color(0, 0, 0, 1)
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("2_wu01b")]
-visible = false
 
 [node name="Debug" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
 offset_right = 764.0
 offset_bottom = 413.0
 theme_override_fonts/normal_font = ExtResource("3_gur6y")

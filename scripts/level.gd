@@ -18,7 +18,7 @@ extends Node2D
 @export var underwater : bool = false
 
 var canStartGoalMusic : bool = true
-const songNames = ["None","Overworld","Underground","Underwater","Castle","Star"]
+const songNames = ["None","Overworld","Underground","Underwater","Castle","Star","Bonus"]
 var overrideBgmVolume : bool = false
 
 
@@ -72,7 +72,10 @@ func _process(delta: float) -> void:
 			Music.loadtrack("Star",true)
 	else:
 		if song > -1:
-			Music.loadtrack(songNames[song],true)
+			if songNames.get(song) is String:
+				Music.loadtrack(songNames.get(song),true)
+			else:
+				Music.loadtrack("None",true)
 		else:
 			Music.loadtrack("custom" + str(abs(song)),true)
 	
