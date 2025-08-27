@@ -1,0 +1,47 @@
+{
+	"minWalk":0,
+	"maxWalk":0,
+	"maxWater":0,
+	"maxInter":0,
+	"maxRun":0,
+	"walkAccel":0,
+	"runAccel":0,
+	"decelWalk":0,
+	"decelSkid":0,
+	
+	"airAccel1":0,
+	"airAccel2":0,
+	"airDecel1":0,
+	"airDecel2":0,
+	"airDecel3":0,
+	
+	"jump":0,
+	"runJump":0,
+	"gravStand":0,
+	"gravStandJump":0,
+	"gravWalk":0,
+	"gravWalkJump":0,
+	"gravRun":0,
+	"gravRunJump":0,
+	"gravInter":0,
+	
+	"swim":0,
+	"swimSuck":0,
+	"swimGrav":0,
+	"swimGravJump":0,
+	"swimGravSuck":0,
+	"swimGravSuckJump":0,
+	"swimGravSurf":0,
+	
+	"vineUp":0,
+	"vineDown":0,
+	
+	"enemy1":0,
+	"enemy2":0,
+	
+	"tramp":0,
+	"trampJump":0,
+	
+	"ceilSoft":0,
+	"ceilHard":0,
+}
