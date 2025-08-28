@@ -12,50 +12,26 @@ extends CharacterBody2D
 @onready var coin_sfx: AudioStreamPlayer = $CoinSFX
 @onready var swim_sfx: AudioStreamPlayer = $SwimSFX
 
+var physicsFile = FileAccess.open("res://physics.json",FileAccess.READ)
+var physicsString = physicsFile.get_as_text()
+var physics = JSON.parse_string(physicsString)
+
 signal goal_pole
 
 var goal_walk : bool = false
 var slidingOnPole : bool = false
 
-
-const walkSpeed = 93.75
-const walkAccel = 133.59375
-const minWalkSpeed = 4.453125
-const runAccel = 200.390625
-
-
-const maxFall = 240
 const gravityDie = 750
 
-
-const walkDecel = 182.8125
-const runSpeed = 153.75
-const turnDecel = 365.625
-const waterSpeed = 63.75
+# basic variables
+var maxSpeed = 0
+var minSpeed = 0
+var jumpSpeed = 0
+var gravity = 0
+var accel = 0
+var decel = 0
 var jumpStartSpeed = 0
-
-# the pain of jumping values
-const gravityJumpStand = 450
-const gravityJumpWalk = 421.875
-const gravityJumpRun = 562.5
-const gravityStand = 1575
-const gravityWalk = 1350
-const gravityRun = 2025
-const jump = -240
-const jumpRun = -300
-
-# the pain of swimming values
-const gravitySwimNorm = 140.625
-const gravitySwimDrain = 126.5625
-const gravitySwimSurf = 337.5
-const gravitySwimJumpNorm = 3.0469 * 60
-const gravitySwimJumpDrain = 0.9375 * 60
-
-const swim = -90
-const swimDrain = -60
-
-var maxMoveSpeed = walkSpeed
-var accel = walkAccel
+var maxFall = 240
 
 var inputAffects : bool = true
 var debug : bool = false
@@ -64,7 +40,18 @@ var isPipe : bool = false
 var fireball : PackedScene = load("res://scenes/entities/fireball.tscn")
 var isDrain : bool = false
 
+func _ready() -> void:
+	print(physics)
+
 func _physics_process(delta: float) -> void:
+	# updating the physics
+	_physics_update()
+	
+	
+	
+	
+	
+	
 	canPipe = get_meta("canPipe")
 	GlobalVariables.marioScreen = floor(position.x/256)
 	GlobalVariables.marioTileX = int(fmod(position.x/16,16))
@@ -180,10 +167,10 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if not slidingOnPole:
-		animated_sprite_2d.speed_scale = abs(velocity.x/walkSpeed)
+		animated_sprite_2d.speed_scale = abs(velocity.x/maxSpeed)
 		if animated_sprite_2d.speed_scale < 0.5:
 			animated_sprite_2d.speed_scale = 0.5
-		if get_parent().underwater:
+		if GlobalVariables.underwater:
 			animated_sprite_2d.speed_scale = 1
 		if is_on_floor():
 			if not velocity.x == 0 or direction:
@@ -193,7 +180,7 @@ func _physics_process(delta: float) -> void:
 			if velocity.x * direction < 0:
 				animated_sprite_2d.animation = "turn" + GlobalVariables.marioVisual
 		else:
-			if get_parent().underwater:
+			if GlobalVariables.underwater:
 				if not animated_sprite_2d.animation == "swim" + GlobalVariables.marioVisual:
 					animated_sprite_2d.animation = "swimIdle" + GlobalVariables.marioVisual
 			else:
@@ -202,130 +189,37 @@ func _physics_process(delta: float) -> void:
 		
 		if not animated_sprite_2d.is_playing():
 			animated_sprite_2d.play()
-	# Add the gravity.
-	if not is_on_floor():
-		if not get_parent().underwater:
-			if Input.is_action_pressed("jump") and velocity.y < 0:
-				if abs(velocity.x) < 60:
-					velocity.y += gravityJumpStand * delta
-				else: if abs(velocity.x) < 138.75:
-					velocity.y += gravityJumpWalk * delta
-				else:
-					velocity.y += gravityJumpRun * delta
-			else:
-				if abs(velocity.x) < 60:
-					velocity.y += gravityStand * delta
-				else: if abs(velocity.x) < 138.75:
-					velocity.y += gravityWalk * delta
-				else:
-					velocity.y += gravityRun * delta
-			if velocity.y > maxFall:
-				velocity.y = maxFall
-		else:
-			# water physics amirite
-			if Input.is_action_pressed("jump"):
-				if position.y > 40:
-					if isDrain:
-						velocity.y += (gravitySwimJumpDrain * delta) + (3.75)
-					else:
-						velocity.y += gravitySwimJumpNorm * delta
-				else:
-					velocity.y += gravitySwimSurf * delta
-			else:
-				if position.y > 40:
-					if isDrain:
-						velocity.y += (gravitySwimDrain * delta) + (3.75)
-					else:
-						velocity.y += gravitySwimNorm * delta
-				else:
-					velocity.y += gravitySwimSurf * delta
-			if isDrain:
-				if velocity.y > -swim:
-					velocity.y = -swim
-			
-			
-			
 	
-		
-	# jumping
-	if not get_parent().underwater:
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			if inputAffects:
-				if abs(velocity.x) < 138.75:
-					velocity.y = jump
-				else:
-					velocity.y = jumpRun
-				if GlobalVariables.marioState == 0:
-					small_jump.playing = true
-				else:
-					big_jump.playing = true
-	else:
-		if Input.is_action_just_pressed("jump"):
-			if inputAffects:
-				swim_sfx.play()
-				animated_sprite_2d.animation = "swim" + GlobalVariables.marioVisual
-				animated_sprite_2d.frame = 0
-				if position.y > 40:
-					if isDrain:
-						velocity.y = swimDrain
-					else:
-						velocity.y = swim
-		
-		
-		
-		
-		
-	# movement
-	if not get_parent().underwater:
+	if not is_on_floor():
+		velocity.y += gravity
+	
+	
+	if velocity.y > maxFall:
+		velocity.y = maxFall
+	
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor() or GlobalVariables.underwater:
+			velocity.y = jumpSpeed
+	
+	if ((not GlobalVariables.underwater) and is_on_floor()) or GlobalVariables.underwater:
 		if direction < 0 and is_on_floor():
 			animated_sprite_2d.flip_h = true
 		if direction > 0 and is_on_floor():
-			animated_sprite_2d.flip_h = false
-	else:
-		if direction < 0:
-			animated_sprite_2d.flip_h = true
-		if direction > 0:
 			animated_sprite_2d.flip_h = false
 	
 	if inputAffects:
 		if is_on_floor():
 			jumpStartSpeed = abs(velocity.x)
 			if direction:
-				if velocity.x * direction > 0:
+				if abs(direction) > 0:
 					velocity.x += direction * accel * delta
 				else:
-					velocity.x += direction * turnDecel * delta
+					velocity.x += direction * decel * delta
 			else:
-				velocity.x = move_toward(velocity.x, 0, walkDecel * delta)
-			
-			
-			if not get_parent().underwater:
-				if Input.is_action_pressed("run"):
-					maxMoveSpeed = runSpeed
-					accel = runAccel
-				else:
-					maxMoveSpeed = walkSpeed
-					accel = walkAccel
-			else:
-				maxMoveSpeed = waterSpeed
-				accel = runAccel
-				
+				velocity.x = move_toward(velocity.x, 0, decel * delta)
 		else:
 			if direction == velocity.x/abs(velocity.x):
-				if velocity.x < walkSpeed:
-					accel = walkAccel
-				else:
-					accel = runAccel
-			else:
-				if velocity.x >= walkSpeed:
-					accel = runAccel
-				else:
-					if jumpStartSpeed < 108.75:
-						accel = walkAccel
-					else:
-						accel = 3.046875
-			if get_parent().underwater:
-				maxMoveSpeed = walkSpeed
+				pass
 			
 			if direction:
 				velocity.x += direction * accel * delta
@@ -333,20 +227,18 @@ func _physics_process(delta: float) -> void:
 			
 			
 			
-		if velocity.x > maxMoveSpeed:
-			velocity.x = maxMoveSpeed
-		if velocity.x < -maxMoveSpeed:
-			velocity.x = -maxMoveSpeed
+		if velocity.x > maxSpeed:
+			velocity.x = maxSpeed
+		if velocity.x < -maxSpeed:
+			velocity.x = -maxSpeed
 	
 	if goal_walk:
 		direction = 1.0
 		animated_sprite_2d.flip_h = false
-		accel = walkAccel
-		maxMoveSpeed = walkSpeed
-		if velocity.x > maxMoveSpeed:
-			velocity.x = maxMoveSpeed
-		if velocity.x < -maxMoveSpeed:
-			velocity.x = -maxMoveSpeed
+		if velocity.x > maxSpeed:
+			velocity.x = maxSpeed
+		if velocity.x < -maxSpeed:
+			velocity.x = -maxSpeed
 		velocity.x += direction * accel * delta
 		if is_on_wall():
 			hide()
@@ -364,7 +256,7 @@ func _physics_process(delta: float) -> void:
 				popItem.velocity.x = -200
 			else:
 				popItem.velocity.x = 200
-			get_parent().add_child(popItem)
+			GlobalVariables.add_child(popItem)
 			animated_sprite_2d.animation = "throw" + GlobalVariables.marioVisual
 	
 	# flagpole animation
@@ -451,3 +343,15 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_coinsound() -> void:
 	coin_sfx.play()
+
+func _physics_update():
+	# grounded stuff
+	if is_on_floor():
+		accel = physics["walkAccel"]
+		decel = physics["walkDecel"]
+		if Input.is_action_pressed("run"):
+			maxSpeed = physics["maxRun"]
+		else:
+			maxSpeed = physics["maxWalk"]
+	
+	# AAAAAAAAAAAAAAAAAAAAAAAAAA

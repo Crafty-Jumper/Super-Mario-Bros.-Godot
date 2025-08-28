@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://u3rxnc0qfoau"]
 
 [ext_resource type="Script" uid="uid://c5ryvii0njjp5" path="res://scripts/hud.gd" id="1_fls4u"]
-[ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Fonts/Mystery Font.ttf" id="1_qpvh6"]
+[ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Mystery Font.ttf" id="1_qpvh6"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="3_f6qnu"]
 [ext_resource type="Texture2D" uid="uid://ccyiokr1jh0bb" path="res://images/palettes/questionPalette.png" id="4_k4w17"]
 [ext_resource type="Texture2D" uid="uid://cvcplbwfbquim" path="res://images/hudcoin.png" id="5_twldb"]
@@ -97,7 +97,7 @@ anchor_left = 0.422
 anchor_right = 0.422
 offset_left = -36.096
 offset_top = 72.0
-offset_right = 39.904
+offset_right = 9185.9
 offset_bottom = 112.0
 theme_override_fonts/normal_font = ExtResource("1_qpvh6")
 theme_override_font_sizes/normal_font_size = 24

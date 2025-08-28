@@ -5,7 +5,7 @@
 		"levelWidth":256,
 		"bgCol":"7b6bff",
 		"marioX":48,
-		"marioY":192,
+		"marioY":194,
 		"pipes":[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,],
 		"pipescreen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
 		"song":1

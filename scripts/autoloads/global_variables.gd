@@ -28,6 +28,7 @@ var marioScreen : int = 0
 var marioOffset = 0
 var marioTileX : int = 0
 var marioTileY : int = 0
+var underwater : bool = false
 
 func _ready() -> void:
 	fixpath()
