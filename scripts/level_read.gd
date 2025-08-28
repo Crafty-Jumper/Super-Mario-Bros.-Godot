@@ -105,6 +105,7 @@ func _place_tiles() -> void:
 	if tileID == 96:
 		flag.position.x = tilePosX * 16 - 1
 		flag.position.y = tilePosY * 16 + 24
+		flag.show()
 	
 	if tileID == 13:
 		if fmod(index,GlobalVariables.levelWidth) > 15:

@@ -199,9 +199,6 @@ sources/1 = SubResource("TileSetScenesCollectionSource_0b4ue")
 sources/0 = SubResource("TileSetAtlasSource_aicyk")
 pattern_0 = SubResource("TileMapPattern_wc255")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aicyk"]
-shader = ExtResource("1_8cye3")
-
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_arp2o"]
 resource_name = "Enemies"
 scenes/1/scene = ExtResource("15_wc255")
@@ -218,6 +215,9 @@ sources/0 = SubResource("TileSetScenesCollectionSource_arp2o")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_arp2o"]
 size = Vector2(10, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aicyk"]
+shader = ExtResource("1_8cye3")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_aicyk")
@@ -251,12 +251,8 @@ metadata/pipePalette = 0
 metadata/cloudPalette = 0
 
 [node name="Area2D" parent="." instance=ExtResource("13_64w2a")]
+visible = false
 position = Vector2(-61, 62)
-
-[node name="Mario" parent="." instance=ExtResource("1_vonw3")]
-material = SubResource("ShaderMaterial_aicyk")
-use_parent_material = true
-position = Vector2(63, 83)
 
 [node name="GoalMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_fpun6")
@@ -285,10 +281,15 @@ limit_bottom = 256
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_w3o6u")
 
+[node name="Mario" parent="." instance=ExtResource("1_vonw3")]
+material = SubResource("ShaderMaterial_aicyk")
+use_parent_material = true
+position = Vector2(63, 83)
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("2_kih21")]
 visible = false
 
-[connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]
+[connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]

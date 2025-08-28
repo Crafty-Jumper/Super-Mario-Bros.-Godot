@@ -15,6 +15,7 @@ extends CharacterBody2D
 var physicsFile = FileAccess.open("res://physics.json",FileAccess.READ)
 var physicsString = physicsFile.get_as_text()
 var physics = JSON.parse_string(physicsString)
+var direction = 0
 
 signal goal_pole
 
@@ -94,7 +95,7 @@ func _physics_process(delta: float) -> void:
 			timer.start(2)
 		return
 	
-	var direction := Input.get_axis("left", "right") * float(inputAffects)
+	direction = Input.get_axis("left", "right") * float(inputAffects)
 	
 	if fmod(floor(GlobalVariables.marioInvuln),2) == 1:
 		hide()
@@ -191,15 +192,14 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.play()
 	
 	if not is_on_floor():
-		velocity.y += gravity
+		velocity.y += gravity * delta
 	
 	
 	if velocity.y > maxFall:
 		velocity.y = maxFall
 	
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() or GlobalVariables.underwater:
-			velocity.y = jumpSpeed
+		velocity.y = -jumpSpeed
 	
 	if ((not GlobalVariables.underwater) and is_on_floor()) or GlobalVariables.underwater:
 		if direction < 0 and is_on_floor():
@@ -353,5 +353,40 @@ func _physics_update():
 			maxSpeed = physics["maxRun"]
 		else:
 			maxSpeed = physics["maxWalk"]
+		
+		if abs(velocity.x) > 1:
+			jumpSpeed = physics["jump"]
 	
-	# AAAAAAAAAAAAAAAAAAAAAAAAAA
+	var jumping = conditionReturn(Input.is_action_pressed("jump"),"Jump","")
+	var currState = conditionReturn(abs(velocity.x) < 60.0,"Stand",conditionReturn(abs(velocity.x) < 138.75,"Walk","Run"))
+	
+	if Input.is_action_just_pressed("jump") or Input.is_action_just_released("jump"):
+		gravity = physics["grav" + currState + jumping]
+	
+	if velocity.y >= -1 and not is_on_floor():
+		gravity = physics["grav" + currState]
+	
+	
+	jumpSpeed = physics[conditionReturn(abs(velocity.x) > 138.75,"run","") + "jump"]
+	
+	if not is_on_floor():
+		if velocity.x * direction == abs(velocity.x):
+			if abs(velocity.x) >= 93.75:
+				accel = physics["airAccel2"]
+			else:
+				accel = physics["airAccel1"]
+		else:
+			if abs(velocity.x) >= 93.75:
+				accel = physics["airDecel1"]
+			if abs(velocity.x) < 93.75:
+				if jumpStartSpeed < 108.75:
+					accel = physics["airDecel2"]
+				else:
+					accel = physics["airDecel3"]
+	
+
+func conditionReturn(condition:bool,trueValue,falseValue):
+	if condition:
+		return trueValue
+	else:
+		return falseValue
