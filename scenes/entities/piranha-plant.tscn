@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbakr6xm68j4r"]
+[gd_scene load_steps=11 format=3 uid="uid://cbakr6xm68j4r"]
 
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_j6xss"]
-[ext_resource type="Script" uid="uid://cbqbx6sh7fg6x" path="res://scenes/entities/piranha_plant.gd" id="1_k00gf"]
+[ext_resource type="Script" uid="uid://fg18w5f4rb4p" path="res://scripts/piranha_plant.gd" id="1_k00gf"]
 [ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="2_k00gf"]
 [ext_resource type="Texture2D" uid="uid://c2egj0afixtc6" path="res://images/piranha-plant.png" id="3_ms8nk"]
 
@@ -35,11 +35,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prpjl"]
 size = Vector2(14, 14)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k00gf"]
+radius = 24.0
+height = 192.0
+
 [node name="Area2D" type="Area2D" groups=["enemy"]]
-collision_mask = 13
+collision_layer = 0
+collision_mask = 10
 script = ExtResource("1_k00gf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1024
 texture_filter = 1
 material = SubResource("ShaderMaterial_qc28s")
 position = Vector2(0, -3)
@@ -51,8 +57,16 @@ frame_progress = 0.280414
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_prpjl")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_k00gf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

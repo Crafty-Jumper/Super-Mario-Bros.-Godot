@@ -384,6 +384,9 @@ func _physics_update():
 				else:
 					accel = physics["airDecel3"]
 	
+	if velocity.x * direction < 0 and is_on_floor():
+		accel = physics["skidDecel"]
+	
 
 func conditionReturn(condition:bool,trueValue,falseValue):
 	if condition:
