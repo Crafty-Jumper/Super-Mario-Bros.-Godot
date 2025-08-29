@@ -57,11 +57,13 @@ shape = SubResource("RectangleShape2D_q0bk4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
+z_index = 127
 texture_filter = 1
 material = SubResource("ShaderMaterial_oevtn")
 sprite_frames = SubResource("SpriteFrames_rar2i")
 
 [node name="Fireball" type="Sprite2D" parent="."]
+z_index = 127
 texture_filter = 1
 material = SubResource("ShaderMaterial_c0fit")
 texture = ExtResource("3_lb77b")
