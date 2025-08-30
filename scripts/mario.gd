@@ -48,7 +48,16 @@ func _physics_process(delta: float) -> void:
 	# updating the physics
 	_physics_update()
 	
-	
+	if GlobalVariables.marioVine:
+		if position.y < -16:
+			var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]
+			if checkType is int or checkType is float:
+				GlobalVariables.sub = checkType
+			if checkType is Array:
+				return
+			GlobalVariables.marioScreen = 0
+			GlobalVariables.fixpath()
+			get_tree().change_scene_to_file("res://scenes/level.tscn")
 	
 	
 	
@@ -167,8 +176,8 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	if not slidingOnPole:
-		animated_sprite_2d.speed_scale = abs(velocity.x/maxSpeed)
+	if not slidingOnPole or GlobalVariables.marioVine:
+		animated_sprite_2d.speed_scale = abs(velocity.x/physics["maxWalk"])
 		if animated_sprite_2d.speed_scale < 0.5:
 			animated_sprite_2d.speed_scale = 0.5
 		if GlobalVariables.underwater:
@@ -188,11 +197,12 @@ func _physics_process(delta: float) -> void:
 				animated_sprite_2d.animation = "jump" + GlobalVariables.marioVisual
 		
 		
-		if not animated_sprite_2d.is_playing():
-			animated_sprite_2d.play()
+	if not animated_sprite_2d.is_playing():
+		animated_sprite_2d.play()
 	
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		if not GlobalVariables.marioVine:
+			velocity.y += gravity * delta
 	
 	
 	if velocity.y > maxFall:
@@ -208,31 +218,63 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.flip_h = false
 	
 	if inputAffects:
-		if is_on_floor():
-			jumpStartSpeed = abs(velocity.x)
-			if direction:
-				if abs(direction) > 0:
-					velocity.x += direction * accel * delta
+		if not GlobalVariables.marioVine:
+			set_collision_mask_value(1,true)
+			if is_on_floor():
+				jumpStartSpeed = abs(velocity.x)
+				if direction:
+					if abs(direction) > 0:
+						velocity.x += direction * accel * delta
+					else:
+						velocity.x += direction * decel * delta
 				else:
-					velocity.x += direction * decel * delta
+					velocity.x = move_toward(velocity.x, 0, decel * delta)
 			else:
-				velocity.x = move_toward(velocity.x, 0, decel * delta)
-		else:
-			if direction == velocity.x/abs(velocity.x):
-				pass
-			
-			if direction:
-				velocity.x += direction * accel * delta
+				if direction == velocity.x/abs(velocity.x):
+					pass
 				
-			
-			
-			
+				if direction:
+					velocity.x += direction * accel * delta
+		else:
+			if not animated_sprite_2d.animation == "climb" + GlobalVariables.marioVisual:
+				animated_sprite_2d.animation = "climb" + GlobalVariables.marioVisual
+			velocity.x = 0
+			set_collision_mask_value(1,false)
+			var yDir = Input.get_axis("down","up")
+			if yDir == 0:
+				animated_sprite_2d.speed_scale = 0
+			else:
+				animated_sprite_2d.speed_scale = 1
+			if yDir > 0:
+				velocity.y = -physics["vineUp"]
+			else: if yDir < 0:
+				velocity.y = physics["vineDown"]
+			else:
+				velocity.y = 0
+			if Input.is_action_just_pressed("right"):
+				if GlobalVariables.marioVineLeft:
+					GlobalVariables.marioVineLeft = false
+					position.x += 16
+					animated_sprite_2d.flip_h = true
+				else:
+					GlobalVariables.marioVine = false
+					position.x += 4
+			if Input.is_action_just_pressed("left"):
+				if not GlobalVariables.marioVineLeft:
+					GlobalVariables.marioVineLeft = true
+					position.x -= 16
+					animated_sprite_2d.flip_h = false
+				else:
+					GlobalVariables.marioVine = false
+					position.x -= 4
+
 		if velocity.x > maxSpeed:
 			velocity.x = maxSpeed
 		if velocity.x < -maxSpeed:
 			velocity.x = -maxSpeed
 	
 	if goal_walk:
+		maxSpeed = physics["maxWalk"]
 		direction = 1.0
 		animated_sprite_2d.flip_h = false
 		if velocity.x > maxSpeed:
@@ -345,6 +387,9 @@ func _on_coinsound() -> void:
 	coin_sfx.play()
 
 func _physics_update():
+	if GlobalVariables.marioVine:
+		return
+	
 	# grounded stuff
 	if is_on_floor():
 		accel = physics["walkAccel"]

@@ -34,8 +34,8 @@
 	"swimGravSuckJump":0,
 	"swimGravSurf":0,
 	
-	"vineUp":0,
-	"vineDown":0,
+	"vineUp":52.5,
+	"vineDown":120.0,
 	
 	"enemy1":0,
 	"enemy2":0,

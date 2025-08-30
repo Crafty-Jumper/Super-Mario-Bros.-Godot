@@ -12,6 +12,8 @@ var sub : int = 0
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
+var marioVine : bool = false
+var marioVineLeft : bool = true
 
 # level related stuff
 var theme = 0

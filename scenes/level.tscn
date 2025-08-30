@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=42 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bkx3a688qm0n5" path="res://images/tiles.png" id="7_8cye3"]
 [ext_resource type="PackedScene" uid="uid://7yjgj2bujgeg" path="res://scenes/blocks/hiddenBlock.tscn" id="7_gur6y"]
 [ext_resource type="PackedScene" uid="uid://sdens1bta7y4" path="res://scenes/blocks/pipe.tscn" id="9_arp2o"]
+[ext_resource type="PackedScene" uid="uid://cwdbbko1ef65v" path="res://scenes/blocks/brickBlockVine.tscn" id="10_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://dtw8ydupe7kjo" path="res://scenes/blocks/brickBlock10Coin.tscn" id="10_arp2o"]
 [ext_resource type="PackedScene" uid="uid://bn8fnjkh4p5xh" path="res://scenes/blocks/brickBlockMushroom.tscn" id="10_ux5qa"]
 [ext_resource type="Script" uid="uid://cpbm10o4slycl" path="res://scripts/level_read.gd" id="10_wc255"]
@@ -190,6 +191,7 @@ scenes/7/scene = ExtResource("11_82cfe")
 scenes/8/scene = ExtResource("12_gunhw")
 scenes/9/scene = ExtResource("13_5k0ak")
 scenes/10/scene = ExtResource("7_gur6y")
+scenes/11/scene = ExtResource("10_2e2fo")
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
 physics_layer_0/collision_layer = 4294967295
@@ -250,6 +252,10 @@ metadata/groundPalette = 0
 metadata/pipePalette = 0
 metadata/cloudPalette = 0
 
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+position = Vector2(4, 0)
+tile_set = SubResource("TileSet_ux5qa")
+
 [node name="Area2D" parent="." instance=ExtResource("13_64w2a")]
 visible = false
 position = Vector2(-61, 62)
@@ -257,10 +263,6 @@ position = Vector2(-61, 62)
 [node name="GoalMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_fpun6")
 playback_type = 1
-
-[node name="TileMapLayer2" type="TileMapLayer" parent="."]
-position = Vector2(4, 0)
-tile_set = SubResource("TileSet_ux5qa")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2147483648

@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5rbge541cwvx"]
+
+[ext_resource type="Script" uid="uid://gxdvgid0g8gq" path="res://vine.gd" id="1_1nmud"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_w22ai"]
+[ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="3_tck7o"]
+[ext_resource type="Texture2D" uid="uid://codrsymqymanl" path="res://images/vine-head.png" id="4_5oa6a"]
+[ext_resource type="Texture2D" uid="uid://c6iexlot68xxi" path="res://images/vine-body.png" id="5_m2qql"]
+[ext_resource type="AudioStream" uid="uid://bnkw84wgpgwer" path="res://audio/sfx-appear.ogg" id="6_w22ai"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7c07w"]
+size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k7hlj"]
+shader = ExtResource("2_w22ai")
+shader_parameter/palette = ExtResource("3_tck7o")
+shader_parameter/accessRow = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nmud"]
+size = Vector2(6, 1)
+
+[node name="CharacterBody2D" type="StaticBody2D"]
+collision_layer = 0
+script = ExtResource("1_1nmud")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7c07w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_k7hlj")
+position = Vector2(-8, -8)
+texture = ExtResource("4_5oa6a")
+centered = false
+
+[node name="Vine-body" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_k7hlj")
+position = Vector2(-8, 8)
+texture = ExtResource("5_m2qql")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_1nmud")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_w22ai")
+autoplay = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
