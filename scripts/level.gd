@@ -6,6 +6,7 @@ extends Node2D
 @onready var mario: CharacterBody2D = $Mario
 @onready var area_2d: CharacterBody2D = $Area2D
 @onready var static_body_2d: StaticBody2D = $StaticBody2D
+@onready var static_body_2d_2: StaticBody2D = $StaticBody2D2
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var pause_menu: Control = $CanvasLayer2/PauseMenu
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
@@ -22,7 +23,7 @@ var vineExists : bool = true
 
 func _ready() -> void:
 	mario.position = Vector2(GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioX"],GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioY"])
-	if GlobalVariables.sub == GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]:
+	if GlobalVariables.sub == GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"].get(GlobalVariables.marioScreen):
 		mario.position.x += GlobalVariables.marioOffset * 256
 	if GlobalVariables.marioVine:
 		character_body_2d.position = Vector2(72,GlobalVariables.levelHeight * 16 + 8)
@@ -43,6 +44,7 @@ func _ready() -> void:
 		Music.loadtrack(songNames[song],true)
 	else:
 		Music.loadtrack("custom" + str(abs(song)),true)
+	static_body_2d_2.position.x = GlobalVariables.levelWidth * 16
 	
 	
 	
@@ -71,6 +73,7 @@ func _process(delta: float) -> void:
 		
 		
 	static_body_2d.position.y = mario.position.y
+	static_body_2d_2.position.y = mario.position.y
 	
 	if GlobalVariables.marioState == -3 or GlobalVariables.marioState == -4:
 		Music.loadtrack("None",false)

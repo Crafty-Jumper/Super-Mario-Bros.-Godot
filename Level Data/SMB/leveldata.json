@@ -1,18 +1,4 @@
 {
-	"template":{
-		"levelTheme":0,
-		"levelHeight":15,
-		"levelWidth":256,
-		"bgCol":"7b6bff",
-		"marioX":48,
-		"marioY":194,
-		"song":0,
-		"intermission":false,
-		"underwater":false,
-		"bonus":false,
-		"pipes":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		"pipescreen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-	},
 	"1-1.0":{
 		"levelTheme":0,
 		"levelHeight":15,
@@ -191,5 +177,33 @@
 		"bonus":false,
 		"pipes":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
 		"pipescreen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-	}
+	},
+	"2-4.0":{
+		"levelTheme":3,
+		"levelHeight":15,
+		"levelWidth":256,
+		"bgCol":"000000",
+		"marioX":48,
+		"marioY":194,
+		"song":6,
+		"intermission":false,
+		"underwater":false,
+		"bonus":false,
+		"pipes":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		"pipescreen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	},
+	"template":{
+		"levelTheme":0,
+		"levelHeight":15,
+		"levelWidth":256,
+		"bgCol":"7b6bff",
+		"marioX":48,
+		"marioY":194,
+		"song":0,
+		"intermission":false,
+		"underwater":false,
+		"bonus":false,
+		"pipes":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		"pipescreen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	},
 }

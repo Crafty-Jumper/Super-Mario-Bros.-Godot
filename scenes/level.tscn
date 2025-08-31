@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=44 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://cpbm10o4slycl" path="res://scripts/level_read.gd" id="10_wc255"]
 [ext_resource type="PackedScene" uid="uid://bypbsaos681uo" path="res://scenes/blocks/pipeLeft.tscn" id="11_82cfe"]
 [ext_resource type="PackedScene" uid="uid://1nl3h0tmxqmu" path="res://scenes/blocks/brickBlockStar.tscn" id="12_gunhw"]
+[ext_resource type="PackedScene" uid="uid://c7kwy6xjnrnfy" path="res://scenes/blocks/qblock_star.tscn" id="12_v3why"]
 [ext_resource type="PackedScene" uid="uid://k2r703mpq3t8" path="res://scenes/blocks/coin.tscn" id="13_5k0ak"]
 [ext_resource type="PackedScene" uid="uid://dchtemg20llqb" path="res://scenes/flagpole.tscn" id="13_64w2a"]
 [ext_resource type="AudioStream" uid="uid://w5eiy3dtll1c" path="res://audio/music/goalpole.mp3" id="14_fpun6"]
@@ -193,6 +194,7 @@ scenes/8/scene = ExtResource("12_gunhw")
 scenes/9/scene = ExtResource("13_5k0ak")
 scenes/10/scene = ExtResource("7_gur6y")
 scenes/11/scene = ExtResource("10_2e2fo")
+scenes/12/scene = ExtResource("12_v3why")
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
 physics_layer_0/collision_layer = 1
@@ -275,6 +277,15 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-7.5, 0)
+shape = SubResource("RectangleShape2D_gur6y")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(65, 0)
+collision_layer = 2147483648
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(7.5, 0)
 shape = SubResource("RectangleShape2D_gur6y")
 
 [node name="Camera2D" type="Camera2D" parent="."]

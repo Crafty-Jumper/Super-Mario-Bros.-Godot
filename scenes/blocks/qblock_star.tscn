@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7kwy6xjnrnfy"]
+
+[ext_resource type="PackedScene" uid="uid://crr7wd058gblm" path="res://scenes/blocks/qblock.tscn" id="1_erecw"]
+[ext_resource type="PackedScene" uid="uid://hnsq0f7ct8fa" path="res://scenes/entities/star.tscn" id="2_cq2kr"]
+
+[node name="StaticBody2D" instance=ExtResource("1_erecw")]
+item = ExtResource("2_cq2kr")

@@ -460,7 +460,7 @@ func _on_can_climb_up() -> void:
 	velocity.y = -physics["vineUp"]
 
 func _changeRoom():
-	var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]
+	var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"].get(GlobalVariables.marioScreen)
 	if checkType is int or checkType is float:
 		GlobalVariables.sub = checkType
 	if checkType is Array:
@@ -471,5 +471,4 @@ func _changeRoom():
 		get_tree().change_scene_to_file("res://scenes/loading1.tscn")
 		return
 	GlobalVariables.marioScreen = 0
-	GlobalVariables.fixpath()
 	get_tree().change_scene_to_file("res://scenes/level.tscn")

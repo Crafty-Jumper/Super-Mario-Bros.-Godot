@@ -10,8 +10,8 @@ var marioPower = 0
 
 var paused : bool = false
 var world : int = 2
-var level : int = 1
-var sub : int = 1
+var level : int = 4
+var sub : int = 0
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
@@ -92,4 +92,7 @@ func fixpath() -> void:
 	levelHeight = leveldatajson[levelPrefix]["levelHeight"]
 	levelWidth = leveldatajson[levelPrefix]["levelWidth"]
 	levelBGColor = leveldatajson[levelPrefix]["bgCol"]
-	marioOffset = leveldatajson[levelPrefix]["pipescreen"][marioScreen]
+	if leveldatajson[levelPrefix]["pipescreen"].get(marioScreen) is int:
+		marioOffset = leveldatajson[levelPrefix]["pipescreen"][marioScreen]
+	else:
+		marioOffset = 0
