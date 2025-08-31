@@ -65,9 +65,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			if itemCount > 0:
 				itemCount -= 1
 			else:
-				if marioHit == 1 and GlobalVariables.marioState >= 0:
+				if marioHit == 1 and GlobalVariables.marioSize >= 0:
 					queue_free()
-				if marioHit == 2 and GlobalVariables.marioState > 0:
+				if marioHit == 2 and GlobalVariables.marioSize > 0:
 					queue_free()
 		if marioHit == 5:
 			if GlobalVariables.marioState > 0:

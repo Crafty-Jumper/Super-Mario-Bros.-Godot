@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
 	
 	if GlobalVariables.marioState == -3 or GlobalVariables.marioState == -4:
 		Music.loadtrack("None",false)
-	if mario.position.y > GlobalVariables.levelHeight * 16 + 100:
+	if mario.position.y > GlobalVariables.levelHeight * 16 + 100 and not GlobalVariables.bonus:
 		Music.loadtrack("None",false)
 	
 	

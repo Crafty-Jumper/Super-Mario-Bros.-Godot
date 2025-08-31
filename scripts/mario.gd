@@ -74,18 +74,7 @@ func _physics_process(delta: float) -> void:
 	
 	if GlobalVariables.marioVine:
 		if position.y < -15:
-			var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]
-			if checkType is int or checkType is float:
-				GlobalVariables.sub = checkType
-			if checkType is Array:
-				return
-			GlobalVariables.marioScreen = 0
-			GlobalVariables.fixpath()
-			get_tree().change_scene_to_file("res://scenes/level.tscn")
-			GlobalVariables.marioVine = true
-	
-	
-	
+			_changeRoom()
 	
 	canPipe = get_meta("canPipe")
 	GlobalVariables.marioScreen = floor(position.x/256)
@@ -94,7 +83,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if GlobalVariables.marioInvinc == 0:
-		if GlobalVariables.marioState == 2:
+		if GlobalVariables.marioPower == 2:
 			animated_sprite_2d.material.set_shader_parameter("accessRow",2)
 		else:
 			animated_sprite_2d.material.set_shader_parameter("accessRow",1)
@@ -152,13 +141,21 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if GlobalVariables.marioState == -1:
-		animated_sprite_2d.animation = "grow"
+		if GlobalVariables.marioSize == 1:
+			animated_sprite_2d.animation = "shrink"
+		else:
+			animated_sprite_2d.animation = "grow"
 		animated_sprite_2d.speed_scale = 1
+		GlobalVariables.marioPower = 1
 		return
 	
 	if GlobalVariables.marioState == -2:
-		animated_sprite_2d.animation = "shrink"
+		if GlobalVariables.marioSize == 1:
+			animated_sprite_2d.animation = "shrink"
+		else:
+			animated_sprite_2d.animation = "grow"
 		animated_sprite_2d.speed_scale = 1
+		GlobalVariables.marioPower = 0
 		return
 	
 	if GlobalVariables.marioState == -3:
@@ -183,9 +180,13 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if position.y > GlobalVariables.levelHeight * 16 + 100:
-		if not dead_music.playing:
-			dead_music.play()
-			GlobalVariables.marioState = -3
+		if GlobalVariables.bonus:
+			if position.y > GlobalVariables.levelHeight * 16 + 500:
+				_changeRoom()
+		else:
+			if not dead_music.playing:
+				dead_music.play()
+				GlobalVariables.marioState = -3
 
 	if GlobalVariables.marioState == -5:
 		animated_sprite_2d.material.set_shader_parameter("accessRow",fmod(animated_sprite_2d.material.get_shader_parameter("accessRow")+1,7)+(1/8))
@@ -200,7 +201,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	if GlobalVariables.marioState == 0:
+	if GlobalVariables.marioSize == 0:
 		ColUp.disabled = true
 	else:
 		ColUp.disabled = false
@@ -316,7 +317,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	if GlobalVariables.marioState == 2:
+	if GlobalVariables.marioPower == 2:
 		if Input.is_action_just_pressed("run"):
 			var popItem = fireball.instantiate()
 			popItem.position = position
@@ -326,7 +327,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				popItem.velocity.x = 200
 			GlobalVariables.add_child(popItem)
-			animated_sprite_2d.animation = "throw" + GlobalVariables.marioVisual
+			animated_sprite_2d.animation = "throwBig"
 	
 	# flagpole animation
 	if slidingOnPole:
@@ -367,21 +368,10 @@ func _on_timer_timeout() -> void:
 		velocity.y = -300
 		GlobalVariables.marioState = -4
 	if isPipe:
-		var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]
-		if checkType is int or checkType is float:
-			GlobalVariables.sub = checkType
-		if checkType is Array:
-			GlobalVariables.world = checkType[GlobalVariables.marioTileX/4]
-			GlobalVariables.level = 1
-			GlobalVariables.sub = 0
-			GlobalVariables.marioScreen = 0
-			get_tree().change_scene_to_file("res://scenes/loading1.tscn")
-			return
-		GlobalVariables.marioScreen = 0
-		GlobalVariables.fixpath()
-		get_tree().change_scene_to_file("res://scenes/level.tscn")
+		_changeRoom()
 	if GlobalVariables.marioState == -5:
-		GlobalVariables.marioState = 2
+		GlobalVariables.marioPower = 2
+		GlobalVariables.marioState = 0
 		GlobalVariables.paused = false
 
 
@@ -389,7 +379,7 @@ func hurt() -> void:
 	if GlobalVariables.marioInvuln > 0:
 		return
 	GlobalVariables.paused = true
-	if GlobalVariables.marioState == 0:
+	if GlobalVariables.marioPower == 0:
 		GlobalVariables.marioState = -3
 	else:
 		GlobalVariables.marioState = -2
@@ -398,12 +388,9 @@ func hurt() -> void:
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if GlobalVariables.marioState == -1:
-		if animated_sprite_2d.animation == "grow":
-			GlobalVariables.marioState = 1
-			GlobalVariables.paused = false
-	if GlobalVariables.marioState == -2:
-		if animated_sprite_2d.animation == "shrink":
+	if GlobalVariables.marioState == -1 or GlobalVariables.marioState == -2:
+		if animated_sprite_2d.animation == "grow" or animated_sprite_2d.animation == "shrink":
+			GlobalVariables.marioSize = 1 - GlobalVariables.marioSize
 			GlobalVariables.marioState = 0
 			GlobalVariables.paused = false
 	if animated_sprite_2d.animation == "swim" + GlobalVariables.marioVisual:
@@ -471,3 +458,18 @@ func _on_can_climb_up() -> void:
 	yDir = 1
 	animated_sprite_2d.animation = "climb" + GlobalVariables.marioVisual
 	velocity.y = -physics["vineUp"]
+
+func _changeRoom():
+	var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]
+	if checkType is int or checkType is float:
+		GlobalVariables.sub = checkType
+	if checkType is Array:
+		GlobalVariables.world = checkType[GlobalVariables.marioTileX/4]
+		GlobalVariables.level = 1
+		GlobalVariables.sub = 0
+		GlobalVariables.marioScreen = 0
+		get_tree().change_scene_to_file("res://scenes/loading1.tscn")
+		return
+	GlobalVariables.marioScreen = 0
+	GlobalVariables.fixpath()
+	get_tree().change_scene_to_file("res://scenes/level.tscn")

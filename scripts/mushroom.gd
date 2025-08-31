@@ -17,7 +17,7 @@ var type = "mushroom"
 
 func _ready() -> void:
 	sprite_2d.position.y += 16
-	if GlobalVariables.marioState == 1:
+	if GlobalVariables.marioPower == 1:
 		type = "fireflower"
 		moveSpeed = 0
 
@@ -65,10 +65,10 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Mario":
 		body.powerup.play()
-		if GlobalVariables.marioState == 0:
+		if GlobalVariables.marioPower == 0:
 			GlobalVariables.paused = true
 			GlobalVariables.marioState = -1
-		if GlobalVariables.marioState == 1:
+		if GlobalVariables.marioPower == 1:
 			GlobalVariables.paused = true
 			GlobalVariables.marioState = -5
 		queue_free()
