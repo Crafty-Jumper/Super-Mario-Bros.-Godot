@@ -195,7 +195,7 @@ scenes/10/scene = ExtResource("7_gur6y")
 scenes/11/scene = ExtResource("10_2e2fo")
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
-physics_layer_0/collision_layer = 4294967295
+physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "Palette"
 custom_data_layer_0/type = 2
 sources/1 = SubResource("TileSetScenesCollectionSource_0b4ue")
@@ -216,8 +216,8 @@ scenes/7/scene = ExtResource("28_v3why")
 tile_size = Vector2i(8, 16)
 sources/0 = SubResource("TileSetScenesCollectionSource_arp2o")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_arp2o"]
-size = Vector2(10, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gur6y"]
+size = Vector2(15, 104)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aicyk"]
 shader = ExtResource("1_8cye3")
@@ -246,6 +246,7 @@ script = ExtResource("3_w3o6u")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("19_2e2fo")]
 position = Vector2(48, -8)
+mainVine = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -270,11 +271,11 @@ playback_type = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2147483648
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-5, 0)
-shape = SubResource("RectangleShape2D_arp2o")
+position = Vector2(-7.5, 0)
+shape = SubResource("RectangleShape2D_gur6y")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(128, 120)

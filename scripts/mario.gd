@@ -175,14 +175,18 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.animation = "die"
 		velocity.y += gravityDie * delta
 		move_and_slide()
-		if position.y > 3000:
+		if position.y > GlobalVariables.levelHeight * 16 + 3000:
 			if GlobalVariables.marioLives > 0:
 				get_tree().change_scene_to_file("res://scenes/loading1.tscn")
 			else:
 				get_tree().change_scene_to_file("res://scenes/loading2.tscn")
-		
 		return
-	
+
+	if position.y > GlobalVariables.levelHeight * 16 + 100:
+		if not dead_music.playing:
+			dead_music.play()
+			GlobalVariables.marioState = -3
+
 	if GlobalVariables.marioState == -5:
 		animated_sprite_2d.material.set_shader_parameter("accessRow",fmod(animated_sprite_2d.material.get_shader_parameter("accessRow")+1,7)+(1/8))
 		if timer.is_stopped():
@@ -274,7 +278,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = physics["vineDown"]
 		else:
 			velocity.y = 0
-		if Input.is_action_just_pressed("right"):
+		if Input.is_action_just_pressed("right") and inputAffects:
 			if GlobalVariables.marioVineLeft:
 				GlobalVariables.marioVineLeft = false
 				position.x += 16
@@ -282,7 +286,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				GlobalVariables.marioVine = false
 				position.x += 4
-		if Input.is_action_just_pressed("left"):
+		if Input.is_action_just_pressed("left") and inputAffects:
 			if not GlobalVariables.marioVineLeft:
 				GlobalVariables.marioVineLeft = true
 				position.x -= 16
@@ -291,10 +295,10 @@ func _physics_process(delta: float) -> void:
 				GlobalVariables.marioVine = false
 				position.x -= 4
 
-		if velocity.x > maxSpeed:
-			velocity.x = maxSpeed
-		if velocity.x < -maxSpeed:
-			velocity.x = -maxSpeed
+	if velocity.x > maxSpeed:
+		velocity.x = maxSpeed
+	if velocity.x < -maxSpeed:
+		velocity.x = -maxSpeed
 	
 	if goal_walk:
 		maxSpeed = physics["maxWalk"]

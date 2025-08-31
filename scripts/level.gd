@@ -18,7 +18,7 @@ extends Node2D
 var canStartGoalMusic : bool = true
 const songNames = ["None","Overworld","Underground","Underwater","Castle","Star","Bonus"]
 var overrideBgmVolume : bool = false
-
+var vineExists : bool = true
 
 func _ready() -> void:
 	mario.position = Vector2(GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioX"],GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioY"])
@@ -28,8 +28,10 @@ func _ready() -> void:
 		character_body_2d.position = Vector2(72,GlobalVariables.levelHeight * 16 + 8)
 		character_body_2d.origPos = GlobalVariables.levelHeight * 16 + 8
 		mario.position = Vector2(64,GlobalVariables.levelHeight * 16 + 16)
+		character_body_2d.audio_stream_player.play()
 		GlobalVariables.marioClimbing = true
 	else:
+		vineExists = false
 		character_body_2d.queue_free()
 	GlobalVariables.fixpath()
 	camera_2d.limit_bottom = GlobalVariables.levelHeight * 16
@@ -46,8 +48,9 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	
-	if character_body_2d.position.y <= GlobalVariables.levelHeight * 16 - 78:
-		mario.yDir = 1
+	if vineExists:
+		if character_body_2d.position.y <= GlobalVariables.levelHeight * 16 - 78:
+			mario.yDir = 1
 	
 	if GlobalVariables.pauseMenuOpen:
 		_pause_process(true)
@@ -69,14 +72,14 @@ func _process(delta: float) -> void:
 		
 	static_body_2d.position.y = mario.position.y
 	
-	if GlobalVariables.marioState == -3:
+	if GlobalVariables.marioState == -3 or GlobalVariables.marioState == -4:
+		Music.loadtrack("None",false)
+	if mario.position.y > GlobalVariables.levelHeight * 16 + 100:
 		Music.loadtrack("None",false)
 	
 	
-	
 	if GlobalVariables.marioInvinc > 60:
-		if not song == 5:
-			Music.loadtrack("Star",true)
+		Music.loadtrack("Star",true)
 	else:
 		if song > -1:
 			if songNames.get(song) is String:
@@ -86,8 +89,6 @@ func _process(delta: float) -> void:
 		else:
 			Music.loadtrack("custom" + str(abs(song)),true)
 	
-	if GlobalVariables.marioInvinc < 60:
-		pass
 	
 	if mario.position.x > camera_2d.position.x - 8:
 		if mario.velocity.x > 0:

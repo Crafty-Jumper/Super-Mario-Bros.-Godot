@@ -163,7 +163,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				return
 			
 				
-		if body.velocity.y > 0:
+		if body.velocity.y > 0 or body.position.y < position.y - 9:
 			if marioJumpAction == 1:
 				if isInShell:
 					if hasKicked and velocity.x == 0:

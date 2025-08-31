@@ -4,10 +4,14 @@ var origPos = position.y
 
 @onready var vine_body: Sprite2D = $"Vine-body"
 @onready var vineCol: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@export var mainVine : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	origPos = position.y
+	if not mainVine:
+		audio_stream_player.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

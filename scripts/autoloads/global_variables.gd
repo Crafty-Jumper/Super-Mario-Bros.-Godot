@@ -6,13 +6,13 @@ var marioVisual = "Small"
 var marioInvuln = 0
 var marioLives = 1000
 var marioInvinc = 0
-var world : int = 1
-var level : int = 2
-var sub : int = 1
+var world : int = 2
+var level : int = 1
+var sub : int = 0
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
-var marioVine : bool = true
+var marioVine : bool = false
 var marioVineLeft : bool = true
 var marioClimbing : bool = false
 
