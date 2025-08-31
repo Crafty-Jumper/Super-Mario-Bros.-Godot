@@ -11,11 +11,9 @@ extends Node2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var tile_map_layer_2: TileMapLayer = $TileMapLayer2
 @onready var pause: AudioStreamPlayer = $AudioStreamPlayer
-
-
+@onready var character_body_2d: StaticBody2D = $CharacterBody2D
 
 @export var song : int = GlobalVariables.song
-@export var underwater : bool = false
 
 var canStartGoalMusic : bool = true
 const songNames = ["None","Overworld","Underground","Underwater","Castle","Star","Bonus"]
@@ -26,6 +24,13 @@ func _ready() -> void:
 	mario.position = Vector2(GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioX"],GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioY"])
 	if GlobalVariables.sub == GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]:
 		mario.position.x += GlobalVariables.marioOffset * 256
+	if GlobalVariables.marioVine:
+		character_body_2d.position = Vector2(72,GlobalVariables.levelHeight * 16 + 8)
+		character_body_2d.origPos = GlobalVariables.levelHeight * 16 + 8
+		mario.position = Vector2(64,GlobalVariables.levelHeight * 16 + 16)
+		GlobalVariables.marioClimbing = true
+	else:
+		character_body_2d.queue_free()
 	GlobalVariables.fixpath()
 	camera_2d.limit_bottom = GlobalVariables.levelHeight * 16
 	camera_2d.limit_right = GlobalVariables.levelWidth * 16
@@ -41,6 +46,8 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	
+	if character_body_2d.position.y <= GlobalVariables.levelHeight * 16 - 78:
+		mario.yDir = 1
 	
 	if GlobalVariables.pauseMenuOpen:
 		_pause_process(true)

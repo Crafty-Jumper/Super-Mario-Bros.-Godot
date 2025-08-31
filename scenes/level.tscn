@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=43 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dchtemg20llqb" path="res://scenes/flagpole.tscn" id="13_64w2a"]
 [ext_resource type="AudioStream" uid="uid://w5eiy3dtll1c" path="res://audio/music/goalpole.mp3" id="14_fpun6"]
 [ext_resource type="PackedScene" uid="uid://bkj8j3l7j6u33" path="res://scenes/entities/goomb.tscn" id="15_wc255"]
+[ext_resource type="PackedScene" uid="uid://b5rbge541cwvx" path="res://scenes/entities/vine.tscn" id="19_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://vewa2fpvxbge" path="res://scenes/entities/firebar.tscn" id="21_h6wmr"]
 [ext_resource type="PackedScene" uid="uid://buaocyjfxqq3" path="res://scenes/entities/firebarcounter.tscn" id="22_pqd0y"]
 [ext_resource type="PackedScene" uid="uid://cdexvmfu6tdli" path="res://scenes/entities/bowser.tscn" id="25_3ies3"]
@@ -243,6 +244,9 @@ offset_bottom = 413.0
 theme_override_fonts/normal_font = ExtResource("3_gur6y")
 script = ExtResource("3_w3o6u")
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("19_2e2fo")]
+position = Vector2(48, -8)
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_gur6y")
@@ -283,15 +287,16 @@ limit_bottom = 256
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_w3o6u")
 
-[node name="Mario" parent="." instance=ExtResource("1_vonw3")]
-material = SubResource("ShaderMaterial_aicyk")
-use_parent_material = true
-position = Vector2(63, 83)
-
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("2_kih21")]
 visible = false
 
+[node name="Mario" parent="." instance=ExtResource("1_vonw3")]
+material = SubResource("ShaderMaterial_aicyk")
+use_parent_material = true
+position = Vector2(63, 83)
+
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]
+[connection signal="canClimbUp" from="Mario" to="Mario" method="_on_can_climb_up"]
 [connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]

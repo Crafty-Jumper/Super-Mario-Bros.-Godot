@@ -16,8 +16,10 @@ var physicsFile = FileAccess.open("res://physics.json",FileAccess.READ)
 var physicsString = physicsFile.get_as_text()
 var physics = JSON.parse_string(physicsString)
 var direction = 0
+var yDir = 0
 
 signal goal_pole
+signal canClimbUp
 
 var goal_walk : bool = false
 var slidingOnPole : bool = false
@@ -40,6 +42,7 @@ var canPipe : bool = false
 var isPipe : bool = false
 var fireball : PackedScene = load("res://scenes/entities/fireball.tscn")
 var isDrain : bool = false
+var climbedDist = 0
 
 func _ready() -> void:
 	print(physics)
@@ -48,8 +51,29 @@ func _physics_process(delta: float) -> void:
 	# updating the physics
 	_physics_update()
 	
+	if GlobalVariables.marioClimbing:
+		inputAffects = false
+		set_collision_mask_value(1,false)
+		if yDir == 0:
+			return
+		if climbedDist < 140:
+			z_index = -127
+			climbedDist += 1
+			if climbedDist >= 100:
+				yDir = 0
+				if climbedDist == 100:
+					animated_sprite_2d.flip_h = true
+					position.x += 16
+		else:
+			set_collision_mask_value(1,true)
+			z_index = 0
+			position.x += 4
+			inputAffects = true
+			gravity = physics["gravStand"]
+			GlobalVariables.marioClimbing = false
+	
 	if GlobalVariables.marioVine:
-		if position.y < -16:
+		if position.y < -15:
 			var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen]
 			if checkType is int or checkType is float:
 				GlobalVariables.sub = checkType
@@ -58,6 +82,7 @@ func _physics_process(delta: float) -> void:
 			GlobalVariables.marioScreen = 0
 			GlobalVariables.fixpath()
 			get_tree().change_scene_to_file("res://scenes/level.tscn")
+			GlobalVariables.marioVine = true
 	
 	
 	
@@ -104,7 +129,9 @@ func _physics_process(delta: float) -> void:
 			timer.start(2)
 		return
 	
-	direction = Input.get_axis("left", "right") * float(inputAffects)
+	if inputAffects:
+		direction = Input.get_axis("left", "right")
+		yDir = Input.get_axis("down","up")
 	
 	if fmod(floor(GlobalVariables.marioInvuln),2) == 1:
 		hide()
@@ -217,56 +244,52 @@ func _physics_process(delta: float) -> void:
 		if direction > 0 and is_on_floor():
 			animated_sprite_2d.flip_h = false
 	
-	if inputAffects:
-		if not GlobalVariables.marioVine:
-			set_collision_mask_value(1,true)
-			if is_on_floor():
-				jumpStartSpeed = abs(velocity.x)
-				if direction:
-					if abs(direction) > 0:
-						velocity.x += direction * accel * delta
-					else:
-						velocity.x += direction * decel * delta
-				else:
-					velocity.x = move_toward(velocity.x, 0, decel * delta)
-			else:
-				if direction == velocity.x/abs(velocity.x):
-					pass
-				
-				if direction:
+	if not GlobalVariables.marioVine:
+		if is_on_floor():
+			jumpStartSpeed = abs(velocity.x)
+			if direction:
+				if abs(direction) > 0:
 					velocity.x += direction * accel * delta
+				else:
+					velocity.x += direction * decel * delta
+			else:
+				velocity.x = move_toward(velocity.x, 0, decel * delta)
 		else:
-			if not animated_sprite_2d.animation == "climb" + GlobalVariables.marioVisual:
-				animated_sprite_2d.animation = "climb" + GlobalVariables.marioVisual
-			velocity.x = 0
-			set_collision_mask_value(1,false)
-			var yDir = Input.get_axis("down","up")
-			if yDir == 0:
-				animated_sprite_2d.speed_scale = 0
+			if direction == velocity.x/abs(velocity.x):
+				pass
+			
+			if direction:
+				velocity.x += direction * accel * delta
+	else:
+		if not animated_sprite_2d.animation == "climb" + GlobalVariables.marioVisual:
+			animated_sprite_2d.animation = "climb" + GlobalVariables.marioVisual
+		velocity.x = 0
+		if yDir == 0:
+			animated_sprite_2d.speed_scale = 0
+		else:
+			animated_sprite_2d.speed_scale = 1
+		if yDir > 0:
+			velocity.y = -physics["vineUp"]
+		else: if yDir < 0:
+			velocity.y = physics["vineDown"]
+		else:
+			velocity.y = 0
+		if Input.is_action_just_pressed("right"):
+			if GlobalVariables.marioVineLeft:
+				GlobalVariables.marioVineLeft = false
+				position.x += 16
+				animated_sprite_2d.flip_h = true
 			else:
-				animated_sprite_2d.speed_scale = 1
-			if yDir > 0:
-				velocity.y = -physics["vineUp"]
-			else: if yDir < 0:
-				velocity.y = physics["vineDown"]
+				GlobalVariables.marioVine = false
+				position.x += 4
+		if Input.is_action_just_pressed("left"):
+			if not GlobalVariables.marioVineLeft:
+				GlobalVariables.marioVineLeft = true
+				position.x -= 16
+				animated_sprite_2d.flip_h = false
 			else:
-				velocity.y = 0
-			if Input.is_action_just_pressed("right"):
-				if GlobalVariables.marioVineLeft:
-					GlobalVariables.marioVineLeft = false
-					position.x += 16
-					animated_sprite_2d.flip_h = true
-				else:
-					GlobalVariables.marioVine = false
-					position.x += 4
-			if Input.is_action_just_pressed("left"):
-				if not GlobalVariables.marioVineLeft:
-					GlobalVariables.marioVineLeft = true
-					position.x -= 16
-					animated_sprite_2d.flip_h = false
-				else:
-					GlobalVariables.marioVine = false
-					position.x -= 4
+				GlobalVariables.marioVine = false
+				position.x -= 4
 
 		if velocity.x > maxSpeed:
 			velocity.x = maxSpeed
@@ -438,3 +461,9 @@ func conditionReturn(condition:bool,trueValue,falseValue):
 		return trueValue
 	else:
 		return falseValue
+
+
+func _on_can_climb_up() -> void:
+	yDir = 1
+	animated_sprite_2d.animation = "climb" + GlobalVariables.marioVisual
+	velocity.y = -physics["vineUp"]

@@ -11,7 +11,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if position.y > -16:
+	if position.y > origPos - 96:
 		position.y -= 0.5
 	vine_body.region_rect.size.y = origPos-position.y
 	vineCol.scale.y = origPos-position.y + 16
