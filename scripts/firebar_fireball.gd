@@ -18,11 +18,4 @@ func _on_area_detection_body_entered(body: Node2D) -> void:
 	if GlobalVariables.marioInvuln or GlobalVariables.marioInvinc:
 		return
 	if body.name == "Mario":
-		GlobalVariables.paused = true
-		if GlobalVariables.marioState > 0:
-			GlobalVariables.marioState = -2
-			body.hurt_pipe.play()
-			GlobalVariables.marioInvuln = 6 * 60
-		else:
-			GlobalVariables.marioState = -3
-			GlobalVariables.marioLives -= 1
+		body.hurt()

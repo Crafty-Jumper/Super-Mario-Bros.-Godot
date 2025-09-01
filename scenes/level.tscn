@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=45 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://cbakr6xm68j4r" path="res://scenes/entities/piranha-plant.tscn" id="28_v3why"]
 [ext_resource type="PackedScene" uid="uid://g0ngj3ah0fex" path="res://scenes/entities/koopa-red.tscn" id="30_2e2fo"]
 [ext_resource type="AudioStream" uid="uid://rp7d3q01hibi" path="res://audio/pause.mp3" id="31_w3o6u"]
+[ext_resource type="AudioStream" uid="uid://d0cadrhbw1ja2" path="res://audio/intermission.mp3" id="35_asl66"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gur6y"]
 shader = ExtResource("3_2e2fo")
@@ -308,6 +309,9 @@ visible = false
 material = SubResource("ShaderMaterial_aicyk")
 use_parent_material = true
 position = Vector2(63, 83)
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("35_asl66")
 
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]
 [connection signal="canClimbUp" from="Mario" to="Mario" method="_on_can_climb_up"]

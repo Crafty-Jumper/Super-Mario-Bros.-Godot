@@ -13,6 +13,7 @@ extends Node2D
 @onready var tile_map_layer_2: TileMapLayer = $TileMapLayer2
 @onready var pause: AudioStreamPlayer = $AudioStreamPlayer
 @onready var character_body_2d: StaticBody2D = $CharacterBody2D
+@onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
 
 @export var song : int = GlobalVariables.song
 
@@ -46,7 +47,8 @@ func _ready() -> void:
 		Music.loadtrack("custom" + str(abs(song)),true)
 	static_body_2d_2.position.x = GlobalVariables.levelWidth * 16
 	
-	
+	if GlobalVariables.intermission:
+		audio_stream_player_2.play()
 	
 func _process(delta: float) -> void:
 	
@@ -129,9 +131,11 @@ func _pause_process(startPause: bool) -> void:
 		static_body_2d.process_mode = Node.PROCESS_MODE_DISABLED
 		tile_map_layer_2.process_mode = Node.PROCESS_MODE_DISABLED
 		goal_music.process_mode = Node.PROCESS_MODE_DISABLED
+		audio_stream_player_2.process_mode = Node.PROCESS_MODE_DISABLED
 	else:
 		mario.process_mode = Node.PROCESS_MODE_ALWAYS
 		area_2d.process_mode = Node.PROCESS_MODE_ALWAYS
 		static_body_2d.process_mode = Node.PROCESS_MODE_ALWAYS
 		tile_map_layer_2.process_mode = Node.PROCESS_MODE_ALWAYS
 		goal_music.process_mode = Node.PROCESS_MODE_ALWAYS
+		audio_stream_player_2.process_mode = Node.PROCESS_MODE_ALWAYS

@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-@export_enum ("up","down","left","right") var direction = 0
+@export_enum ("up","right","down","left") var direction = 0
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Mario":

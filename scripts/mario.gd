@@ -17,6 +17,7 @@ var physicsString = physicsFile.get_as_text()
 var physics = JSON.parse_string(physicsString)
 var direction = 0
 var yDir = 0
+var throwFrames = 0
 
 signal goal_pole
 signal canClimbUp
@@ -45,11 +46,15 @@ var isDrain : bool = false
 var climbedDist = 0
 
 func _ready() -> void:
-	print(physics)
+	physicsFile.close()
 
 func _physics_process(delta: float) -> void:
 	# updating the physics
 	_physics_update()
+	
+	if GlobalVariables.intermission:
+		inputAffects = false
+		direction = 1
 	
 	if GlobalVariables.marioClimbing:
 		inputAffects = false
@@ -91,13 +96,13 @@ func _physics_process(delta: float) -> void:
 	
 	if canPipe:
 		if is_on_floor() and get_meta("pipeDirection") < 3:
-			if Input.is_action_pressed("down") and get_meta("pipeDirection") == 0:
+			if yDir < 0 and get_meta("pipeDirection") == 0:
 				isPipe = true
 				hurt_pipe.play()
-			if Input.is_action_pressed("right") and get_meta("pipeDirection") == 1:
+			if direction > 0 and get_meta("pipeDirection") == 1:
 				isPipe = true
 				hurt_pipe.play()
-			if Input.is_action_pressed("left") and get_meta("pipeDirection") == 2:
+			if direction < 0 and get_meta("pipeDirection") == 2:
 				isPipe = true
 				hurt_pipe.play()
 	if isPipe:
@@ -155,7 +160,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite_2d.animation = "grow"
 		animated_sprite_2d.speed_scale = 1
-		GlobalVariables.marioPower = 0
 		return
 	
 	if GlobalVariables.marioState == -3:
@@ -327,7 +331,11 @@ func _physics_process(delta: float) -> void:
 			else:
 				popItem.velocity.x = 200
 			GlobalVariables.add_child(popItem)
-			animated_sprite_2d.animation = "throwBig"
+			throwFrames = 10
+	
+	if throwFrames:
+		throwFrames -= 1
+		animated_sprite_2d.animation = "throwBig"
 	
 	# flagpole animation
 	if slidingOnPole:
@@ -382,6 +390,7 @@ func hurt() -> void:
 	if GlobalVariables.marioPower == 0:
 		GlobalVariables.marioState = -3
 	else:
+		GlobalVariables.marioPower = 0
 		GlobalVariables.marioState = -2
 		GlobalVariables.marioInvuln = 360
 		hurt_pipe.play()
@@ -446,6 +455,9 @@ func _physics_update():
 	if velocity.x * direction < 0 and is_on_floor():
 		accel = physics["skidDecel"]
 	
+	if GlobalVariables.intermission:
+		maxSpeed = physics["maxInter"]
+		gravity = physics["gravInter"]
 
 func conditionReturn(condition:bool,trueValue,falseValue):
 	if condition:

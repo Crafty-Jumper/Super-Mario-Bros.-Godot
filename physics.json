@@ -2,7 +2,7 @@
 	"minWalk":4.453125,
 	"maxWalk":93.75,
 	"maxWater":63.75,
-	"maxInter":48.75,
+	"maxInter":40.0,
 	"maxRun":153.75,
 	"maxSkid":33.75,
 	"walkAccel":133.59375,

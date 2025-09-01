@@ -22,6 +22,7 @@ animations = [{
 [node name="StaticBody2D" instance=ExtResource("1_wrq4r")]
 use_parent_material = true
 script = ExtResource("2_l8olm")
+direction = 1
 metadata/getsReplaced = true
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
