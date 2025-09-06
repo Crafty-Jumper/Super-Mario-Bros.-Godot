@@ -18,6 +18,8 @@ var physics = JSON.parse_string(physicsString)
 var direction = 0
 var yDir = 0
 var throwFrames = 0
+var frameTimer = 0
+
 
 signal goal_pole
 
@@ -50,6 +52,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# updating the physics
 	_physics_update()
+	
+	if frameTimer > 0:
+		frameTimer -= 1
+	else:
+		frameTimer = 5
 	
 	if GlobalVariables.intermission:
 		inputAffects = false
@@ -226,6 +233,11 @@ func _physics_process(delta: float) -> void:
 				animated_sprite_2d.animation = "idle" + GlobalVariables.marioVisual
 			if velocity.x * direction < 0:
 				animated_sprite_2d.animation = "turn" + GlobalVariables.marioVisual
+				if frameTimer == 5:
+					var popItem = load("res://scenes/smoke.tscn").instantiate()
+					popItem.position = position
+					popItem.position.y += 16
+					get_parent().add_child(popItem)
 		else:
 			if GlobalVariables.underwater:
 				if not animated_sprite_2d.animation == "swim" + GlobalVariables.marioVisual:
