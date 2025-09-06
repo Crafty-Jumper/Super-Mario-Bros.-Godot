@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://b0tdlnsifrurg"]
+
+[ext_resource type="Script" uid="uid://bd4b85n0s6qgv" path="res://scenes/entities/projectiles/iceball.gd" id="1_0bqac"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_4n2wr"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="3_8geg2"]
+[ext_resource type="Texture2D" uid="uid://4045b2r0e5uv" path="res://images/explode.png" id="4_ipkrm"]
+[ext_resource type="Texture2D" uid="uid://d0lf5v30pw77p" path="res://images/fireball.png" id="5_5ea6p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0bk4"]
+size = Vector2(8, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oevtn"]
+shader = ExtResource("2_4n2wr")
+shader_parameter/palette = ExtResource("3_8geg2")
+shader_parameter/accessRow = 9
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bm5o"]
+atlas = ExtResource("4_ipkrm")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0go3"]
+atlas = ExtResource("4_ipkrm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0ywk"]
+atlas = ExtResource("4_ipkrm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rar2i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bm5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0go3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0ywk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0fit"]
+shader = ExtResource("2_4n2wr")
+shader_parameter/palette = ExtResource("3_8geg2")
+shader_parameter/accessRow = 9
+
+[node name="fireball" type="CharacterBody2D" groups=["iceball"]]
+collision_layer = 8
+script = ExtResource("1_0bqac")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q0bk4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 127
+texture_filter = 1
+material = SubResource("ShaderMaterial_oevtn")
+sprite_frames = SubResource("SpriteFrames_rar2i")
+
+[node name="Fireball" type="Sprite2D" parent="."]
+z_index = 127
+texture_filter = 1
+material = SubResource("ShaderMaterial_c0fit")
+texture = ExtResource("5_5ea6p")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -33,6 +33,7 @@ window/dpi/allow_hidpi=false
 enemy=""
 fireball=""
 player=""
+iceball=""
 
 [input]
 

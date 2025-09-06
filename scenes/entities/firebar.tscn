@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://vewa2fpvxbge"]
 
 [ext_resource type="Script" uid="uid://b4vrnw1dsovs6" path="res://scripts/firebar.gd" id="1_g6xlb"]
-[ext_resource type="PackedScene" uid="uid://cbytu2d2n4a8t" path="res://scenes/firebar_fireball.tscn" id="2_p746n"]
+[ext_resource type="PackedScene" uid="uid://cbytu2d2n4a8t" path="res://scenes/entities/firebar_fireball.tscn" id="2_p746n"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_g6xlb")

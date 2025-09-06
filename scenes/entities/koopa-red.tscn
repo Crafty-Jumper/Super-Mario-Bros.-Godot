@@ -1,7 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://g0ngj3ah0fex"]
+[gd_scene load_steps=12 format=3 uid="uid://g0ngj3ah0fex"]
 
 [ext_resource type="PackedScene" uid="uid://bffcf7iwcgdw8" path="res://scenes/entities/enemy.tscn" id="1_3m6fj"]
 [ext_resource type="Texture2D" uid="uid://benl8aq8a5n2y" path="res://images/koopa.png" id="2_433m8"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_dydwg"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="3_ru5ig"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sbu4e"]
+resource_local_to_scene = true
+shader = ExtResource("2_dydwg")
+shader_parameter/palette = ExtResource("3_ru5ig")
+shader_parameter/accessRow = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dydwg"]
 atlas = ExtResource("2_433m8")
@@ -74,6 +82,7 @@ score = 100
 fireballScore = 100
 
 [node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_sbu4e")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_vc823")
 animation = &"stomp"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddsqisbwi1hke"
-path="res://.godot/imported/palette.png-d7571af1c0b63a308bcd0e43332ed95c.ctex"
+uid="uid://da18fuc76pqt"
+path="res://.godot/imported/shatter.png-507398b540c08d50f7b8614132e9c907.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/palettes/palette.png"
-dest_files=["res://.godot/imported/palette.png-d7571af1c0b63a308bcd0e43332ed95c.ctex"]
+source_file="res://images/shatter.png"
+dest_files=["res://.godot/imported/shatter.png-507398b540c08d50f7b8614132e9c907.ctex"]
 
 [params]
 

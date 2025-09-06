@@ -1,21 +1,16 @@
 extends CharacterBody2D
 
 # exports
-@export_enum ("Black","Red","Green")
-var palette: int = 0
-@export_enum ("None","Walk","Bounce","Fly Horizontal","Fly Vertical")
-var movementType: int = 0
+@export_enum ("Black","Red","Green") var palette: int = 0
+@export_enum ("None","Walk","Bounce","Fly Horizontal","Fly Vertical") var movementType: int = 0
 @export var moveSpeed = 0
 @export var bounceSpeed = 0
 @export var gravity = 0
 @export var maxFallSpeed = 0
 @export var flyDistance = 0
-@export_enum ("Ignore","Stomp","Hurt Mario")
-var marioJumpAction = 0
-@export_enum ("Ignore","Die","Fireproof")
-var fireballAction = 0
-@export_enum ("Ignore","Die","Hurt Mario")
-var starAction = 0
+@export_enum ("Ignore","Stomp","Hurt Mario") var marioJumpAction = 0
+@export_enum ("Ignore","Die","Fireproof") var fireballAction = 0
+@export_enum ("Ignore","Die","Hurt Mario") var starAction = 0
 @export var edgeTurn : bool = false
 @export var winged : bool = false
 @export var shellEnemy : bool = false
@@ -42,6 +37,7 @@ var speed = 0
 var canMove : bool = true
 var hasKicked : bool = false
 var kick_time : int = 0
+var frozen : bool = false
 
 func _ready() -> void:
 	wake_timer.wait_time = wakeUpTime
@@ -49,10 +45,21 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var d60 = delta*60
 	
+	if hasKicked and frozen:
+		if is_on_wall():
+			_projectile(load("res://scenes/shatter.tscn"),9)
+			queue_free()
+	
 	if position.y > GlobalVariables.levelHeight * 16 + 48:
 		queue_free()
-	if animated_sprite_2d.material.get_shader_parameter("accessRow") != palette+4:
-		animated_sprite_2d.material.set_shader_parameter("accessRow",palette+4)
+	
+	if frozen:
+		palette = 3
+		set_collision_layer_value(1,true)
+	
+	if animated_sprite_2d.material.get_shader_parameter("accessRow") != palette+6:
+		animated_sprite_2d.material.set_shader_parameter("accessRow",palette+6)
+	
 	
 	if kick_time > 0:
 		kick_time -= 1
@@ -66,7 +73,7 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(3,false)
 	
 	
-	if not active:
+	if !active:
 		return
 	
 	if GlobalVariables.paused:
@@ -86,20 +93,24 @@ func _physics_process(delta: float) -> void:
 			if velocity.x == 0:
 				if speed < 0:
 					velocity.x = moveSpeed
-					animated_sprite_2d.flip_h = false
+					if !frozen:
+						animated_sprite_2d.flip_h = false
 				else:
 					velocity.x = -moveSpeed
-					animated_sprite_2d.flip_h = true
+					if !frozen:
+						animated_sprite_2d.flip_h = true
 			else:
 				speed = velocity.x
 	if hasKicked:
 		if velocity.x == 0:
 			if speed < 0:
 				velocity.x = shellSpeed
-				animated_sprite_2d.flip_h = false
+				if !frozen:
+					animated_sprite_2d.flip_h = false
 			else:
 				velocity.x = -shellSpeed
-				animated_sprite_2d.flip_h = true
+				if !frozen:
+					animated_sprite_2d.flip_h = true
 		else:
 			speed = velocity.x
 		
@@ -109,17 +120,19 @@ func _physics_process(delta: float) -> void:
 	
 	if edgeTurn:
 		if is_on_floor():
-			if isInShell:
-				pass
-			else:
-				if not edge_left.is_colliding():
+			if !isInShell:
+				if !edge_left.is_colliding():
 					if velocity.x > 0:
 						velocity.x *= -1
 						animated_sprite_2d.flip_h = true
-				if not edge_right.is_colliding():
+				if !edge_right.is_colliding():
 					if velocity.x < 0:
 						velocity.x *= -1
 						animated_sprite_2d.flip_h = false
+	
+	if frozen and !hasKicked:
+		velocity.x = 0
+		animated_sprite_2d.speed_scale = 0
 	
 	move_and_slide()
 
@@ -132,10 +145,15 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("fireball"):
 		if fireballAction == 1:
 			flip()
-			spawn_score(1000)
+			spawn_score(100)
 		if fireballAction > 0:
 			body.explode()
-	
+	if body.is_in_group("iceball"):
+		frozen = true
+		if fireballAction == 1:
+			spawn_score(10)
+		if fireballAction > 0:
+			body.explode()
 	
 	if body.name == "Mario":
 		if GlobalVariables.marioInvinc > 0:
@@ -145,16 +163,19 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			if starAction == 0:
 				return
 		
-		if isInShell and not hasKicked:
+		if (isInShell or frozen) and not hasKicked:
 			kick_sound.play()
-			hasKicked = true
+			if (frozen and not(body.velocity.y > 0 or body.position.y < position.y - 9)) or isInShell:
+				hasKicked = true
 			wake_timer.stop()
 			kick_time = 5
-			animated_sprite_2d.animation = "stomp"
-			if body.position.x > position.x:
-				velocity.x = -shellSpeed
-			else:
-				velocity.x = shellSpeed
+			if isInShell:
+				animated_sprite_2d.animation = "stomp"
+			if (frozen and not(body.velocity.y > 0 or body.position.y < position.y - 9)) or isInShell:
+				if body.position.x > position.x:
+					velocity.x = -shellSpeed
+				else:
+					velocity.x = shellSpeed
 			return
 		
 		
@@ -186,9 +207,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				body.hurt()
 	
 	if body.is_in_group("enemy"):
-		if body.isInShell:
+		if body.hasKicked:
 			if abs(body.velocity.x) == body.shellSpeed:
 				flip()
+				spawn_score(200)
 	
 	
 	
@@ -221,3 +243,9 @@ func _on_wake_timer_timeout() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "stomp" and not shellEnemy:
 		queue_free()
+
+func _projectile(scene:PackedScene,palette:int):
+	var popItem = scene.instantiate()
+	popItem.position = position
+	popItem.palette = palette
+	GlobalVariables.add_child(popItem)

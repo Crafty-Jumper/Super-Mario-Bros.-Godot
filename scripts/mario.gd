@@ -20,7 +20,6 @@ var yDir = 0
 var throwFrames = 0
 
 signal goal_pole
-signal canClimbUp
 
 var goal_walk : bool = false
 var slidingOnPole : bool = false
@@ -90,6 +89,8 @@ func _physics_process(delta: float) -> void:
 	if GlobalVariables.marioInvinc == 0:
 		if GlobalVariables.marioPower == 2:
 			animated_sprite_2d.material.set_shader_parameter("accessRow",2)
+		else: if GlobalVariables.marioPower == 3:
+			animated_sprite_2d.material.set_shader_parameter("accessRow",4)
 		else:
 			animated_sprite_2d.material.set_shader_parameter("accessRow",1)
 	
@@ -244,8 +245,12 @@ func _physics_process(delta: float) -> void:
 	if velocity.y > maxFall:
 		velocity.y = maxFall
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -jumpSpeed
+		if GlobalVariables.marioSize:
+			big_jump.play()
+		else:
+			small_jump.play()
 	
 	if ((not GlobalVariables.underwater) and is_on_floor()) or GlobalVariables.underwater:
 		if direction < 0 and is_on_floor():
@@ -323,15 +328,11 @@ func _physics_process(delta: float) -> void:
 	
 	if GlobalVariables.marioPower == 2:
 		if Input.is_action_just_pressed("run"):
-			var popItem = fireball.instantiate()
-			popItem.position = position
-			popItem.position.y -= 8
-			if animated_sprite_2d.flip_h:
-				popItem.velocity.x = -200
-			else:
-				popItem.velocity.x = 200
-			GlobalVariables.add_child(popItem)
-			throwFrames = 10
+			_projectile(load("res://scenes/entities/projectiles/fireball.tscn"),200,0)
+	if GlobalVariables.marioPower == 3:
+		if Input.is_action_just_pressed("run"):
+			_projectile(load("res://scenes/entities/projectiles/iceball.tscn"),100,0)
+	
 	
 	if throwFrames:
 		throwFrames -= 1
@@ -390,8 +391,8 @@ func hurt() -> void:
 	if GlobalVariables.marioPower == 0:
 		GlobalVariables.marioState = -3
 	else:
-		GlobalVariables.marioPower = 0
 		GlobalVariables.marioState = -2
+		GlobalVariables.marioPower = 0
 		GlobalVariables.marioInvuln = 360
 		hurt_pipe.play()
 
@@ -465,12 +466,6 @@ func conditionReturn(condition:bool,trueValue,falseValue):
 	else:
 		return falseValue
 
-
-func _on_can_climb_up() -> void:
-	yDir = 1
-	animated_sprite_2d.animation = "climb" + GlobalVariables.marioVisual
-	velocity.y = -physics["vineUp"]
-
 func _changeRoom():
 	var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"].get(GlobalVariables.marioScreen)
 	if checkType is int or checkType is float:
@@ -484,3 +479,14 @@ func _changeRoom():
 		return
 	GlobalVariables.marioScreen = 0
 	get_tree().change_scene_to_file("res://scenes/level.tscn")
+
+func _projectile(projectile:PackedScene,speedX:float,speedY:float):
+	var popItem = projectile.instantiate()
+	popItem.position = position
+	popItem.position.y -= 8
+	if animated_sprite_2d.flip_h:
+		popItem.velocity.x = -speedX
+	else:
+		popItem.velocity.x = speedX
+	GlobalVariables.add_child(popItem)
+	throwFrames = 10

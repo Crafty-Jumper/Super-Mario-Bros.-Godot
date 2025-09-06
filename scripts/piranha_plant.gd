@@ -9,7 +9,7 @@ var playerNear : bool = false
 func _ready() -> void:
 	position.y += 24
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if GlobalVariables.paused or GlobalVariables.pauseMenuOpen:
 		return
 	if not active:

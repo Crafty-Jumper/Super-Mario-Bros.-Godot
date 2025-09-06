@@ -4,12 +4,12 @@
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_bbwq4"]
 [ext_resource type="Texture2D" uid="uid://cibd5w5nj5nqw" path="res://images/flag.png" id="2_d7hrp"]
 [ext_resource type="AudioStream" uid="uid://bqvuu4sa3mrp1" path="res://audio/flagpole.mp3" id="3_d7hrp"]
-[ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="3_heuab"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="3_heuab"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmpsl"]
 shader = ExtResource("2_bbwq4")
 shader_parameter/palette = ExtResource("3_heuab")
-shader_parameter/accessRow = 6
+shader_parameter/accessRow = 8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7u70"]
 size = Vector2(2, 144)

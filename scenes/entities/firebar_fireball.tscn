@@ -1,14 +1,14 @@
 [gd_scene load_steps=7 format=3 uid="uid://cbytu2d2n4a8t"]
 
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_vuy7p"]
-[ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="2_qq5y0"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="2_qq5y0"]
 [ext_resource type="Texture2D" uid="uid://d0lf5v30pw77p" path="res://images/fireball.png" id="3_nieed"]
 [ext_resource type="Script" uid="uid://mfel0y51cjbr" path="res://scripts/firebar_fireball.gd" id="4_3aptg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p7nkp"]
 shader = ExtResource("1_vuy7p")
 shader_parameter/palette = ExtResource("2_qq5y0")
-shader_parameter/accessRow = 5
+shader_parameter/accessRow = 7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kwnc"]
 size = Vector2(8, 8)

@@ -32,14 +32,13 @@ func _physics_process(delta: float) -> void:
 	if type == "fireflower":
 		velocity.x = 0
 	
-	head.material.set_shader_parameter("accessRow",fmod(head.material.get_shader_parameter("accessRow")+1,7)+(1/8))
-	
-	
-	
+	head.material.set_shader_parameter("accessRow",fmod(head.material.get_shader_parameter("accessRow")+1,10))
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
+	
+	
 	if not appearing:
 		if type == "mushroom":
 			if velocity.x == 0:
@@ -59,6 +58,9 @@ func _physics_process(delta: float) -> void:
 			appearing = false
 			sprite_2d.z_index = 0
 	else: sprite_2d.visible = false
+	
+	
+	
 	move_and_slide()
 
 

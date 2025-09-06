@@ -14,7 +14,7 @@ func _ready() -> void:
 		audio_stream_player.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if position.y > origPos - 96:
 		position.y -= 0.5
 	vine_body.region_rect.size.y = origPos-position.y

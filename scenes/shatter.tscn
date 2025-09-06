@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddolwy1alh3ev"]
+
+[ext_resource type="Script" uid="uid://c331xbu7hy122" path="res://scenes/shatterpal.gd" id="1_7knh3"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_msdje"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="2_7knh3"]
+[ext_resource type="Texture2D" uid="uid://da18fuc76pqt" path="res://images/shatter.png" id="3_0vma2"]
+[ext_resource type="Script" uid="uid://c6k1vjhbx3rek" path="res://scripts/shatter particles.gd" id="4_bjirc"]
+[ext_resource type="AudioStream" uid="uid://bihudu8msdn6" path="res://audio/sfx-shatter.mp3" id="5_um57p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_al1ig"]
+shader = ExtResource("1_msdje")
+shader_parameter/palette = ExtResource("2_7knh3")
+shader_parameter/accessRow = 6
+
+[node name="Node2D" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_7knh3")
+
+[node name="Shatter1" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_al1ig")
+texture = ExtResource("3_0vma2")
+script = ExtResource("4_bjirc")
+speedX = 1.5
+speedY = -5.0
+
+[node name="Shatter2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_al1ig")
+texture = ExtResource("3_0vma2")
+script = ExtResource("4_bjirc")
+speedX = 1.5
+speedY = -2.5
+
+[node name="Shatter3" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_al1ig")
+texture = ExtResource("3_0vma2")
+flip_h = true
+script = ExtResource("4_bjirc")
+speedX = -1.5
+speedY = -5.0
+
+[node name="Shatter4" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_al1ig")
+texture = ExtResource("3_0vma2")
+flip_h = true
+script = ExtResource("4_bjirc")
+speedX = -1.5
+speedY = -2.5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_um57p")
+autoplay = true

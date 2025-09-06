@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bv2aybkqwpfcs" path="res://scripts/bowser.gd" id="1_ckgce"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_dynap"]
-[ext_resource type="Texture2D" uid="uid://b5mpgx51ob4xh" path="res://images/palettes/palette.png" id="2_ckgce"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="2_ckgce"]
 [ext_resource type="Texture2D" uid="uid://bvfh4bairedws" path="res://images/bowser.png" id="3_1yjn3"]
 [ext_resource type="AudioStream" uid="uid://ynv5l6fk3ixf" path="res://audio/sfx-bowserfall.mp3" id="5_1yjn3"]
 
@@ -12,7 +12,7 @@ size = Vector2(30, 30)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ud05e"]
 shader = ExtResource("1_dynap")
 shader_parameter/palette = ExtResource("2_ckgce")
-shader_parameter/accessRow = 6
+shader_parameter/accessRow = 8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_358l4"]
 atlas = ExtResource("3_1yjn3")

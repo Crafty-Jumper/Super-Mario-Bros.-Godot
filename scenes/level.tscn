@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=45 format=4 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://k2r703mpq3t8" path="res://scenes/blocks/coin.tscn" id="13_5k0ak"]
 [ext_resource type="PackedScene" uid="uid://dchtemg20llqb" path="res://scenes/flagpole.tscn" id="13_64w2a"]
 [ext_resource type="AudioStream" uid="uid://w5eiy3dtll1c" path="res://audio/music/goalpole.mp3" id="14_fpun6"]
-[ext_resource type="PackedScene" uid="uid://bkj8j3l7j6u33" path="res://scenes/entities/goomb.tscn" id="15_wc255"]
+[ext_resource type="PackedScene" uid="uid://bkj8j3l7j6u33" path="res://scenes/entities/goomba.tscn" id="15_wc255"]
 [ext_resource type="PackedScene" uid="uid://b5rbge541cwvx" path="res://scenes/entities/vine.tscn" id="19_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://vewa2fpvxbge" path="res://scenes/entities/firebar.tscn" id="21_h6wmr"]
 [ext_resource type="PackedScene" uid="uid://buaocyjfxqq3" path="res://scenes/entities/firebarcounter.tscn" id="22_pqd0y"]
@@ -254,6 +254,7 @@ mainVine = true
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_gur6y")
+tile_map_data = PackedByteArray("AAAAAA4AAAAAAAAAAAABAA4AAAAAAAAAAAACAA4AAAAAAAAAAAADAA4AAAAAAAAAAAAEAA4AAAAAAAAAAAAFAA4AAAAAAAAAAAAGAA4AAAAAAAAAAAAHAA4AAAAAAAAAAAAIAA4AAAAAAAAAAAAJAA4AAAAAAAAAAAAKAA4AAAAAAAAAAAALAA4AAAAAAAAAAAAMAA4AAAAAAAAAAAANAA4AAAAAAAAAAAAOAA4AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA0AAAAAAAAAAAAOAA0AAAAAAAAAAAANAA0AAAAAAAAAAAAMAA0AAAAAAAAAAAALAA0AAAAAAAAAAAAKAA0AAAAAAAAAAAAJAA0AAAAAAAAAAAAIAA0AAAAAAAAAAAAHAA0AAAAAAAAAAAAGAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAADAA0AAAAAAAAAAAACAA0AAAAAAAAAAAABAA0AAAAAAAAAAAAAAA0AAAAAAAAAAAAQAA0AAAAAAAAAAAARAA0AAAAAAAAAAAASAA4AAAAAAAAAAAATAA4AAAAAAAAAAAAUAA4AAAAAAAAAAAAVAA4AAAAAAAAAAAARAA4AAAAAAAAAAAAQAA4AAAAAAAAAAAASAA0AAAAAAAAAAAATAA0AAAAAAAAAAAAUAA0AAAAAAAAAAAAVAA0AAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_oi3di")
 script = ExtResource("10_wc255")
 metadata/groundPalette = 0
@@ -314,5 +315,4 @@ position = Vector2(63, 83)
 stream = ExtResource("35_asl66")
 
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]
-[connection signal="canClimbUp" from="Mario" to="Mario" method="_on_can_climb_up"]
 [connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]

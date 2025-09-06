@@ -66,10 +66,18 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				itemCount -= 1
 			else:
 				if marioHit == 1 and GlobalVariables.marioSize >= 0:
+					_projectile(load("res://scenes/shatter.tscn"),6)
 					queue_free()
 				if marioHit == 2 and GlobalVariables.marioSize > 0:
+					_projectile(load("res://scenes/shatter.tscn"),6)
 					queue_free()
 		if marioHit == 5:
 			if GlobalVariables.marioState > 0:
 				bumped = 4
 				hasBeenHit = true
+
+func _projectile(scene:PackedScene,palette:int):
+	var popItem = scene.instantiate()
+	popItem.position = position
+	popItem.palette = palette
+	GlobalVariables.add_child(popItem)
