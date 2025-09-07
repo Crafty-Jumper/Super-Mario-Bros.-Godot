@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="16" height="15" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#7b6bff" nextlayerid="5" nextobjectid="3">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="16" height="15" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#7b6bff" nextlayerid="5" nextobjectid="3">
  <editorsettings>
   <export target="1-2.0.csv" format="csv"/>
  </editorsettings>
+ <properties>
+  <property name="levelTheme" type="int" value="0"/>
+ </properties>
  <tileset firstgid="1" source="../tilesmb.tsx"/>
  <tileset firstgid="257" source="../enemiessmb.tsx"/>
  <layer id="1" name="Tiles" width="16" height="15">
-  <properties>
-   <property name="marioStartY" type="int" value="192"/>
-  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

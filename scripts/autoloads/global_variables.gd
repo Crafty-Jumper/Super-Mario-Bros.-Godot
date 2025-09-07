@@ -97,7 +97,7 @@ func fixpath() -> void:
 	song = leveldatajson[levelPrefix]["song"]
 	bonus = leveldatajson[levelPrefix]["bonus"]
 	intermission = leveldatajson[levelPrefix]["intermission"]
-	theme = leveldatajson[levelPrefix]["levelTheme"]
+	theme = get_map_property(levelPath,"levelTheme")
 	levelHeight = int(get_built_in_property(levelPath,"height"))
 	levelWidth = int(get_built_in_property(levelPath,"width"))
 	levelBGColor = get_built_in_property(levelPath,"backgroundcolor")
@@ -121,4 +121,22 @@ func get_built_in_property(file:String,property:String) -> String:
 			XMLParser.NODE_ELEMENT:
 				if tmxfile.get_node_name() == "map":
 					return tmxfile.get_named_attribute_value(property)
+	return "this shouldn't be seen"
+
+func get_map_property(file:String,property:String):
+	var tmxfile = XMLParser.new()
+	var error = tmxfile.open(file)
+	
+	if !error == OK:
+		return "i got nothin"
+	
+	
+	while tmxfile.read() == OK:
+		match tmxfile.get_node_type():
+			XMLParser.NODE_ELEMENT:
+				if tmxfile.get_node_name() == "property":
+					if tmxfile.get_named_attribute_value("name") == property:
+						var value = tmxfile.get_named_attribute_value("value")
+						if tmxfile.get_named_attribute_value("type") == "int":
+							return int(value)
 	return "this shouldn't be seen"
