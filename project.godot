@@ -24,9 +24,12 @@ Save="*res://scripts/autoloads/save.gd"
 
 window/size/viewport_width=768
 window/size/viewport_height=720
+window/size/transparent=true
+window/size/extend_to_title=true
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
-window/dpi/allow_hidpi=false
+window/per_pixel_transparency/allowed=true
+window/handheld/orientation=4
 
 [global_group]
 

@@ -15,7 +15,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_76esm"]
 shader = ExtResource("2_4gsdp")
 shader_parameter/palette = ExtResource("3_752v2")
-shader_parameter/accessRow = 4
+shader_parameter/accessRow = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qghpy"]
 atlas = ExtResource("2_4ckko")

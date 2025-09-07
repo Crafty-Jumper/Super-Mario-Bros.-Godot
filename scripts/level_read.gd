@@ -112,7 +112,7 @@ func _place_tiles() -> void:
 	
 	if tileID == 13:
 		if fmod(index,GlobalVariables.levelWidth) > 15:
-			if int((levelString.get_slice(",",index - 2))) == 5:
+			if int((levelString.get_slice(",",index - 2)))-1 == 5:
 				tilePos = Vector2i(8,7)
 	
 	if tileIDs[tileID] is Array:

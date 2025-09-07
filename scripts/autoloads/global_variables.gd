@@ -76,29 +76,39 @@ func map(input_min: float, input_max: float, output_min: float, output_max: floa
 	return output
 
 func fixpath() -> void:
+	# level pack getting
 	GlobalVariables.levelpack = Save.config.get_value("Misc","levelPack","SMB")
-	song = leveldatajson[levelPrefix]["song"]
-	bonus = leveldatajson[levelPrefix]["bonus"]
-	intermission = leveldatajson[levelPrefix]["intermission"]
+	
+	
 	levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
+	
+	# finding the tmx
 	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"):
 		levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
 	else:
 		levelPath = "user://data/Level Packs/" + levelpack + "/" + levelPrefix + ".tmx"
+	# finding the json file
 	if FileAccess.file_exists("res://Level Data/" + levelpack + "/leveldata.json"):
 		leveldata = FileAccess.open("res://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
 	else:
 		leveldata = FileAccess.open("user://data/Level Packs/" + levelpack + "/leveldata.json", FileAccess.READ)
+
+	# general data
+	song = leveldatajson[levelPrefix]["song"]
+	bonus = leveldatajson[levelPrefix]["bonus"]
+	intermission = leveldatajson[levelPrefix]["intermission"]
 	theme = leveldatajson[levelPrefix]["levelTheme"]
 	levelHeight = int(get_built_in_property(levelPath,"height"))
 	levelWidth = int(get_built_in_property(levelPath,"width"))
 	levelBGColor = get_built_in_property(levelPath,"backgroundcolor")
+	
+	# pipe stuff
 	if leveldatajson[levelPrefix]["pipescreen"].get(marioScreen) is int:
 		marioOffset = leveldatajson[levelPrefix]["pipescreen"][marioScreen]
 	else:
 		marioOffset = 0
 
-func get_built_in_property(file:String,property:String):
+func get_built_in_property(file:String,property:String) -> String:
 	var tmxfile = XMLParser.new()
 	var error = tmxfile.open(file)
 	
