@@ -4,7 +4,7 @@
   <export format="csv"/>
  </editorsettings>
  <properties>
-  <property name="levelTheme" type="int" value="0"/>
+  <property name="levelTheme" type="int" value="1"/>
  </properties>
  <tileset firstgid="1" source="../tilesmb.tsx"/>
  <tileset firstgid="257" source="../enemiessmb.tsx"/>
