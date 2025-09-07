@@ -114,7 +114,7 @@ func _physics_process(delta: float) -> void:
 				isPipe = true
 				hurt_pipe.play()
 	if isPipe:
-		if GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"][GlobalVariables.marioScreen] is Array:
+		if GlobalVariables.pipes[GlobalVariables.marioScreen] is Array:
 			Music.loadtrack("None")
 		set_meta("canPipe",false)
 		animated_sprite_2d.speed_scale = 1
@@ -479,7 +479,7 @@ func conditionReturn(condition:bool,trueValue,falseValue):
 		return falseValue
 
 func _changeRoom():
-	var checkType = GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"].get(GlobalVariables.marioScreen)
+	var checkType = GlobalVariables.pipes.get(GlobalVariables.marioScreen)
 	if checkType is int or checkType is float:
 		GlobalVariables.sub = checkType
 	if checkType is Array:

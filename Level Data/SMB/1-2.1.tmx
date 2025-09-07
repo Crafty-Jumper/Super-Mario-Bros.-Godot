@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="256" height="15" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#000000" nextlayerid="5" nextobjectid="3">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="256" height="15" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#ffffff" nextlayerid="5" nextobjectid="3">
  <editorsettings>
   <export target="../1-2.1.csv" format="csv"/>
  </editorsettings>
  <properties>
+  <property name="bonus" type="bool" value="false"/>
+  <property name="intermission" type="bool" value="false"/>
   <property name="levelTheme" type="int" value="1"/>
+  <property name="marioX" type="int" value="48"/>
+  <property name="marioY" type="int" value="48"/>
+  <property name="pipes" value="0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0"/>
+  <property name="pipescreen" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+  <property name="song" type="int" value="2"/>
+  <property name="underwater" type="bool" value="false"/>
  </properties>
  <tileset firstgid="1" source="../tilesmb.tsx"/>
  <tileset firstgid="257" source="../enemiessmb.tsx"/>

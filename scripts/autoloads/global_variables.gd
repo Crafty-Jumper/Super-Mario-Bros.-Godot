@@ -29,11 +29,13 @@ var song = 0
 var underwater : bool = false
 var bonus : bool = false
 var intermission : bool = false
+var marioX = 0
+var marioY = 0
+var pipes = []
+var pipescreen = []
 
 var levelpack = "SMB"
 var levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
-var leveldata = FileAccess.open("res://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
-var leveldatajson = JSON.parse_string(leveldata.get_as_text())
 var levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
 var levelHeight = int(get_built_in_property(levelPath,"height"))
 var levelWidth = int(get_built_in_property(levelPath,"width"))
@@ -77,9 +79,7 @@ func map(input_min: float, input_max: float, output_min: float, output_max: floa
 
 func fixpath() -> void:
 	# level pack getting
-	GlobalVariables.levelpack = Save.config.get_value("Misc","levelPack","SMB")
-	
-	
+	levelpack = Save.config.get_value("Misc","levelPack","SMB")
 	levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
 	
 	# finding the tmx
@@ -87,24 +87,24 @@ func fixpath() -> void:
 		levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
 	else:
 		levelPath = "user://data/Level Packs/" + levelpack + "/" + levelPrefix + ".tmx"
-	# finding the json file
-	if FileAccess.file_exists("res://Level Data/" + levelpack + "/leveldata.json"):
-		leveldata = FileAccess.open("res://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
-	else:
-		leveldata = FileAccess.open("user://data/Level Packs/" + levelpack + "/leveldata.json", FileAccess.READ)
 
-	# general data
-	song = leveldatajson[levelPrefix]["song"]
-	bonus = leveldatajson[levelPrefix]["bonus"]
-	intermission = leveldatajson[levelPrefix]["intermission"]
+	# general level data
+	song = get_map_property(levelPath,"song")
+	bonus = get_map_property(levelPath,"bonus")
+	intermission = get_map_property(levelPath,"intermission")
 	theme = get_map_property(levelPath,"levelTheme")
 	levelHeight = int(get_built_in_property(levelPath,"height"))
 	levelWidth = int(get_built_in_property(levelPath,"width"))
 	levelBGColor = get_built_in_property(levelPath,"backgroundcolor")
+	marioX = get_map_property(levelPath,"marioX")
+	marioY = get_map_property(levelPath,"marioY")
+	underwater = get_map_property(levelPath,"underwater")
+	pipes = JSON.parse_string("[" + get_map_property(levelPath,"pipes") + "]")
+	pipescreen = JSON.parse_string("[" + get_map_property(levelPath,"pipescreen") + "]")
 	
 	# pipe stuff
-	if leveldatajson[levelPrefix]["pipescreen"].get(marioScreen) is int:
-		marioOffset = leveldatajson[levelPrefix]["pipescreen"][marioScreen]
+	if pipescreen.get(marioScreen) is int:
+		marioOffset = pipescreen[marioScreen]
 	else:
 		marioOffset = 0
 
@@ -139,4 +139,10 @@ func get_map_property(file:String,property:String):
 						var value = tmxfile.get_named_attribute_value("value")
 						if tmxfile.get_named_attribute_value("type") == "int":
 							return int(value)
+						if tmxfile.get_named_attribute_value("type") == "bool":
+							if tmxfile.get_named_attribute_value("value") == "true":
+								return true
+							else:
+								return false
+						return value
 	return "this shouldn't be seen"

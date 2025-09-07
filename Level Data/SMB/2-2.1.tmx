@@ -4,7 +4,15 @@
   <export target="2-2.1.csv" format="csv"/>
  </editorsettings>
  <properties>
+  <property name="bonus" type="bool" value="false"/>
+  <property name="intermission" type="bool" value="false"/>
   <property name="levelTheme" type="int" value="2"/>
+  <property name="marioX" type="int" value="48"/>
+  <property name="marioY" type="int" value="48"/>
+  <property name="pipes" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+  <property name="pipescreen" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+  <property name="song" type="int" value="3"/>
+  <property name="underwater" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../tilesmb.tsx"/>
  <tileset firstgid="257" source="../enemiessmb.tsx"/>

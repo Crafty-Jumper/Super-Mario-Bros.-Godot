@@ -23,8 +23,8 @@ var overrideBgmVolume : bool = false
 var vineExists : bool = true
 
 func _ready() -> void:
-	mario.position = Vector2(GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioX"],GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioY"])
-	if GlobalVariables.sub == GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["pipes"].get(GlobalVariables.marioScreen):
+	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)
+	if GlobalVariables.sub == GlobalVariables.pipes.get(GlobalVariables.marioScreen):
 		mario.position.x += GlobalVariables.marioOffset * 256
 	if GlobalVariables.marioVine:
 		character_body_2d.position = Vector2(72,GlobalVariables.levelHeight * 16 + 8)
