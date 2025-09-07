@@ -54,7 +54,6 @@ func _ready() -> void:
 	
 	# tiles
 	levelString = get_layer(GlobalVariables.levelPath,"Tiles")
-	print(levelString)
 	
 	
 	for i in GlobalVariables.levelHeight*GlobalVariables.levelWidth:
@@ -137,8 +136,9 @@ func get_layer(file:String,layer:String) -> String:
 		match tmxfile.get_node_type():
 			XMLParser.NODE_ELEMENT:
 				currentNode = tmxfile.get_node_name()
-				if tmxfile.get_named_attribute_value("name") == layer:
-					layerFound = true
+				if currentNode == "layer":
+					if tmxfile.get_named_attribute_value("name") == layer:
+						layerFound = true
 				if layerFound:
 					if tmxfile.get_node_name() == "data":
 						encoding = tmxfile.get_named_attribute_value("encoding")

@@ -42,7 +42,7 @@ var inputAffects : bool = true
 var debug : bool = false
 var canPipe : bool = false
 var isPipe : bool = false
-var fireball : PackedScene = load("res://scenes/entities/fireball.tscn")
+var fireball : PackedScene = load("res://scenes/entities/projectiles/fireball.tscn")
 var isDrain : bool = false
 var climbedDist = 0
 
@@ -500,5 +500,6 @@ func _projectile(projectile:PackedScene,speedX:float,speedY:float):
 		popItem.velocity.x = -speedX
 	else:
 		popItem.velocity.x = speedX
+	popItem.velocity.y = speedY
 	GlobalVariables.add_child(popItem)
 	throwFrames = 10

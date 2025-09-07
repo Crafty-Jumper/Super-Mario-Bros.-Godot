@@ -34,10 +34,10 @@ var levelpack = "SMB"
 var levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
 var leveldata = FileAccess.open("res://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
 var leveldatajson = JSON.parse_string(leveldata.get_as_text())
-var levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix
-var levelHeight = leveldatajson[levelPrefix]["levelHeight"]
-var levelWidth = leveldatajson[levelPrefix]["levelWidth"]
-var levelBGColor = leveldatajson[levelPrefix]["bgCol"]
+var levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
+var levelHeight = int(get_built_in_property(levelPath,"height"))
+var levelWidth = int(get_built_in_property(levelPath,"width"))
+var levelBGColor = get_built_in_property(levelPath,"backgroundcolor")
 
 func _ready() -> void:
 	fixpath()
@@ -90,10 +90,25 @@ func fixpath() -> void:
 	else:
 		leveldata = FileAccess.open("user://data/Level Packs/" + levelpack + "/leveldata.json", FileAccess.READ)
 	theme = leveldatajson[levelPrefix]["levelTheme"]
-	levelHeight = leveldatajson[levelPrefix]["levelHeight"]
-	levelWidth = leveldatajson[levelPrefix]["levelWidth"]
-	levelBGColor = leveldatajson[levelPrefix]["bgCol"]
+	levelHeight = int(get_built_in_property(levelPath,"height"))
+	levelWidth = int(get_built_in_property(levelPath,"width"))
+	levelBGColor = get_built_in_property(levelPath,"backgroundcolor")
 	if leveldatajson[levelPrefix]["pipescreen"].get(marioScreen) is int:
 		marioOffset = leveldatajson[levelPrefix]["pipescreen"][marioScreen]
 	else:
 		marioOffset = 0
+
+func get_built_in_property(file:String,property:String):
+	var tmxfile = XMLParser.new()
+	var error = tmxfile.open(file)
+	
+	if !error == OK:
+		return "i got nothin"
+	
+	
+	while tmxfile.read() == OK:
+		match tmxfile.get_node_type():
+			XMLParser.NODE_ELEMENT:
+				if tmxfile.get_node_name() == "map":
+					return tmxfile.get_named_attribute_value(property)
+	return "this shouldn't be seen"

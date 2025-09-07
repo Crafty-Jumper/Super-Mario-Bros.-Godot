@@ -244,8 +244,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "stomp" and not shellEnemy:
 		queue_free()
 
-func _projectile(scene:PackedScene,palette:int):
+func _projectile(scene:PackedScene,pal:int):
 	var popItem = scene.instantiate()
 	popItem.position = position
-	popItem.palette = palette
+	popItem.palette = pal
 	GlobalVariables.add_child(popItem)

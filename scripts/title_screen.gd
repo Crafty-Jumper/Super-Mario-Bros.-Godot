@@ -15,7 +15,7 @@ func _ready() -> void:
 	Music.loadtrack("None",false)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	mushroom_select.position.y = 132 + selectedButton * 16
 	mario.position = Vector2(GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioX"],GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioY"])
 	title.material.set_shader_parameter("accessRow",GlobalVariables.theme+1)
