@@ -81,10 +81,10 @@ func fixpath() -> void:
 	bonus = leveldatajson[levelPrefix]["bonus"]
 	intermission = leveldatajson[levelPrefix]["intermission"]
 	levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
-	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + "_Tiles.csv"):
-		levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix
+	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"):
+		levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
 	else:
-		levelPath = "user://data/Level Packs/" + levelpack + "/" + levelPrefix
+		levelPath = "user://data/Level Packs/" + levelpack + "/" + levelPrefix + ".tmx"
 	if FileAccess.file_exists("res://Level Data/" + levelpack + "/leveldata.json"):
 		leveldata = FileAccess.open("res://Level Data/" + levelpack + "/leveldata.json", FileAccess.READ)
 	else:

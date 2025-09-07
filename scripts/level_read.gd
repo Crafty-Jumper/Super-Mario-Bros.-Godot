@@ -53,21 +53,25 @@ func _ready() -> void:
 	GlobalVariables.fixpath()
 	
 	# tiles
-	levelString = get_layer(GlobalVariables.levelPath + ".tmx","Tiles")
+	levelString = get_layer(GlobalVariables.levelPath,"Tiles")
+	print(levelString)
 	
 	
 	for i in GlobalVariables.levelHeight*GlobalVariables.levelWidth:
 		_place_tiles()
 
 	# enemies
-	var enemyFile = FileAccess.open(GlobalVariables.levelPath + "_Enemies.csv", FileAccess.READ)
-	var enemyString = get_layer(GlobalVariables.levelPath + ".tmx","Enemies")
+	var enemyString = get_layer(GlobalVariables.levelPath,"Enemies")
 	
 	index = 0
 	tilePosY = 0
 	for i in GlobalVariables.levelHeight*GlobalVariables.levelWidth:
 		enemyString = enemyString.replace("\n","")
-		var tileID = int((enemyString.get_slice(",",index)))-1
+		var tileID = 0
+		if int(enemyString.get_slice(",",index)) > 0:
+			tileID = int(enemyString.get_slice(",",index))-257
+		else:
+			tileID = -1
 		
 		if fmod(index,GlobalVariables.levelWidth) == 0 and index > 0:
 			tilePosY += 1
@@ -117,12 +121,12 @@ func _place_tiles() -> void:
 	else:
 		set_cell(Vector2i(tilePosX,tilePosY),0,tilePos)
 
-func get_layer(file:String,layer:String="") -> String:
+func get_layer(file:String,layer:String) -> String:
 	var tmxfile = XMLParser.new()
 	var error = tmxfile.open(file)
 	
 	if !error == OK:
-		return ""
+		return "i got nothin"
 	
 	var encoding = ""
 	var layerFound = false
