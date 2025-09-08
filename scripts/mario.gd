@@ -257,12 +257,15 @@ func _physics_process(delta: float) -> void:
 	if velocity.y > maxFall:
 		velocity.y = maxFall
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or GlobalVariables.underwater):
 		velocity.y = -jumpSpeed
-		if GlobalVariables.marioSize:
-			big_jump.play()
+		if GlobalVariables.underwater:
+			swim_sfx.play()
 		else:
-			small_jump.play()
+			if GlobalVariables.marioSize:
+				big_jump.play()
+			else:
+				small_jump.play()
 	
 	if ((not GlobalVariables.underwater) and is_on_floor()) or GlobalVariables.underwater:
 		if direction < 0 and is_on_floor():

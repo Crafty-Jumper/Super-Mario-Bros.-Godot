@@ -9,8 +9,8 @@ var marioSize = 0
 var marioPower = 0
 
 var paused : bool = false
-var world : int = 1
-var level : int = 1
+var world : int = 2
+var level : int = 2
 var sub : int = 1
 var coin : int = 0
 var score : int = 0
@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 			pauseMenuOpen = true
 	if pauseMenuOpen:
 		return
-	fixpath()
+	
 	if marioSize == 0:
 		marioVisual = "Small"
 	else:

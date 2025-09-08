@@ -5,8 +5,8 @@ uniform int accessRow = 1;
 uniform sampler2D screen : hint_screen_texture;
 
 void fragment() {
-	
-	
+
+
 	vec4 original_color = texture(screen, SCREEN_UV);
 	ivec3 colori = ivec3(round(original_color.rgb * 255.0));
 

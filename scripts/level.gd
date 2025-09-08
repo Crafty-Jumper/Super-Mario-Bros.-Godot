@@ -36,7 +36,6 @@ func _ready() -> void:
 	else:
 		vineExists = false
 		character_body_2d.queue_free()
-	GlobalVariables.fixpath()
 	camera_2d.limit_bottom = GlobalVariables.levelHeight * 16
 	camera_2d.limit_right = GlobalVariables.levelWidth * 16
 	GlobalVariables.pauseMenuOpen = false
