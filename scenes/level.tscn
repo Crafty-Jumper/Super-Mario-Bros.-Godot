@@ -1,7 +1,7 @@
-[gd_scene load_steps=45 format=4 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=50 format=4 uid="uid://ds52k3x1j8fvo"]
 
-[ext_resource type="Shader" uid="uid://cousxnpar5cua" path="res://shaders/level.gdshader" id="1_8cye3"]
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
+[ext_resource type="Texture2D" uid="uid://c8o8eh0podkb0" path="res://images/palettes/enemypalette.png" id="2_2jdvr"]
 [ext_resource type="Script" uid="uid://c1lf2w74abeu1" path="res://scripts/level.gd" id="2_aicyk"]
 [ext_resource type="PackedScene" uid="uid://cndnoly72gxh6" path="res://scenes/pausemenu.tscn" id="2_kih21"]
 [ext_resource type="PackedScene" uid="uid://crr7wd058gblm" path="res://scenes/blocks/qblock.tscn" id="2_oi3di"]
@@ -34,7 +34,16 @@
 [ext_resource type="PackedScene" uid="uid://cbakr6xm68j4r" path="res://scenes/entities/piranha-plant.tscn" id="28_v3why"]
 [ext_resource type="PackedScene" uid="uid://g0ngj3ah0fex" path="res://scenes/entities/koopa-red.tscn" id="30_2e2fo"]
 [ext_resource type="AudioStream" uid="uid://rp7d3q01hibi" path="res://audio/pause.mp3" id="31_w3o6u"]
+[ext_resource type="Shader" uid="uid://balppuiemyvlp" path="res://shaders/PaletteSwapScreen.gdshader" id="32_2jdvr"]
 [ext_resource type="AudioStream" uid="uid://d0cadrhbw1ja2" path="res://audio/intermission.mp3" id="35_asl66"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2jdvr"]
+load_path = "res://.godot/imported/enemypalette.png-3ff05f933d8391c70baf7bc06f31b8dd.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4oe8"]
+shader = ExtResource("3_2e2fo")
+shader_parameter/palette = SubResource("CompressedTexture2D_2jdvr")
+shader_parameter/accessRow = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gur6y"]
 shader = ExtResource("3_2e2fo")
@@ -222,10 +231,33 @@ sources/0 = SubResource("TileSetScenesCollectionSource_arp2o")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gur6y"]
 size = Vector2(15, 104)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jdvr"]
+shader = ExtResource("32_2jdvr")
+shader_parameter/palette = ExtResource("2_2jdvr")
+shader_parameter/accessRow = 1
+
+[sub_resource type="Shader" id="Shader_asl66"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR.rbg = COLOR.gbr;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aicyk"]
-shader = ExtResource("1_8cye3")
+shader = SubResource("Shader_asl66")
 
 [node name="Node2D" type="Node2D"]
+material = SubResource("ShaderMaterial_q4oe8")
 script = ExtResource("2_aicyk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -297,6 +329,13 @@ limit_left = 0
 limit_top = 0
 limit_right = 4096
 limit_bottom = 256
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer"]
+material = SubResource("ShaderMaterial_2jdvr")
+offset_right = 2301.0
+offset_bottom = 2430.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_w3o6u")

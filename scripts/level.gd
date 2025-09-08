@@ -14,6 +14,7 @@ extends Node2D
 @onready var pause: AudioStreamPlayer = $AudioStreamPlayer
 @onready var character_body_2d: StaticBody2D = $CharacterBody2D
 @onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
+@onready var screen_palette: ColorRect = $Camera2D/CanvasLayer/ColorRect
 
 @export var song : int = GlobalVariables.song
 
@@ -51,6 +52,8 @@ func _ready() -> void:
 		audio_stream_player_2.play()
 	
 func _process(delta: float) -> void:
+	
+	screen_palette.material.set_shader_parameter("accessRow",GlobalVariables.theme)
 	
 	if vineExists:
 		if character_body_2d.position.y <= GlobalVariables.levelHeight * 16 - 78:

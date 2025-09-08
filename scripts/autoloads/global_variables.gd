@@ -11,7 +11,7 @@ var marioPower = 0
 var paused : bool = false
 var world : int = 1
 var level : int = 1
-var sub : int = 0
+var sub : int = 1
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
@@ -137,12 +137,13 @@ func get_map_property(file:String,property:String):
 				if tmxfile.get_node_name() == "property":
 					if tmxfile.get_named_attribute_value("name") == property:
 						var value = tmxfile.get_named_attribute_value("value")
-						if tmxfile.get_named_attribute_value("type") == "int":
-							return int(value)
-						if tmxfile.get_named_attribute_value("type") == "bool":
-							if tmxfile.get_named_attribute_value("value") == "true":
-								return true
-							else:
-								return false
+						if tmxfile.get_attribute_name(1) == "type":
+							if tmxfile.get_named_attribute_value("type") == "int":
+								return int(value)
+							if tmxfile.get_named_attribute_value("type") == "bool":
+								if tmxfile.get_named_attribute_value("value") == "true":
+									return true
+								else:
+									return false
 						return value
 	return "this shouldn't be seen"
