@@ -1,9 +1,9 @@
 extends TileMapLayer
 
 @onready var flag: CharacterBody2D = $"../Area2D"
-@onready var tile_map_layer_2: TileMapLayer = $"../TileMapLayer2"
+@onready var tile_map_layer_2: TileMapLayer = $"../Enemies"
+@onready var background: TileMapLayer = $"../Parallax2D/Background"
 
-var levelFile = FileAccess.open(GlobalVariables.levelPath + "_Tiles.csv", FileAccess.READ)
 var index = 0
 var tilePosX = 0
 var tilePosY = 0
@@ -52,12 +52,16 @@ func _ready() -> void:
 	
 	GlobalVariables.fixpath()
 	
-	# tiles
 	levelString = get_layer(GlobalVariables.levelPath,"Tiles")
-	
 	
 	for i in GlobalVariables.levelHeight*GlobalVariables.levelWidth:
 		_place_tiles()
+	levelString = get_layer(GlobalVariables.levelPath,"Background")
+	index = 0
+	tilePosX = 0
+	tilePosY = 0
+	for i in GlobalVariables.levelHeight*GlobalVariables.levelWidth:
+		_place_tiles_bg()
 
 	# enemies
 	var enemyString = get_layer(GlobalVariables.levelPath,"Enemies")
@@ -148,4 +152,25 @@ func get_layer(file:String,layer:String) -> String:
 					if encoding == "csv":
 						if !csv == "":
 							return csv
-	return "this shouldn't be seen"
+	return ""
+
+func _place_tiles_bg() -> void:
+	levelString = levelString.replace("\n","")
+		
+	var tileID = int((levelString.get_slice(",",index)))-1
+	var tilePos = Vector2i(0,0)
+	
+	if tileIDs[tileID] is Array:
+		pass
+	else:
+		tilePos = Vector2i(fmod(tileIDs[tileID],9),floor(tileIDs[tileID]/9))
+	
+	if fmod(index,GlobalVariables.levelWidth) == 0 and index > 0:
+		tilePosY += 1
+	tilePosX = fmod(index,GlobalVariables.levelWidth)
+	index += 1
+	
+	if tileIDs[tileID] is Array:
+		background.set_cell(Vector2i(tilePosX,tilePosY),1,Vector2i(0,0),tileIDs[tileID][0])
+	else:
+		background.set_cell(Vector2i(tilePosX,tilePosY),0,tilePos)

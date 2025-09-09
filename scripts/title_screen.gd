@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	mushroom_select.position.y = 132 + selectedButton * 16
-	mario.position = Vector2(GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioX"],GlobalVariables.leveldatajson[GlobalVariables.levelPrefix]["marioY"])
+	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)
 	title.material.set_shader_parameter("accessRow",GlobalVariables.theme+1)
 	color_rect.color = Color(GlobalVariables.levelBGColor)
 	

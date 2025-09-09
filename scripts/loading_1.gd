@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var rich_text_label: RichTextLabel = $RichTextLabel
 @onready var timer: Timer = $Timer
 @onready var lives_label: RichTextLabel = $LivesLabel
 @onready var world_label: RichTextLabel = $WorldLabel

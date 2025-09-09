@@ -10,11 +10,12 @@ extends Node2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var pause_menu: Control = $CanvasLayer2/PauseMenu
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
-@onready var tile_map_layer_2: TileMapLayer = $TileMapLayer2
+@onready var tile_map_layer_2: TileMapLayer = $Enemies
 @onready var pause: AudioStreamPlayer = $AudioStreamPlayer
 @onready var character_body_2d: StaticBody2D = $CharacterBody2D
 @onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
 @onready var screen_palette: ColorRect = $Camera2D/CanvasLayer/ColorRect
+@onready var parallax_2d: Parallax2D = $Parallax2D
 
 @export var song : int = GlobalVariables.song
 
@@ -24,6 +25,7 @@ var overrideBgmVolume : bool = false
 var vineExists : bool = true
 
 func _ready() -> void:
+	parallax_2d.scroll_scale.x = float(get_layer_property(GlobalVariables.levelPath,"Background","parallaxx"))
 	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)
 	if GlobalVariables.sub == GlobalVariables.pipes.get(GlobalVariables.marioScreen):
 		mario.position.x += GlobalVariables.marioOffset * 256
@@ -51,6 +53,7 @@ func _ready() -> void:
 		audio_stream_player_2.play()
 	
 func _process(delta: float) -> void:
+	
 	
 	screen_palette.material.set_shader_parameter("accessRow",GlobalVariables.theme)
 	
@@ -141,3 +144,20 @@ func _pause_process(startPause: bool) -> void:
 		tile_map_layer_2.process_mode = Node.PROCESS_MODE_ALWAYS
 		goal_music.process_mode = Node.PROCESS_MODE_ALWAYS
 		audio_stream_player_2.process_mode = Node.PROCESS_MODE_ALWAYS
+
+func get_layer_property(file:String,layer:String,property:String):
+	var tmxfile = XMLParser.new()
+	var error = tmxfile.open(file)
+	
+	if !error == OK:
+		return "i got nothin"
+	
+	
+	while tmxfile.read() == OK:
+		match tmxfile.get_node_type():
+			XMLParser.NODE_ELEMENT:
+				if tmxfile.get_node_name() == "layer":
+					if tmxfile.get_named_attribute_value("name") == layer:
+						var value = tmxfile.get_named_attribute_value(property)
+						return value
+	return "this shouldn't be seen"
