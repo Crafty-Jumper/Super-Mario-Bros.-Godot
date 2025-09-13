@@ -26,6 +26,7 @@ var vineExists : bool = true
 
 func _ready() -> void:
 	parallax_2d.scroll_scale.x = float(get_layer_property(GlobalVariables.levelPath,"Background","parallaxx"))
+	
 	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)
 	if GlobalVariables.sub == GlobalVariables.pipes.get(GlobalVariables.marioScreen):
 		mario.position.x += GlobalVariables.marioOffset * 256
@@ -53,7 +54,6 @@ func _ready() -> void:
 		audio_stream_player_2.play()
 	
 func _process(delta: float) -> void:
-	
 	
 	screen_palette.material.set_shader_parameter("accessRow",GlobalVariables.theme)
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://g0ngj3ah0fex"]
 
-[ext_resource type="PackedScene" uid="uid://bffcf7iwcgdw8" path="res://scenes/entities/enemy.tscn" id="1_3m6fj"]
+[ext_resource type="PackedScene" uid="uid://bffcf7iwcgdw8" path="res://scenes/templates/enemy.tscn" id="1_3m6fj"]
 [ext_resource type="Texture2D" uid="uid://benl8aq8a5n2y" path="res://images/koopa.png" id="2_433m8"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_dydwg"]
 [ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="3_ru5ig"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://bisy2rfhynurm"]
+
+[ext_resource type="Script" uid="uid://fv6d4k88hvtg" path="res://scenes/templates/powerup.gd" id="1_bn02r"]
+[ext_resource type="AudioStream" uid="uid://bnkw84wgpgwer" path="res://audio/sfx-appear.ogg" id="1_t0qsk"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="3_5spnf"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="4_mlnum"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l00l"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0qsk"]
+size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_geq8x"]
+shader = ExtResource("3_5spnf")
+shader_parameter/palette = ExtResource("4_mlnum")
+shader_parameter/accessRow = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mlnum"]
+resource_local_to_scene = true
+shader = ExtResource("3_5spnf")
+shader_parameter/palette = ExtResource("4_mlnum")
+shader_parameter/accessRow = 1
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_bn02r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_3l00l")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4294967295
+collision_mask = 4294967295
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_t0qsk")
+debug_color = Color(0.943534, 6.83457e-06, 0.601195, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="AppearSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_t0qsk")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="FlashyPart" type="Sprite2D" parent="Sprite"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_geq8x")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_mlnum")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

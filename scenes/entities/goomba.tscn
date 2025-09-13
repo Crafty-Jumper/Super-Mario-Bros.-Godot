@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bkj8j3l7j6u33"]
 
-[ext_resource type="PackedScene" uid="uid://bffcf7iwcgdw8" path="res://scenes/entities/enemy.tscn" id="1_adqrc"]
+[ext_resource type="PackedScene" uid="uid://bffcf7iwcgdw8" path="res://scenes/templates/enemy.tscn" id="1_adqrc"]
 [ext_resource type="Texture2D" uid="uid://deeaoeu24kald" path="res://images/goomba.png" id="2_0dten"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_82u26"]
 [ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="3_c625i"]
@@ -48,7 +48,7 @@ animations = [{
 [node name="CharacterBody2D" instance=ExtResource("1_adqrc")]
 movementType = 1
 moveSpeed = 40
-gravity = 40
+gravity = 10
 maxFallSpeed = 400
 marioJumpAction = 1
 fireballAction = 1

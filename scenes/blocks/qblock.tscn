@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://crr7wd058gblm"]
 
-[ext_resource type="PackedScene" uid="uid://dlv8kg74yx8e3" path="res://scenes/blocks/block.tscn" id="1_cdc4h"]
+[ext_resource type="PackedScene" uid="uid://dlv8kg74yx8e3" path="res://scenes/templates/block.tscn" id="1_cdc4h"]
 [ext_resource type="PackedScene" uid="uid://i78oy0dlmnjx" path="res://scenes/spinning_coin.tscn" id="2_7rg31"]
 [ext_resource type="PackedScene" uid="uid://bpoduoly0s0fg" path="res://scenes/blocks/hitQBlock.tscn" id="3_fl6wp"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="4_5086g"]

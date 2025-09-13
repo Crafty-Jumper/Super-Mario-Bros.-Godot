@@ -20,7 +20,6 @@ var yDir = 0
 var throwFrames = 0
 var frameTimer = 0
 
-
 signal goal_pole
 
 var goal_walk : bool = false
@@ -394,7 +393,6 @@ func _on_timer_timeout() -> void:
 	if isPipe:
 		_changeRoom()
 	if GlobalVariables.marioState == -5:
-		GlobalVariables.marioPower = 2
 		GlobalVariables.marioState = 0
 		GlobalVariables.paused = false
 

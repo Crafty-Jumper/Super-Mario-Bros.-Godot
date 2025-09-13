@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx6lrp858mifo"]
+
+[ext_resource type="PackedScene" uid="uid://bisy2rfhynurm" path="res://scenes/templates/powerup.tscn" id="1_yo282"]
+[ext_resource type="Texture2D" uid="uid://venov7vx0111" path="res://images/flower-head.png" id="2_yyrj4"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="3_48lvb"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="4_cr033"]
+[ext_resource type="Texture2D" uid="uid://bu1x6qb6phnu8" path="res://images/flower-stem.png" id="5_fct2y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uss8a"]
+resource_local_to_scene = true
+shader = ExtResource("3_48lvb")
+shader_parameter/palette = ExtResource("4_cr033")
+shader_parameter/accessRow = 8
+
+[node name="CharacterBody2D" instance=ExtResource("1_yo282")]
+turnsToMushroom = true
+effect = 3
+marioPower = 2
+
+[node name="FlashyPart" parent="Sprite" index="0"]
+position = Vector2(0, -4)
+texture = ExtResource("2_yyrj4")
+
+[node name="Sprite2D" parent="Sprite" index="1"]
+material = SubResource("ShaderMaterial_uss8a")
+position = Vector2(0, 4)
+texture = ExtResource("5_fct2y")
