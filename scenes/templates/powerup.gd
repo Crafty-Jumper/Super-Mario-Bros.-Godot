@@ -33,17 +33,18 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity
 	
-	if is_on_floor():
-		velocity.y = -jump
+	
 	
 	if not appearing:
-			if velocity.x == 0:
-				if curSpeed > 0:
-					velocity.x = -speed
-				else:
-					velocity.x = speed
+		if is_on_floor():
+			velocity.y = -jump
+		if velocity.x == 0:
+			if curSpeed > 0:
+				velocity.x = -speed
 			else:
-				curSpeed = velocity.x
+				velocity.x = speed
+		else:
+			curSpeed = velocity.x
 	
 	flashy_part.material.set_shader_parameter("accessRow",fmod(flashy_part.material.get_shader_parameter("accessRow")+1,10))
 	
@@ -60,7 +61,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				body.powerup.play()
 				GlobalVariables.paused = true
 		if effect == 3:
+			body.powerup.play()
 			GlobalVariables.marioState = -5
 			GlobalVariables.paused = true
 			GlobalVariables.marioPower = marioPower
+		if effect == 5:
+			GlobalVariables.marioInvinc = 600
+			body.powerup.play()
 		queue_free()
