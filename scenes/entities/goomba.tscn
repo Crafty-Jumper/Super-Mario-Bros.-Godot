@@ -48,7 +48,7 @@ animations = [{
 [node name="CharacterBody2D" instance=ExtResource("1_adqrc")]
 movementType = 1
 moveSpeed = 40
-gravity = 10
+gravity = 20
 maxFallSpeed = 400
 marioJumpAction = 1
 fireballAction = 1
