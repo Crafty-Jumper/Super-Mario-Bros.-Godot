@@ -22,7 +22,7 @@ var marioScreen : int = 0
 var marioOffset = 0
 var marioTileX : int = 0
 var marioTileY : int = 0
-var clearPiranhas : bool = false
+var warpShown : bool = false
 # level related stuff
 var theme = 0
 var song = 0

@@ -1,14 +1,20 @@
 extends StaticBody2D
 
 @export_enum ("up","right","down","left") var direction = 0
+@onready var rich_text_label: RichTextLabel = $RichTextLabel
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Mario":
 		body.set_meta("canPipe",true)
 		body.set_meta("pipeDirection",direction)
-		
 
+func _process(delta: float) -> void:
+	var checkType = GlobalVariables.pipes.get(position.x/256)
+	if GlobalVariables.warpShown:
+		if checkType is Array:
+			rich_text_label.text = str(int(checkType[fmod(position.x,256)/16/4]))
+			rich_text_label.show()
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Mario":
-		body.set_meta("canPipe",false)
+		body.canPipe = false

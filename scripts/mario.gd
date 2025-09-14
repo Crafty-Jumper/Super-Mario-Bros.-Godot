@@ -500,10 +500,11 @@ func _changeRoom():
 	if checkType is Array:
 		GlobalVariables.world = checkType[GlobalVariables.marioTileX/4]
 		if GlobalVariables.levelpack == "SMB":
-			if GlobalVariables.world == 4 or GlobalVariables.world == 2:
-				GlobalVariables.world = 36
-			if GlobalVariables.world == 3:
-				GlobalVariables.world = 5
+			if !GlobalVariables.warpShown:
+				if GlobalVariables.world == 4 or GlobalVariables.world == 2:
+					GlobalVariables.world = 36
+				if GlobalVariables.world == 3:
+					GlobalVariables.world = 5
 		GlobalVariables.level = 1
 		GlobalVariables.sub = 0
 		GlobalVariables.marioScreen = 0

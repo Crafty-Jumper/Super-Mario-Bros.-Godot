@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 		if GlobalVariables.pipes.get(GlobalVariables.levelWidth/16-1) is Array:
 			warp_zone_text.position.x = GlobalVariables.levelWidth * 16 - 256
 			warp_zone_text.show()
-			GlobalVariables.clearPiranhas = true
+			GlobalVariables.warpShown = true
 	
 	if GlobalVariables.pauseMenuOpen:
 		_pause_process(true)

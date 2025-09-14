@@ -444,6 +444,7 @@ position = Vector2(33, 193)
 stream = ExtResource("35_asl66")
 
 [node name="WarpZoneText" type="RichTextLabel" parent="."]
+visible = false
 texture_filter = 1
 offset_right = 256.0
 offset_bottom = 240.0
