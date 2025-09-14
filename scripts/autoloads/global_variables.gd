@@ -5,13 +5,13 @@ var marioInvuln = 0
 var marioLives = 3
 var marioInvinc = 0
 var marioState = 0
-var marioSize = 0
-var marioPower = 0
+var marioSize = 1
+var marioPower = 2
 
 var paused : bool = false
 var world : int = 1
-var level : int = 2
-var sub : int = 1
+var level : int = 4
+var sub : int = 0
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false

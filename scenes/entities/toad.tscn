@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjkld8e54uclm"]
+
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_qiaxi"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="2_7yu67"]
+[ext_resource type="Texture2D" uid="uid://dgcxnuth7hjga" path="res://images/toadstools.png" id="3_agdr4"]
+[ext_resource type="Script" uid="uid://c4av2qa0nt4kg" path="res://scripts/toad.gd" id="4_vc47v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5hgb"]
+shader = ExtResource("1_qiaxi")
+shader_parameter/palette = ExtResource("2_7yu67")
+shader_parameter/accessRow = 7
+
+[node name="Sprite2D" type="Sprite2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_c5hgb")
+position = Vector2(0, -4)
+texture = ExtResource("3_agdr4")
+hframes = 2
+script = ExtResource("4_vc47v")
