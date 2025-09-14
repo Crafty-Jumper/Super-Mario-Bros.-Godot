@@ -16,6 +16,7 @@ extends Node2D
 @onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
 @onready var screen_palette: ColorRect = $Camera2D/CanvasLayer/ColorRect
 @onready var parallax_2d: Parallax2D = $Parallax2D
+@onready var warp_zone_text: RichTextLabel = $WarpZoneText
 
 @export var song : int = GlobalVariables.song
 
@@ -43,6 +44,9 @@ func _ready() -> void:
 	camera_2d.limit_right = GlobalVariables.levelWidth * 16
 	GlobalVariables.pauseMenuOpen = false
 	
+	
+	
+	
 	song = GlobalVariables.song
 	if song > -1:
 		Music.loadtrack(songNames[song],true)
@@ -60,6 +64,12 @@ func _process(delta: float) -> void:
 	if vineExists:
 		if character_body_2d.position.y <= GlobalVariables.levelHeight * 16 - 78:
 			mario.yDir = 1
+	
+	if camera_2d.position.x >= GlobalVariables.levelWidth * 16 - 128:
+		if GlobalVariables.pipes.get(GlobalVariables.levelWidth/16-1) is Array:
+			warp_zone_text.position.x = GlobalVariables.levelWidth * 16 - 256
+			warp_zone_text.show()
+			GlobalVariables.clearPiranhas = true
 	
 	if GlobalVariables.pauseMenuOpen:
 		_pause_process(true)

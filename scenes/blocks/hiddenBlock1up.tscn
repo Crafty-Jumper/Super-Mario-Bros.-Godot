@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://s2q7ergdkoue"]
+
+[ext_resource type="PackedScene" uid="uid://7yjgj2bujgeg" path="res://scenes/blocks/hiddenBlock.tscn" id="1_0by5o"]
+[ext_resource type="PackedScene" uid="uid://crniruukcx2if" path="res://scenes/entities/1-up.tscn" id="2_6bju1"]
+
+[node name="StaticBody2D" instance=ExtResource("1_0by5o")]
+item = ExtResource("2_6bju1")

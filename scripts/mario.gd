@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var hurt_pipe: AudioStreamPlayer = $"Hurt&Pipe"
 @onready var coin_sfx: AudioStreamPlayer = $CoinSFX
 @onready var swim_sfx: AudioStreamPlayer = $SwimSFX
+@onready var life: AudioStreamPlayer = $Life
 
 var physicsFile = FileAccess.open("res://physics.json",FileAccess.READ)
 var physicsString = physicsFile.get_as_text()
@@ -439,6 +440,8 @@ func _physics_update():
 		if abs(velocity.x) > 1:
 			jumpSpeed = physics["jump"]
 	
+	
+	
 	var jumping = conditionReturn(Input.is_action_pressed("jump"),"Jump","")
 	var currState = conditionReturn(abs(velocity.x) < 60.0,"Stand",conditionReturn(abs(velocity.x) < 138.75,"Walk","Run"))
 	
@@ -472,6 +475,17 @@ func _physics_update():
 	if GlobalVariables.intermission:
 		maxSpeed = physics["maxInter"]
 		gravity = physics["gravInter"]
+	
+	if GlobalVariables.underwater:
+		if position.y > 40:
+			jumpSpeed = physics["swim"]
+			if Input.is_action_pressed("jump"):
+				gravity = physics["swimGravJump"]
+			else:
+				gravity = physics["swimGrav"]
+		else:
+			jumpSpeed = 0
+			gravity = physics["swimGravSurf"]
 
 func conditionReturn(condition:bool,trueValue,falseValue):
 	if condition:
@@ -485,6 +499,11 @@ func _changeRoom():
 		GlobalVariables.sub = checkType
 	if checkType is Array:
 		GlobalVariables.world = checkType[GlobalVariables.marioTileX/4]
+		if GlobalVariables.levelpack == "SMB":
+			if GlobalVariables.world == 4 or GlobalVariables.world == 2:
+				GlobalVariables.world = 36
+			if GlobalVariables.world == 3:
+				GlobalVariables.world = 5
 		GlobalVariables.level = 1
 		GlobalVariables.sub = 0
 		GlobalVariables.marioScreen = 0

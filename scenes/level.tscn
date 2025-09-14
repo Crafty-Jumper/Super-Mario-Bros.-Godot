@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=55 format=4 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
 [ext_resource type="Texture2D" uid="uid://c8o8eh0podkb0" path="res://images/palettes/enemypalette.png" id="2_2jdvr"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://k2r703mpq3t8" path="res://scenes/blocks/coin.tscn" id="13_5k0ak"]
 [ext_resource type="PackedScene" uid="uid://dchtemg20llqb" path="res://scenes/flagpole.tscn" id="13_64w2a"]
 [ext_resource type="AudioStream" uid="uid://w5eiy3dtll1c" path="res://audio/music/goalpole.mp3" id="14_fpun6"]
+[ext_resource type="PackedScene" uid="uid://s2q7ergdkoue" path="res://scenes/blocks/hiddenBlock1up.tscn" id="14_svjb4"]
 [ext_resource type="PackedScene" uid="uid://bkj8j3l7j6u33" path="res://scenes/entities/goomba.tscn" id="15_wc255"]
 [ext_resource type="PackedScene" uid="uid://b5rbge541cwvx" path="res://scenes/entities/vine.tscn" id="19_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://vewa2fpvxbge" path="res://scenes/entities/firebar.tscn" id="21_h6wmr"]
@@ -37,6 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://rp7d3q01hibi" path="res://audio/pause.mp3" id="31_w3o6u"]
 [ext_resource type="Shader" uid="uid://balppuiemyvlp" path="res://shaders/PaletteSwapScreen.gdshader" id="32_2jdvr"]
 [ext_resource type="AudioStream" uid="uid://d0cadrhbw1ja2" path="res://audio/intermission.mp3" id="35_asl66"]
+[ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Mystery Font.ttf" id="39_c1pbi"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2jdvr"]
 load_path = "res://.godot/imported/enemypalette.png-3ff05f933d8391c70baf7bc06f31b8dd.ctex"
@@ -284,6 +286,7 @@ scenes/9/scene = ExtResource("13_5k0ak")
 scenes/10/scene = ExtResource("7_gur6y")
 scenes/11/scene = ExtResource("10_2e2fo")
 scenes/12/scene = ExtResource("12_v3why")
+scenes/13/scene = ExtResource("14_svjb4")
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
 physics_layer_0/collision_layer = 1
@@ -439,6 +442,26 @@ position = Vector2(33, 193)
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("35_asl66")
+
+[node name="WarpZoneText" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_right = 256.0
+offset_bottom = 240.0
+theme_override_fonts/normal_font = ExtResource("39_c1pbi")
+theme_override_font_sizes/normal_font_size = 8
+text = "
+
+
+
+
+
+
+
+
+
+
+
+     WELCOME TO WARP ZONE!"
 
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]
 [connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]

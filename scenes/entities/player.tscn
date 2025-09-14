@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://e0lmnsgvoln4"]
+[gd_scene load_steps=56 format=3 uid="uid://e0lmnsgvoln4"]
 
 [ext_resource type="Script" uid="uid://d37uuganaastb" path="res://scripts/mario.gd" id="1_wrvex"]
 [ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://images/mario.png" id="2_4ckko"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://drkp23drkcrnb" path="res://audio/sfx-pipe.mp3" id="9_7owmg"]
 [ext_resource type="AudioStream" uid="uid://qwtgq3se0dvo" path="res://audio/coin.mp3" id="10_eiyqk"]
 [ext_resource type="AudioStream" uid="uid://uwpkam132gr5" path="res://audio/sfx-squish.mp3" id="11_73kkf"]
+[ext_resource type="AudioStream" uid="uid://dyb457fbs58qu" path="res://audio/sfx-life.mp3" id="12_n5sgd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_76esm"]
 shader = ExtResource("2_4gsdp")
@@ -531,6 +532,9 @@ stream = ExtResource("10_eiyqk")
 
 [node name="SwimSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_73kkf")
+
+[node name="Life" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_n5sgd")
 
 [connection signal="goal_pole" from="." to="." method="_on_goal_pole"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

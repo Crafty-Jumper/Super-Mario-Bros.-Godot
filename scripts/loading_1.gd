@@ -17,6 +17,9 @@ func _process(_delta: float) -> void:
 		GlobalVariables.marioState = 0
 	GlobalVariables.paused = false
 	lives_label.text = "* " + str(GlobalVariables.marioLives)
-	world_label.text = "WORLD " + str(GlobalVariables.world) + "-" + str(GlobalVariables.level)
+	if GlobalVariables.world == 36:
+		world_label.text = "WORLD  -" + str(GlobalVariables.level)
+	else:
+		world_label.text = "WORLD " + str(GlobalVariables.world) + "-" + str(GlobalVariables.level)
 func _on_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://scenes/level.tscn")

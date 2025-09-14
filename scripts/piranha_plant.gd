@@ -22,7 +22,8 @@ func _process(_delta: float) -> void:
 				up = true
 	time += 1
 	
-	
+	if GlobalVariables.clearPiranhas:
+		queue_free()
 	
 	
 	if up:

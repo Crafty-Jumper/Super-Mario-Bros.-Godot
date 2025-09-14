@@ -24,7 +24,7 @@ func _ready() -> void:
 			queue_free()
 		
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if appearing:
 		sprite.position.y -= 0.25
 		if sprite.position.y == 0:
@@ -65,6 +65,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			GlobalVariables.marioState = -5
 			GlobalVariables.paused = true
 			GlobalVariables.marioPower = marioPower
+		if effect == 4:
+			GlobalVariables.marioLives += marioPower
+			body.life.play()
 		if effect == 5:
 			GlobalVariables.marioInvinc = 600
 			body.powerup.play()

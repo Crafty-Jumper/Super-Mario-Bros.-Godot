@@ -11,6 +11,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	level_label.text = str(GlobalVariables.world) + "-" + str(GlobalVariables.level)
+	if GlobalVariables.world == 36:
+		level_label.text = " -" + str(GlobalVariables.level)
+	else:
+		level_label.text = str(GlobalVariables.world) + "-" + str(GlobalVariables.level)
 	score_label.text = "0".repeat(6 - str(GlobalVariables.score).length()) + str(GlobalVariables.score)
 	coin_label.text = "*" + "0".repeat(2 - str(GlobalVariables.coin).length()) + str(GlobalVariables.coin)
