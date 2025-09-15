@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://tesmv1yomxnl"]
+[gd_scene load_steps=7 format=3 uid="uid://tesmv1yomxnl"]
 
 [ext_resource type="PackedScene" uid="uid://dlv8kg74yx8e3" path="res://scenes/templates/block.tscn" id="1_oyc27"]
 [ext_resource type="Texture2D" uid="uid://b4s1c81j1n0xc" path="res://images/block.png" id="2_lnnhk"]
-[ext_resource type="PackedScene" uid="uid://crk5nurkhs76a" path="res://scenes/selfDelete.tscn" id="2_pfktm"]
+[ext_resource type="Texture2D" uid="uid://bkx3a688qm0n5" path="res://images/tiles.png" id="4_d8xfi"]
+[ext_resource type="Script" uid="uid://bwldenipro1in" path="res://scenes/blocks/block_changer.gd" id="4_wet67"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wet67"]
+atlas = ExtResource("4_d8xfi")
+region = Rect2(64, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pfktm"]
 animations = [{
@@ -13,11 +18,18 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wet67")
+}],
+"loop": true,
+"name": &"underground",
+"speed": 5.0
 }]
 
 [node name="StaticBody2D" instance=ExtResource("1_oyc27")]
 use_parent_material = true
-item = ExtResource("2_pfktm")
 marioHit = 2
 metadata/canHit = true
 
@@ -28,3 +40,4 @@ use_parent_material = true
 texture_filter = 1
 use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_pfktm")
+script = ExtResource("4_wet67")

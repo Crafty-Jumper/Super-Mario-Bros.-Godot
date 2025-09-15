@@ -141,7 +141,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		show()
 	
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_just_pressed("freefly"):
 		if debug:
 			debug = false
 		else:

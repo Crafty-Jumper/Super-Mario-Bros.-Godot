@@ -24,6 +24,8 @@ var canStartGoalMusic : bool = true
 const songNames = ["None","Overworld","Underground","Underwater","Castle","Star","Bonus"]
 var overrideBgmVolume : bool = false
 var vineExists : bool = true
+var prevCamX = 0.0
+var prevCamY = 0.0
 
 func _ready() -> void:
 	parallax_2d.scroll_scale.x = float(get_layer_property(GlobalVariables.levelPath,"Background","parallaxx"))
@@ -41,10 +43,9 @@ func _ready() -> void:
 	else:
 		vineExists = false
 		character_body_2d.queue_free()
-	camera_2d.limit_bottom = GlobalVariables.levelHeight * 16
-	camera_2d.limit_right = GlobalVariables.levelWidth * 16
-	GlobalVariables.pauseMenuOpen = false
 	
+	GlobalVariables.pauseMenuOpen = false
+	color_rect.color = Color(GlobalVariables.levelBGColor)
 	
 	
 	
@@ -84,6 +85,15 @@ func _process(delta: float) -> void:
 			Music.musicVolume([0,0,0,0,0])
 	
 	
+	if Input.is_action_just_pressed("freecam"):
+		GlobalVariables.freecam = bool(1-int(GlobalVariables.freecam))
+		if GlobalVariables.freecam:
+			prevCamX = camera_2d.position.x
+			prevCamY = camera_2d.position.y
+		else:
+			camera_2d.position.x = prevCamX
+			camera_2d.position.y = prevCamY
+	
 	color_rect.color = Color(GlobalVariables.levelBGColor)
 	if mario.goal_walk and canStartGoalMusic:
 		goal_music.play()
@@ -110,15 +120,27 @@ func _process(delta: float) -> void:
 		else:
 			Music.loadtrack("custom" + str(abs(song)),true)
 	
-	
-	if mario.position.x > camera_2d.position.x - 8:
-		if mario.velocity.x > 0:
-			camera_2d.position.x += mario.velocity.x * delta
-	if GlobalVariables.paused:
-		return
-	if mario.position.x >= camera_2d.position.x - 48 and mario.position.x < camera_2d.position.x - 9:
-		if mario.velocity.x > 0:
-			camera_2d.position.x += mario.velocity.x * delta * 0.75
+	if GlobalVariables.freecam:
+		_pause_process(true)
+		camera_2d.position.x += Input.get_axis("left","right") * 10
+		camera_2d.position.y += Input.get_axis("up","down") * 10
+		camera_2d.limit_left = -1000000
+		camera_2d.limit_right = 1000000
+		camera_2d.limit_bottom = 1000000
+		camera_2d.limit_top = -1000000
+	else:
+		camera_2d.limit_bottom = GlobalVariables.levelHeight * 16
+		camera_2d.limit_right = GlobalVariables.levelWidth * 16
+		camera_2d.limit_left = 0
+		camera_2d.limit_top = 0
+		if mario.position.x > camera_2d.position.x - 8:
+			if mario.velocity.x > 0:
+				camera_2d.position.x += mario.velocity.x * delta
+		if GlobalVariables.paused:
+			return
+		if mario.position.x >= camera_2d.position.x - 48 and mario.position.x < camera_2d.position.x - 9:
+			if mario.velocity.x > 0:
+				camera_2d.position.x += mario.velocity.x * delta * 0.75
 	
 	
 	

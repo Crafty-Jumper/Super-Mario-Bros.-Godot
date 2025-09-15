@@ -8,10 +8,12 @@ var marioState = 0
 var marioSize = 1
 var marioPower = 2
 
+var freecam : bool = false
+
 var paused : bool = false
-var world : int = 36
-var level : int = 3
-var sub : int = 0
+var world : int = 1
+var level : int = 2
+var sub : int = 1
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
