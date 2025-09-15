@@ -86,6 +86,7 @@ func _physics_process(delta: float) -> void:
 	if GlobalVariables.marioVine:
 		if position.y < -15:
 			_changeRoom()
+			GlobalVariables.enteringVine = true
 	
 	canPipe = get_meta("canPipe")
 	GlobalVariables.marioScreen = floor(position.x/256)

@@ -9,20 +9,24 @@ var marioSize = 1
 var marioPower = 2
 
 var paused : bool = false
-var world : int = 1
-var level : int = 4
+var world : int = 36
+var level : int = 3
 var sub : int = 0
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
+# vine stuff
 var marioVine : bool = false
 var marioVineLeft : bool = true
 var marioClimbing : bool = false
+var enteringVine : bool = false
+
 var marioScreen : int = 0
 var marioOffset = 0
 var marioTileX : int = 0
 var marioTileY : int = 0
 var warpShown : bool = false
+
 # level related stuff
 var theme = 0
 var song = 0

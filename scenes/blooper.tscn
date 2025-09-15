@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpdvltactm2fk"]
+
+[ext_resource type="Script" uid="uid://ilt8fdeu6dlq" path="res://scripts/blooper.gd" id="1_rb2o1"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_lv7yr"]
+[ext_resource type="Texture2D" uid="uid://qh1hs4o6u3fx" path="res://images/blooper.png" id="2_m6jxq"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="3_t5scw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lv7yr"]
+size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qyrs"]
+shader = ExtResource("2_lv7yr")
+shader_parameter/palette = ExtResource("3_t5scw")
+shader_parameter/accessRow = 6
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_rb2o1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lv7yr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_7qyrs")
+position = Vector2(0, 4)
+texture = ExtResource("2_m6jxq")
+hframes = 2
+frame = 1

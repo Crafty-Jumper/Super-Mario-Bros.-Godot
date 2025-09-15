@@ -31,12 +31,13 @@ func _ready() -> void:
 	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)
 	if GlobalVariables.sub == GlobalVariables.pipes.get(GlobalVariables.marioScreen):
 		mario.position.x += GlobalVariables.marioOffset * 256
-	if GlobalVariables.marioVine:
+	if GlobalVariables.enteringVine:
 		character_body_2d.position = Vector2(72,GlobalVariables.levelHeight * 16 + 8)
 		character_body_2d.origPos = GlobalVariables.levelHeight * 16 + 8
 		mario.position = Vector2(64,GlobalVariables.levelHeight * 16 + 16)
 		character_body_2d.audio_stream_player.play()
 		GlobalVariables.marioClimbing = true
+		GlobalVariables.enteringVine = false
 	else:
 		vineExists = false
 		character_body_2d.queue_free()
