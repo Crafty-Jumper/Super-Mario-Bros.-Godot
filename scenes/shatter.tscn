@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ddolwy1alh3ev"]
 
-[ext_resource type="Script" uid="uid://c331xbu7hy122" path="res://scenes/shatterpal.gd" id="1_7knh3"]
+[ext_resource type="Script" uid="uid://c331xbu7hy122" path="res://scripts/shatterpal.gd" id="1_7knh3"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_msdje"]
 [ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="2_7knh3"]
 [ext_resource type="Texture2D" uid="uid://da18fuc76pqt" path="res://images/shatter.png" id="3_0vma2"]

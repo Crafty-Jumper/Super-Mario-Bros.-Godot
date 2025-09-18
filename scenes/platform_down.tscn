@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cudh7asvic67k"]
+
+[ext_resource type="PackedScene" uid="uid://dbgfqbd47csfn" path="res://scenes/platform.tscn" id="1_2lcdu"]
+
+[node name="CharacterBody2D" instance=ExtResource("1_2lcdu")]
+moveType = 1

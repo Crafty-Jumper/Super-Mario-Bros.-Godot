@@ -13,7 +13,7 @@ var freecam : bool = false
 var paused : bool = false
 var world : int = 1
 var level : int = 2
-var sub : int = 1
+var sub : int = 0
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
@@ -53,6 +53,9 @@ func _ready() -> void:
 	add_child(timer)
 
 func _process(delta: float) -> void:
+	
+	ProjectSettings.set_setting("application/config/icon","res://loading.png")
+	
 	if Input.is_action_just_pressed("pause"):
 		if pauseMenuOpen:
 			pauseMenuOpen = false
@@ -87,6 +90,8 @@ func fixpath() -> void:
 	# level pack getting
 	levelpack = Save.config.get_value("Misc","levelPack","SMB")
 	levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
+	
+	
 	
 	# finding the tmx
 	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"):

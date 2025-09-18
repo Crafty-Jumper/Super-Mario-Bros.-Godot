@@ -499,7 +499,10 @@ func _changeRoom():
 	if checkType is int or checkType is float:
 		GlobalVariables.sub = checkType
 	if checkType is Array:
-		GlobalVariables.world = checkType[GlobalVariables.marioTileX/4]
+		if checkType.get(GlobalVariables.marioTileX/4) is float or checkType.get(GlobalVariables.marioTileX/4) is int:
+			GlobalVariables.world = checkType[GlobalVariables.marioTileX/4]
+		else:
+			GlobalVariables.world = 36
 		if GlobalVariables.levelpack == "SMB":
 			if !GlobalVariables.warpShown:
 				if GlobalVariables.world == 4 or GlobalVariables.world == 2:

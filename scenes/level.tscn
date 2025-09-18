@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=60 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
 [ext_resource type="Texture2D" uid="uid://c8o8eh0podkb0" path="res://images/palettes/enemypalette.png" id="2_2jdvr"]
@@ -31,8 +31,11 @@
 [ext_resource type="PackedScene" uid="uid://b5rbge541cwvx" path="res://scenes/entities/vine.tscn" id="19_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://vewa2fpvxbge" path="res://scenes/entities/firebar.tscn" id="21_h6wmr"]
 [ext_resource type="PackedScene" uid="uid://buaocyjfxqq3" path="res://scenes/entities/firebarcounter.tscn" id="22_pqd0y"]
+[ext_resource type="PackedScene" uid="uid://dbgfqbd47csfn" path="res://scenes/platform.tscn" id="25_0fmhk"]
 [ext_resource type="PackedScene" uid="uid://cdexvmfu6tdli" path="res://scenes/entities/bowser.tscn" id="25_3ies3"]
+[ext_resource type="PackedScene" uid="uid://cudh7asvic67k" path="res://scenes/platform_down.tscn" id="26_iafhg"]
 [ext_resource type="PackedScene" uid="uid://ddu3d3l0d2xxe" path="res://scenes/entities/koopa-green.tscn" id="26_xy2fk"]
+[ext_resource type="PackedScene" uid="uid://cirl5xfkw6pv1" path="res://scenes/platform_up.tscn" id="27_cr74b"]
 [ext_resource type="PackedScene" uid="uid://cbakr6xm68j4r" path="res://scenes/entities/piranha-plant.tscn" id="28_v3why"]
 [ext_resource type="PackedScene" uid="uid://g0ngj3ah0fex" path="res://scenes/entities/koopa-red.tscn" id="30_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://cjkld8e54uclm" path="res://scenes/entities/toad.tscn" id="31_535f6"]
@@ -309,6 +312,9 @@ scenes/6/scene = ExtResource("30_2e2fo")
 scenes/7/scene = ExtResource("28_v3why")
 scenes/8/scene = ExtResource("31_535f6")
 scenes/9/scene = ExtResource("32_50fbu")
+scenes/10/scene = ExtResource("25_0fmhk")
+scenes/11/scene = ExtResource("26_iafhg")
+scenes/12/scene = ExtResource("27_cr74b")
 
 [sub_resource type="TileSet" id="TileSet_ux5qa"]
 tile_size = Vector2i(8, 16)
@@ -379,7 +385,6 @@ mainVine = true
 [node name="Tiles" type="TileMapLayer" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_gur6y")
-tile_map_data = PackedByteArray("AAAAAA4AAAAAAAAAAAABAA4AAAAAAAAAAAACAA4AAAAAAAAAAAADAA4AAAAAAAAAAAAEAA4AAAAAAAAAAAAFAA4AAAAAAAAAAAAGAA4AAAAAAAAAAAAHAA4AAAAAAAAAAAAIAA4AAAAAAAAAAAAJAA4AAAAAAAAAAAAKAA4AAAAAAAAAAAALAA4AAAAAAAAAAAAMAA4AAAAAAAAAAAANAA4AAAAAAAAAAAAOAA4AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA0AAAAAAAAAAAAOAA0AAAAAAAAAAAANAA0AAAAAAAAAAAAMAA0AAAAAAAAAAAALAA0AAAAAAAAAAAAKAA0AAAAAAAAAAAAJAA0AAAAAAAAAAAAIAA0AAAAAAAAAAAAHAA0AAAAAAAAAAAAGAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAADAA0AAAAAAAAAAAACAA0AAAAAAAAAAAABAA0AAAAAAAAAAAAAAA0AAAAAAAAAAAAQAA0AAAAAAAAAAAARAA0AAAAAAAAAAAASAA4AAAAAAAAAAAATAA4AAAAAAAAAAAAUAA4AAAAAAAAAAAAVAA4AAAAAAAAAAAARAA4AAAAAAAAAAAAQAA4AAAAAAAAAAAASAA0AAAAAAAAAAAATAA0AAAAAAAAAAAAUAA0AAAAAAAAAAAAVAA0AAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_oi3di")
 script = ExtResource("10_wc255")
 metadata/groundPalette = 0
