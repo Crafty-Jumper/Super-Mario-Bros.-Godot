@@ -29,3 +29,9 @@ func copy_file(filepath:String) -> void:
 	var filewrite = FileAccess.open("user://resources/" + filepath,FileAccess.WRITE)
 	filewrite.store_buffer(data)
 	file.close()
+
+func load_image(path:String) -> Texture:
+	var image = Image.new()
+	get_file(path)
+	image.load("user://resources/" + path)
+	return ImageTexture.create_from_image(image)

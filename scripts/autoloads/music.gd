@@ -20,7 +20,6 @@ func loadtrack(track: String,loop: bool = false) -> void:
 	looping = loop
 	var checkPath = "user://resources/Level Data/" + GlobalVariables.levelpack + "/audio/music/"
 	for i in 3:
-		print(i)
 		if i == 1:
 			checkPath = "user://resources/audio/music/"
 		if i == 2:
