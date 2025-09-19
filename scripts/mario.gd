@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var big_jump: AudioStreamPlayer = $BigJump
 @onready var timer: Timer = $Timer
 @onready var small_jump: AudioStreamPlayer = $SmallJump
@@ -118,6 +119,7 @@ func _physics_process(delta: float) -> void:
 		if GlobalVariables.pipes[GlobalVariables.marioScreen] is Array:
 			Music.loadtrack("None")
 		set_meta("canPipe",false)
+		animation_player.speed_scale = 1
 		animated_sprite_2d.speed_scale = 1
 		if get_meta("pipeDirection") == 0:
 			position.y += 1
@@ -156,22 +158,29 @@ func _physics_process(delta: float) -> void:
 	
 	if GlobalVariables.marioState == -1:
 		if GlobalVariables.marioSize == 1:
+			animation_player.current_animation = "shrink"
 			animated_sprite_2d.animation = "shrink"
 		else:
+			animation_player.current_animation = "grow"
 			animated_sprite_2d.animation = "grow"
+		animation_player.speed_scale = 1
 		animated_sprite_2d.speed_scale = 1
 		GlobalVariables.marioPower = 1
 		return
 	
 	if GlobalVariables.marioState == -2:
 		if GlobalVariables.marioSize == 1:
+			animation_player.current_animation = "shrink"
 			animated_sprite_2d.animation = "shrink"
 		else:
+			animation_player.current_animation = "grow"
 			animated_sprite_2d.animation = "grow"
+		animation_player.speed_scale = 1
 		animated_sprite_2d.speed_scale = 1
 		return
 	
 	if GlobalVariables.marioState == -3:
+		animation_player.current_animation = "die"
 		animated_sprite_2d.animation = "die"
 		ColDown.disabled = true
 		ColUp.disabled = true
@@ -182,6 +191,7 @@ func _physics_process(delta: float) -> void:
 	
 	if GlobalVariables.marioState == -4:
 		GlobalVariables.marioScreen = 0
+		animation_player.current_animation = "die"
 		animated_sprite_2d.animation = "die"
 		velocity.y += gravityDie * delta
 		move_and_slide()
@@ -223,16 +233,22 @@ func _physics_process(delta: float) -> void:
 	
 	if not slidingOnPole or GlobalVariables.marioVine:
 		animated_sprite_2d.speed_scale = abs(velocity.x/physics["maxWalk"])
+		animation_player.speed_scale = abs(velocity.x/physics["maxWalk"])
 		if animated_sprite_2d.speed_scale < 0.5:
 			animated_sprite_2d.speed_scale = 0.5
+			animation_player.speed_scale = 0.5
 		if GlobalVariables.underwater:
 			animated_sprite_2d.speed_scale = 1
+			animation_player.speed_scale = 1
 		if is_on_floor():
 			if not velocity.x == 0 or direction:
+				animation_player.current_animation = "walk" + GlobalVariables.marioVisual
 				animated_sprite_2d.animation = "walk" + GlobalVariables.marioVisual
 			else:
+				animation_player.current_animation = "idle" + GlobalVariables.marioVisual
 				animated_sprite_2d.animation = "idle" + GlobalVariables.marioVisual
 			if velocity.x * direction < 0:
+				animation_player.current_animation = "turn" + GlobalVariables.marioVisual
 				animated_sprite_2d.animation = "turn" + GlobalVariables.marioVisual
 				if frameTimer == 5:
 					var popItem = load("res://scenes/smoke.tscn").instantiate()
@@ -242,8 +258,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			if GlobalVariables.underwater:
 				if not animated_sprite_2d.animation == "swim" + GlobalVariables.marioVisual:
+					animation_player.current_animation = "swimIdle" + GlobalVariables.marioVisual
 					animated_sprite_2d.animation = "swimIdle" + GlobalVariables.marioVisual
 			else:
+				animation_player.current_animation = "jump" + GlobalVariables.marioVisual
 				animated_sprite_2d.animation = "jump" + GlobalVariables.marioVisual
 		
 		
@@ -292,11 +310,14 @@ func _physics_process(delta: float) -> void:
 				velocity.x += direction * accel * delta
 	else:
 		if not animated_sprite_2d.animation == "climb" + GlobalVariables.marioVisual:
+			animation_player.current_animation = "climb" + GlobalVariables.marioVisual
 			animated_sprite_2d.animation = "climb" + GlobalVariables.marioVisual
 		velocity.x = 0
 		if yDir == 0:
+			animation_player.speed_scale = 0
 			animated_sprite_2d.speed_scale = 0
 		else:
+			animation_player.speed_scale = 1
 			animated_sprite_2d.speed_scale = 1
 		if yDir > 0:
 			velocity.y = -physics["vineUp"]
@@ -352,21 +373,24 @@ func _physics_process(delta: float) -> void:
 	
 	if throwFrames:
 		throwFrames -= 1
+		animation_player.current_animation = "throwBig"
 		animated_sprite_2d.animation = "throwBig"
 	
 	# flagpole animation
 	if slidingOnPole:
-		
+		animation_player.current_animation = "climb" + GlobalVariables.marioVisual
 		animated_sprite_2d.animation = "climb" + GlobalVariables.marioVisual
 		velocity.y = 120
 		velocity.x = 0
 		if not is_on_floor():
 			animated_sprite_2d.flip_h = false
+			animation_player.speed_scale = 1
 			animated_sprite_2d.speed_scale = 1
 		position.x = floor(position.x/16)*16
 		if is_on_floor() and timer.time_left == 0:
 			timer.start()
 			animated_sprite_2d.flip_h = true
+			animation_player.speed_scale = 0
 			animated_sprite_2d.speed_scale = 0
 			position.x += 16
 	
@@ -419,6 +443,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			GlobalVariables.marioState = 0
 			GlobalVariables.paused = false
 	if animated_sprite_2d.animation == "swim" + GlobalVariables.marioVisual:
+		animation_player.current_animation = "swim" + GlobalVariables.marioVisual
 		animated_sprite_2d.animation = "swimIdle" + GlobalVariables.marioVisual
 
 

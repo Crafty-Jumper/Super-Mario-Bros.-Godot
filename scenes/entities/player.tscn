@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://e0lmnsgvoln4"]
+[gd_scene load_steps=66 format=3 uid="uid://e0lmnsgvoln4"]
 
 [ext_resource type="Script" uid="uid://d37uuganaastb" path="res://scripts/mario.gd" id="1_wrvex"]
 [ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://images/mario.png" id="2_4ckko"]
@@ -486,6 +486,172 @@ size = Vector2(12, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_73kkf"]
 size = Vector2(12, 30)
 
+[sub_resource type="Animation" id="Animation_n5sgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5ki56"]
+resource_name = "idleSmall"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_saib0"]
+resource_name = "walkSmall"
+length = 0.20000668
+loop_mode = 1
+step = 0.06666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ogpgs"]
+resource_name = "turnSmall"
+length = 0.06667334
+loop_mode = 1
+step = 0.06666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_spk56"]
+resource_name = "climbSmall"
+length = 0.166675
+loop_mode = 1
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_1yk18"]
+resource_name = "jumpSmall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_b4o2o"]
+resource_name = "swimIdleSmall"
+length = 0.20001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_yr3on"]
+resource_name = "die"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_2ngu4"]
+resource_name = "grow"
+length = 1.3333417
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25, 0.3333333, 0.4166667, 0.5, 0.5833334, 0.6666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 15, 16, 0, 15, 16, 0, 15, 16]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ogpgs"]
+_data = {
+&"RESET": SubResource("Animation_n5sgd"),
+&"climbSmall": SubResource("Animation_spk56"),
+&"die": SubResource("Animation_yr3on"),
+&"grow": SubResource("Animation_2ngu4"),
+&"idleSmall": SubResource("Animation_5ki56"),
+&"jumpSmall": SubResource("Animation_1yk18"),
+&"swimIdleSmall": SubResource("Animation_b4o2o"),
+&"turnSmall": SubResource("Animation_ogpgs"),
+&"walkSmall": SubResource("Animation_saib0")
+}
+
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 2147483649
@@ -499,6 +665,7 @@ metadata/pipeDirection = 0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_76esm")
+position = Vector2(16, 0)
 sprite_frames = SubResource("SpriteFrames_76esm")
 animation = &"grow"
 autoplay = "idleSmall"
@@ -508,7 +675,6 @@ position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_b6tgf")
 
 [node name="ColUp" type="CollisionShape2D" parent="."]
-position = Vector2(-7.15256e-07, -3.00133e-11)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_73kkf")
 
@@ -538,6 +704,19 @@ stream = ExtResource("11_73kkf")
 
 [node name="Life" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_n5sgd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ogpgs")
+}
+autoplay = "idleSmall"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_76esm")
+texture = ExtResource("2_4ckko")
+hframes = 16
+vframes = 2
 
 [connection signal="goal_pole" from="." to="." method="_on_goal_pole"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

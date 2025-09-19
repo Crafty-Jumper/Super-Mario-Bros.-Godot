@@ -16,9 +16,15 @@ func loadtrack(track: String,loop: bool = false) -> void:
 		return
 	song = track
 	
+	
 	looping = loop
-	var checkPath = "user://data/Level Packs/" + GlobalVariables.levelpack + "/audio/music/"
-	for i in 2:
+	var checkPath = "user://resources/Level Data/" + GlobalVariables.levelpack + "/audio/music/"
+	for i in 3:
+		print(i)
+		if i == 1:
+			checkPath = "user://resources/audio/music/"
+		if i == 2:
+			checkPath = "res://audio/music/"
 		stream.set_sync_stream(0,load_custom_mp3(checkPath + track + "-Pul1.mp3"))
 		stream.set_sync_stream(1,load_custom_mp3(checkPath + track + "-Pul2.mp3"))
 		stream.set_sync_stream(2,load_custom_mp3(checkPath + track + "-Tri.mp3"))
@@ -27,7 +33,7 @@ func loadtrack(track: String,loop: bool = false) -> void:
 		if FileAccess.file_exists(checkPath + track + "-Pul1.mp3"):
 			play()
 			return
-		checkPath = "res://audio/music/"
+		
 
 func musicVolume(tracks:Array) -> void:
 	stream.set_sync_stream_volume(0,tracks[0])

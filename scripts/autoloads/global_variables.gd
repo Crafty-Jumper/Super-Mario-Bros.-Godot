@@ -5,8 +5,8 @@ var marioInvuln = 0
 var marioLives = 3
 var marioInvinc = 0
 var marioState = 0
-var marioSize = 1
-var marioPower = 2
+var marioSize = 0
+var marioPower = 0
 
 var freecam : bool = false
 
@@ -49,8 +49,6 @@ var levelBGColor = get_built_in_property(levelPath,"backgroundcolor")
 
 func _ready() -> void:
 	fixpath()
-	var timer = Timer.new()
-	add_child(timer)
 
 func _process(delta: float) -> void:
 	
@@ -92,12 +90,12 @@ func fixpath() -> void:
 	levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
 	
 	
+	# find an smb level file
+	
 	
 	# finding the tmx
-	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"):
-		levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
-	else:
-		levelPath = "user://data/Level Packs/" + levelpack + "/" + levelPrefix + ".tmx"
+	Files.get_file("Level Data/" + levelpack + "/" + levelPrefix + ".tmx")
+	levelPath = "user://resources/Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
 
 	# general level data
 	song = get_map_property(levelPath,"song")

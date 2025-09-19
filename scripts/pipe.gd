@@ -8,7 +8,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.set_meta("canPipe",true)
 		body.set_meta("pipeDirection",direction)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var checkType = GlobalVariables.pipes.get(position.x/256)
 	if GlobalVariables.warpShown:
 		if checkType is Array:

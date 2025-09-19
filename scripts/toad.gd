@@ -5,8 +5,3 @@ extends Sprite2D
 func _ready() -> void:
 	if GlobalVariables.world >= 8:
 		frame = 1
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
