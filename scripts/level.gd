@@ -29,6 +29,7 @@ var prevCamX = 0.0
 var prevCamY = 0.0
 
 func _ready() -> void:
+	GlobalVariables.generatorActive = false
 	parallax_2d.scroll_scale.x = float(get_layer_property(GlobalVariables.levelPath,"Background","parallaxx"))
 	
 	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)

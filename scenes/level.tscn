@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=64 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
 [ext_resource type="Texture2D" uid="uid://c8o8eh0podkb0" path="res://images/palettes/enemypalette.png" id="2_2jdvr"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://cirl5xfkw6pv1" path="res://scenes/platform_up.tscn" id="27_cr74b"]
 [ext_resource type="PackedScene" uid="uid://644qpbrmvmje" path="res://scenes/entities/flyingcheepcheeptrigger.tscn" id="28_ok3ci"]
 [ext_resource type="PackedScene" uid="uid://cbakr6xm68j4r" path="res://scenes/entities/piranha-plant.tscn" id="28_v3why"]
+[ext_resource type="PackedScene" uid="uid://c5pjdpyqnf06l" path="res://scenes/entities/generator_disabler.tscn" id="29_hv3ux"]
 [ext_resource type="PackedScene" uid="uid://g0ngj3ah0fex" path="res://scenes/entities/koopa-red.tscn" id="30_2e2fo"]
 [ext_resource type="PackedScene" uid="uid://cjkld8e54uclm" path="res://scenes/entities/toad.tscn" id="31_535f6"]
 [ext_resource type="AudioStream" uid="uid://rp7d3q01hibi" path="res://audio/pause.mp3" id="31_w3o6u"]
@@ -319,6 +320,7 @@ scenes/10/scene = ExtResource("25_0fmhk")
 scenes/11/scene = ExtResource("26_iafhg")
 scenes/12/scene = ExtResource("27_cr74b")
 scenes/13/scene = ExtResource("28_ok3ci")
+scenes/14/scene = ExtResource("29_hv3ux")
 
 [sub_resource type="TileSet" id="TileSet_ux5qa"]
 tile_size = Vector2i(8, 16)
