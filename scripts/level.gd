@@ -62,6 +62,24 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	
+	if Input.is_action_just_pressed("worldup"):
+		GlobalVariables.world += 1
+		GlobalVariables.sub = 0
+		get_tree().change_scene_to_file("res://scenes/level.tscn")
+	if Input.is_action_just_pressed("worlddown"):
+		GlobalVariables.world -= 1
+		GlobalVariables.sub = 0
+		get_tree().change_scene_to_file("res://scenes/level.tscn")
+	if Input.is_action_just_pressed("levelup"):
+		GlobalVariables.level += 1
+		GlobalVariables.sub = 0
+		get_tree().change_scene_to_file("res://scenes/level.tscn")
+	if Input.is_action_just_pressed("leveldown"):
+		GlobalVariables.level -= 1
+		GlobalVariables.sub = 0
+		get_tree().change_scene_to_file("res://scenes/level.tscn")
+	
+	
 	screen_palette.material.set_shader_parameter("accessRow",GlobalVariables.theme)
 	
 	if vineExists:
