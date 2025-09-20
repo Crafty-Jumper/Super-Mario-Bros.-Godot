@@ -47,7 +47,8 @@ var isDrain : bool = false
 var climbedDist = 0
 
 func _ready() -> void:
-	physicsString = Files.get_file("characters/" + GlobalVariables.character + "/physics.json")
+	for i in 3:
+		physicsString = Files.get_file("characters/" + GlobalVariables.character + "/physics.json")
 	physics = JSON.parse_string(physicsString)
 	sprite_2d.texture = Files.load_image("characters/" + GlobalVariables.character + "/animations1.png")
 	sprite_2d.material.set_shader_parameter("palette",Files.load_image("characters/" + GlobalVariables.character + "/playerpalette.png"))

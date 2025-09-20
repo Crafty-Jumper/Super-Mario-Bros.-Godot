@@ -43,7 +43,7 @@ var pipescreen = []
 
 # user data stuff
 var levelpack = "SMB"
-var character = "mario"
+var character = "luigi"
 
 var levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
 var levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
