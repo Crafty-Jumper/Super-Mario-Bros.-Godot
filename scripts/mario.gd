@@ -50,6 +50,7 @@ var climbedDist = 0
 func _ready() -> void:
 	physicsFile.close()
 	sprite_2d.texture = Files.load_image("images/mario.png")
+	sprite_2d.material.set_shader_parameter("palette",Files.load_image("images/palettes/playerpalette.png"))
 
 func _physics_process(delta: float) -> void:
 	# updating the physics
@@ -97,13 +98,11 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if GlobalVariables.marioInvinc == 0:
-		if GlobalVariables.marioPower == 2:
-			sprite_2d.material.set_shader_parameter("accessRow",2)
-		else: if GlobalVariables.marioPower == 3:
-			sprite_2d.material.set_shader_parameter("accessRow",4)
+		if GlobalVariables.marioPower > 0:
+			sprite_2d.material.set_shader_parameter("accessRow",GlobalVariables.marioPower)
 		else:
 			sprite_2d.material.set_shader_parameter("accessRow",1)
-	
+		
 	
 	if canPipe:
 		if is_on_floor() and get_meta("pipeDirection") < 3:

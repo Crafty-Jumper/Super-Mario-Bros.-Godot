@@ -21,4 +21,4 @@ func _process(_delta: float) -> void:
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Mario":
-		body.canPipe = false
+		body.set_meta("canPipe",false)
