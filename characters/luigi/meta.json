@@ -1,0 +1,7 @@
+{
+	"name":"LUIGI",
+	"health":0,
+	"selectFramesIdle":1,
+	"selectFrames":1,
+	"selectAnim":"jump"
+}
