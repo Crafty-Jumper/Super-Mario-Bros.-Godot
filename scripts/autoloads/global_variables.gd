@@ -12,7 +12,7 @@ var freecam : bool = false
 
 var paused : bool = false
 var world : int = 1
-var level : int = 2
+var level : int = 1
 var sub : int = 0
 var coin : int = 0
 var score : int = 0
