@@ -5,8 +5,8 @@ var marioInvuln = 0
 var marioLives = 3
 var marioInvinc = 0
 var marioState = 0
-var marioSize = 0
-var marioPower = 0
+var marioSize = 1
+var marioPower = 2
 
 var freecam : bool = false
 

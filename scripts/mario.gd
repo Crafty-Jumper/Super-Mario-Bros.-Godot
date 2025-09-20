@@ -27,6 +27,7 @@ var goal_walk : bool = false
 var slidingOnPole : bool = false
 
 const gravityDie = 750
+var crouching : bool = false
 
 # basic variables
 var maxSpeed = 0
@@ -96,6 +97,7 @@ func _physics_process(delta: float) -> void:
 	GlobalVariables.marioScreen = floor(position.x/256)
 	GlobalVariables.marioTileX = int(fmod(position.x/16,16))
 	GlobalVariables.marioTileY = int(position.y/16)
+	
 	
 	
 	if GlobalVariables.marioInvinc == 0:
@@ -216,7 +218,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	if GlobalVariables.marioSize == 0:
+	if GlobalVariables.marioSize == 0 or crouching:
 		ColUp.disabled = true
 	else:
 		ColUp.disabled = false
@@ -230,23 +232,32 @@ func _physics_process(delta: float) -> void:
 		if GlobalVariables.underwater:
 			animation_player.speed_scale = 1
 		if is_on_floor():
-			if not velocity.x == 0 or direction:
-				animation_player.current_animation = "walk" + GlobalVariables.marioVisual
-			else:
-				animation_player.current_animation = "idle" + GlobalVariables.marioVisual
-			if velocity.x * direction < 0:
-				animation_player.current_animation = "turn" + GlobalVariables.marioVisual
-				if frameTimer == 5:
-					var popItem = load("res://scenes/smoke.tscn").instantiate()
-					popItem.position = position
-					popItem.position.y += 16
-					get_parent().add_child(popItem)
+			if inputAffects:
+				if Input.is_action_pressed("down"):
+					if GlobalVariables.marioSize != 0:
+						crouching = true
+						animation_player.current_animation = "crouch"
+				else:
+					crouching = false
+			if not crouching:
+				if not velocity.x == 0 or direction:
+					animation_player.current_animation = "walk" + GlobalVariables.marioVisual
+				else:
+					animation_player.current_animation = "idle" + GlobalVariables.marioVisual
+				if velocity.x * direction < 0:
+					animation_player.current_animation = "turn" + GlobalVariables.marioVisual
+					if frameTimer == 5:
+						var popItem = load("res://scenes/smoke.tscn").instantiate()
+						popItem.position = position
+						popItem.position.y += 16
+						get_parent().add_child(popItem)
 		else:
-			if GlobalVariables.underwater:
-				if not animation_player.current_animation == "swim" + GlobalVariables.marioVisual:
-					animation_player.current_animation = "swimIdle" + GlobalVariables.marioVisual
-			else:
-				animation_player.current_animation = "jump" + GlobalVariables.marioVisual
+			if not crouching:
+				if GlobalVariables.underwater:
+					if not animation_player.current_animation == "swim" + GlobalVariables.marioVisual:
+						animation_player.current_animation = "swimIdle" + GlobalVariables.marioVisual
+				else:
+					animation_player.current_animation = "jump" + GlobalVariables.marioVisual
 	
 	if not is_on_floor():
 		if not GlobalVariables.marioVine:
@@ -275,12 +286,13 @@ func _physics_process(delta: float) -> void:
 	if not GlobalVariables.marioVine:
 		if is_on_floor():
 			jumpStartSpeed = abs(velocity.x)
-			if direction:
-				if abs(direction) > 0:
-					velocity.x += direction * accel * delta
-				else:
-					velocity.x += direction * decel * delta
-			else:
+			if !crouching:
+				if direction:
+					if abs(direction) > 0:
+						velocity.x += direction * accel * delta
+					else:
+						velocity.x += direction * decel * delta
+			if !direction or crouching:
 				velocity.x = move_toward(velocity.x, 0, decel * delta)
 		else:
 			if direction == velocity.x/abs(velocity.x):
