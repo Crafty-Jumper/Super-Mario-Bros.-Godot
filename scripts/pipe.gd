@@ -20,5 +20,5 @@ func _process(_delta: float) -> void:
 			rich_text_label.show()
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.name == "Mario":
+	if body.is_in_group("player"):
 		body.set_meta("canPipe",false)

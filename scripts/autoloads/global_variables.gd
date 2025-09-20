@@ -17,6 +17,7 @@ var sub : int = 0
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
+
 # vine stuff
 var marioVine : bool = false
 var marioVineLeft : bool = true
@@ -40,12 +41,17 @@ var marioY = 0
 var pipes = []
 var pipescreen = []
 
+# user data stuff
 var levelpack = "SMB"
+var character = "mario"
+
 var levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
 var levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
 var levelHeight = int(get_built_in_property(levelPath,"height"))
 var levelWidth = int(get_built_in_property(levelPath,"width"))
 var levelBGColor = get_built_in_property(levelPath,"backgroundcolor")
+
+
 
 func _ready() -> void:
 	fixpath()

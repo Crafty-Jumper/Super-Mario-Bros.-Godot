@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://e0lmnsgvoln4"]
 
 [ext_resource type="Script" uid="uid://d37uuganaastb" path="res://scripts/mario.gd" id="1_wrvex"]
-[ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://images/mario.png" id="2_4ckko"]
+[ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://characters/mario/animations1.png" id="2_4ckko"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="2_4gsdp"]
 [ext_resource type="AudioStream" uid="uid://dhyoxx8n1odk4" path="res://audio/sfx-jumpsmall.mp3" id="5_5ayx0"]
 [ext_resource type="AudioStream" uid="uid://cb2m8ddbq1dg3" path="res://audio/sfx-jump.ogg" id="5_752v2"]
@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://drkp23drkcrnb" path="res://audio/sfx-pipe.mp3" id="9_7owmg"]
 [ext_resource type="AudioStream" uid="uid://qwtgq3se0dvo" path="res://audio/coin.mp3" id="10_eiyqk"]
 [ext_resource type="AudioStream" uid="uid://uwpkam132gr5" path="res://audio/sfx-squish.mp3" id="11_73kkf"]
-[ext_resource type="Texture2D" uid="uid://1eykuuinqsjs" path="res://images/palettes/playerpalette.png" id="11_n5sgd"]
+[ext_resource type="Texture2D" uid="uid://1eykuuinqsjs" path="res://characters/mario/playerpalette.png" id="11_n5sgd"]
 [ext_resource type="AudioStream" uid="uid://dyb457fbs58qu" path="res://audio/sfx-life.mp3" id="12_n5sgd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6tgf"]

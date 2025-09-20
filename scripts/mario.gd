@@ -14,9 +14,8 @@ extends CharacterBody2D
 @onready var swim_sfx: AudioStreamPlayer = $SwimSFX
 @onready var life: AudioStreamPlayer = $Life
 
-var physicsFile = FileAccess.open("res://physics.json",FileAccess.READ)
-var physicsString = physicsFile.get_as_text()
-var physics = JSON.parse_string(physicsString)
+var physicsString = ""
+var physics = {}
 var direction = 0
 var yDir = 0
 var throwFrames = 0
@@ -48,9 +47,10 @@ var isDrain : bool = false
 var climbedDist = 0
 
 func _ready() -> void:
-	physicsFile.close()
-	sprite_2d.texture = Files.load_image("images/mario.png")
-	sprite_2d.material.set_shader_parameter("palette",Files.load_image("images/palettes/playerpalette.png"))
+	physicsString = Files.get_file("characters/" + GlobalVariables.character + "/physics.json")
+	physics = JSON.parse_string(physicsString)
+	sprite_2d.texture = Files.load_image("characters/" + GlobalVariables.character + "/animations1.png")
+	sprite_2d.material.set_shader_parameter("palette",Files.load_image("characters/" + GlobalVariables.character + "/playerpalette.png"))
 
 func _physics_process(delta: float) -> void:
 	# updating the physics

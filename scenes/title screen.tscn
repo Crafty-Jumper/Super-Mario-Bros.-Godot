@@ -20,7 +20,7 @@
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="19_7q7jk"]
 [ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="20_tmweu"]
 [ext_resource type="Texture2D" uid="uid://cy6lqa6m54sj" path="res://images/tiles-bg.png" id="21_h7nan"]
-[ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://images/mario.png" id="21_qoa36"]
+[ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://characters/mario/animations1.png" id="21_qoa36"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kmjn6"]
 texture = ExtResource("21_h7nan")
