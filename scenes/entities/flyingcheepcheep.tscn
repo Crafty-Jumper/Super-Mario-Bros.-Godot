@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://oqpyrtsrx2uk"]
+
+[ext_resource type="Texture2D" uid="uid://dgufkt2tkwa2a" path="res://images/cheepcheep.png" id="1_a8d1r"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_g3xpl"]
+[ext_resource type="Script" uid="uid://csux7dwm2njqo" path="res://scripts/flyingcheepcheep.gd" id="1_jiidc"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="2_jiidc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdiia"]
+size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nxrw"]
+shader = ExtResource("1_g3xpl")
+shader_parameter/palette = ExtResource("2_jiidc")
+shader_parameter/accessRow = 7
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_jiidc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rdiia")
+
+[node name="Cheepcheep" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_8nxrw")
+texture = ExtResource("1_a8d1r")
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_rdiia")
+debug_color = Color(0.95145196, 0, 0.5660165, 0.41960785)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

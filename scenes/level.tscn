@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://ds52k3x1j8fvo"]
+[gd_scene load_steps=62 format=3 uid="uid://ds52k3x1j8fvo"]
 
 [ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="1_vonw3"]
 [ext_resource type="Texture2D" uid="uid://c8o8eh0podkb0" path="res://images/palettes/enemypalette.png" id="2_2jdvr"]
@@ -45,6 +45,7 @@
 [ext_resource type="AudioStream" uid="uid://d0cadrhbw1ja2" path="res://audio/intermission.mp3" id="35_asl66"]
 [ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Mystery Font.ttf" id="39_c1pbi"]
 [ext_resource type="Script" uid="uid://cas8f14f1l6fo" path="res://scripts/enemy_generator.gd" id="45_uhfbm"]
+[ext_resource type="PackedScene" uid="uid://oqpyrtsrx2uk" path="res://scenes/entities/flyingcheepcheep.tscn" id="46_lqb7q"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2jdvr"]
 load_path = "res://.godot/imported/enemypalette.png-3ff05f933d8391c70baf7bc06f31b8dd.ctex"
@@ -473,8 +474,9 @@ text = "
 
      WELCOME TO WARP ZONE!"
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="EnemyGenerator" type="Node2D" parent="."]
 script = ExtResource("45_uhfbm")
+generatedEnemy = ExtResource("46_lqb7q")
 
 [connection signal="finished" from="GoalMusic" to="." method="_on_goal_music_finished"]
 [connection signal="goal_pole" from="Mario" to="." method="_on_mario_goal_pole"]

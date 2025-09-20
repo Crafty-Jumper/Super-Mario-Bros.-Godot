@@ -11,7 +11,7 @@ var marioPower = 2
 var freecam : bool = false
 
 var paused : bool = false
-var world : int = 1
+var world : int = 3
 var level : int = 1
 var sub : int = 0
 var coin : int = 0
@@ -100,7 +100,8 @@ func fixpath() -> void:
 	
 	
 	# finding the tmx
-	Files.get_file("Level Data/" + levelpack + "/" + levelPrefix + ".tmx")
+	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"):
+		Files.copy_file("Level Data/" + levelpack + "/" + levelPrefix + ".tmx")
 	levelPath = "user://resources/Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
 
 	# general level data

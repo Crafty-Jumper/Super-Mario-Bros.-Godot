@@ -31,12 +31,12 @@ func _process(_delta: float) -> void:
 		node.hide()
 		collision_shape_2d.disabled = true
 	
-	node.position.y = (16 - (-8*(cos(bumped)+1))) - 32
+	node.position.y = (16 - (-4*(cos(bumped)+1))) - 24
 	if hasBeenHit:
 		node.show()
 		collision_shape_2d.disabled = false
 		if bumped > 0:
-			bumped -= 1
+			bumped -= 0.5
 		if bumped <= 0:
 			bumped = 0
 			if marioHit == 3:
