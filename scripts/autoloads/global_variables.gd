@@ -1,18 +1,23 @@
 extends Node
 
+# generator things
+var generatedEnemy : PackedScene
+var generatorDirection = 1
+var generatorActive : bool = false
+
 var marioVisual = "Small"
 var marioInvuln = 0
 var marioLives = 3
 var marioInvinc = 0
 var marioState = 0
-var marioSize = 1
-var marioPower = 2
+var marioSize = 0
+var marioPower = 0
 
 var freecam : bool = false
 
 var paused : bool = false
-var world : int = 3
-var level : int = 1
+var world : int = 2
+var level : int = 3
 var sub : int = 0
 var coin : int = 0
 var score : int = 0
@@ -103,7 +108,7 @@ func fixpath() -> void:
 	if FileAccess.file_exists("res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"):
 		Files.copy_file("Level Data/" + levelpack + "/" + levelPrefix + ".tmx")
 	levelPath = "user://resources/Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
-
+# screm
 	# general level data
 	song = get_map_property(levelPath,"song")
 	bonus = get_map_property(levelPath,"bonus")

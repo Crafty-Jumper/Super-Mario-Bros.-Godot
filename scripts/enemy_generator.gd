@@ -14,6 +14,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	active = GlobalVariables.generatorActive
+	direction = GlobalVariables.generatorDirection
+	generatedEnemy = GlobalVariables.generatedEnemy
+	
 	if !active:
 		return
 	position = camera_2d.position
@@ -23,6 +27,6 @@ func _process(delta: float) -> void:
 		timer = randf_range(50.0,100.0)
 		if direction == 1:
 			enemy.position = position
-			enemy.position.y = position.y + 128
+			enemy.position.y += 128
 			enemy.position.x += randf_range(-128.0,128.0)
 			get_parent().add_child(enemy)

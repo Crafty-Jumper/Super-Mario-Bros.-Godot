@@ -412,6 +412,8 @@ func _on_timer_timeout() -> void:
 func hurt() -> void:
 	if GlobalVariables.marioInvuln > 0:
 		return
+	if goal_walk or slidingOnPole:
+		return
 	GlobalVariables.paused = true
 	if GlobalVariables.marioPower == 0:
 		GlobalVariables.marioState = -3

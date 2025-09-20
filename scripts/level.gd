@@ -17,6 +17,7 @@ extends Node2D
 @onready var screen_palette: ColorRect = $Camera2D/CanvasLayer/ColorRect
 @onready var parallax_2d: Parallax2D = $Parallax2D
 @onready var warp_zone_text: RichTextLabel = $WarpZoneText
+@onready var enemy_generator: Node2D = $EnemyGenerator
 
 @export var song : int = GlobalVariables.song
 
@@ -170,6 +171,7 @@ func _pause_process(startPause: bool) -> void:
 		tile_map_layer_2.process_mode = Node.PROCESS_MODE_DISABLED
 		goal_music.process_mode = Node.PROCESS_MODE_DISABLED
 		audio_stream_player_2.process_mode = Node.PROCESS_MODE_DISABLED
+		enemy_generator.process_mode = Node.PROCESS_MODE_DISABLED
 	else:
 		mario.process_mode = Node.PROCESS_MODE_ALWAYS
 		area_2d.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -177,6 +179,7 @@ func _pause_process(startPause: bool) -> void:
 		tile_map_layer_2.process_mode = Node.PROCESS_MODE_ALWAYS
 		goal_music.process_mode = Node.PROCESS_MODE_ALWAYS
 		audio_stream_player_2.process_mode = Node.PROCESS_MODE_ALWAYS
+		enemy_generator.process_mode = Node.PROCESS_MODE_ALWAYS
 
 func get_layer_property(file:String,layer:String,property:String):
 	var tmxfile = XMLParser.new()

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://644qpbrmvmje"]
+
+[ext_resource type="PackedScene" uid="uid://bkfv4d1smvcpl" path="res://scenes/templates/enemy-generator-trigger.tscn" id="1_nx7x8"]
+[ext_resource type="PackedScene" uid="uid://oqpyrtsrx2uk" path="res://scenes/entities/flyingcheepcheep.tscn" id="2_g0oqc"]
+
+[node name="GeneratorTrigger" instance=ExtResource("1_nx7x8")]
+enemyGeneration = ExtResource("2_g0oqc")
