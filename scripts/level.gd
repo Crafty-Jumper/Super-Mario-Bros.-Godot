@@ -14,7 +14,12 @@ extends Node2D
 @onready var pause: AudioStreamPlayer = $AudioStreamPlayer
 @onready var character_body_2d: StaticBody2D = $CharacterBody2D
 @onready var audio_stream_player_2: AudioStreamPlayer = $AudioStreamPlayer2
-@onready var screen_palette: ColorRect = $Camera2D/CanvasLayer/ColorRect
+
+@onready var screen_palette: ColorRect = $Camera2D/CanvasLayer/EnemyPal
+@onready var pipe_pal: ColorRect = $Camera2D/Pipes/PipePal
+@onready var ground_pal: ColorRect = $Camera2D/Ground/GroundPal
+@onready var cloud_pal: ColorRect = $Camera2D/Clouds/CloudPal
+
 @onready var parallax_2d: Parallax2D = $Parallax2D
 @onready var warp_zone_text: RichTextLabel = $WarpZoneText
 @onready var enemy_generator: Node2D = $EnemyGenerator
@@ -82,8 +87,10 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://scenes/level.tscn")
 	
 	
-	screen_palette.material.set_shader_parameter("accessRow",GlobalVariables.theme)
-	
+	screen_palette.material.set_shader_parameter("accessRow",GlobalVariables.theme-1)
+	ground_pal.material.set_shader_parameter("accessRow",GlobalVariables.theme)
+	pipe_pal.material.set_shader_parameter("accessRow",GlobalVariables.pipeTheme)
+	cloud_pal.material.set_shader_parameter("accessRow",GlobalVariables.cloudTheme)
 	if vineExists:
 		if character_body_2d.position.y <= GlobalVariables.levelHeight * 16 - 78:
 			mario.yDir = 1

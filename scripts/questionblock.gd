@@ -3,4 +3,4 @@ extends Sprite2D
 
 func _process(_delta: float) -> void:
 	var color = floor(timer.time_left * 5)
-	material.set_shader_parameter("accessRow",fmod(color,4) + 1 + (GlobalVariables.theme * 4))
+	material.set_shader_parameter("accessRow",fmod(color,4) + 1 + ((GlobalVariables.theme-1) * 4))

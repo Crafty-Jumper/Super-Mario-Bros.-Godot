@@ -90,7 +90,8 @@ func _ready() -> void:
 		
 		
 func _process(_delta: float) -> void:
-	material.set_shader_parameter("accessRow",GlobalVariables.theme + 1)
+	pass
+	#material.set_shader_parameter("accessRow",GlobalVariables.theme + 1)
 
 func _place_tiles() -> void:
 	levelString = levelString.replace("\n","")

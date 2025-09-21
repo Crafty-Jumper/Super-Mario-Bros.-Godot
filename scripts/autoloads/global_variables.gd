@@ -16,8 +16,8 @@ var marioPower = 0
 var freecam : bool = false
 
 var paused : bool = false
-var world : int = 3
-var level : int = 1
+var world : int = 1
+var level : int = 3
 var sub : int = 0
 var coin : int = 0
 var score : int = 0
@@ -37,6 +37,8 @@ var warpShown : bool = false
 
 # level related stuff
 var theme = 0
+var pipeTheme = 0
+var cloudTheme = 0
 var song = 0
 var underwater : bool = false
 var bonus : bool = false
@@ -113,7 +115,9 @@ func fixpath() -> void:
 	song = get_map_property(levelPath,"song")
 	bonus = get_map_property(levelPath,"bonus")
 	intermission = get_map_property(levelPath,"intermission")
-	theme = get_map_property(levelPath,"levelTheme")
+	theme = get_map_property(levelPath,"paletteBRN")
+	pipeTheme = get_map_property(levelPath,"paletteGRN")
+	cloudTheme = get_map_property(levelPath,"paletteBLU")
 	levelHeight = int(get_built_in_property(levelPath,"height"))
 	levelWidth = int(get_built_in_property(levelPath,"width"))
 	levelBGColor = get_built_in_property(levelPath,"backgroundcolor")

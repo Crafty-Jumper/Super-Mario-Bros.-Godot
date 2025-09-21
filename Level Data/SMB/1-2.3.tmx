@@ -6,9 +6,11 @@
  <properties>
   <property name="bonus" type="bool" value="false"/>
   <property name="intermission" type="bool" value="false"/>
-  <property name="levelTheme" type="int" value="0"/>
   <property name="marioX" type="int" value="64"/>
   <property name="marioY" type="int" value="160"/>
+  <property name="paletteBLU" type="int" value="1"/>
+  <property name="paletteBRN" type="int" value="1"/>
+  <property name="paletteGRN" type="int" value="1"/>
   <property name="pipes" value="0,0,0,0"/>
   <property name="pipescreen" value="0,0,0,0"/>
   <property name="song" type="int" value="1"/>

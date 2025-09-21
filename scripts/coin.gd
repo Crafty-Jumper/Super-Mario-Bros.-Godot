@@ -7,7 +7,7 @@ extends Area2D
 var collected : bool = false
 
 func _process(_delta: float) -> void:
-	if GlobalVariables.theme == 2:
+	if GlobalVariables.theme == 3:
 		coin.hide()
 		water_coin.show()
 	else:
@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 	if collected:
 		coin.hide()
 		water_coin.hide()
-		if GlobalVariables.theme == 2:
+		if GlobalVariables.theme == 3:
 			question_solid.show()
 
 func _on_body_entered(body: Node2D) -> void:

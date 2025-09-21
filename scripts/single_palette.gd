@@ -8,4 +8,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	material.set_shader_parameter("accessRow",GlobalVariables.theme + 1)
+	material.set_shader_parameter("accessRow",GlobalVariables.theme)
