@@ -20,6 +20,7 @@ var direction = 0
 var yDir = 0
 var throwFrames = 0
 var frameTimer = 0
+var paletteRow = 0.0
 
 signal goal_pole
 
@@ -55,6 +56,10 @@ func _ready() -> void:
 	sprite_2d.material.set_shader_parameter("palette",Files.load_image("characters/" + GlobalVariables.character + "/playerpalette.png"))
 
 func _physics_process(delta: float) -> void:
+	if paletteRow <= 1:
+		paletteRow = 1
+	sprite_2d.material.set_shader_parameter("accessRow",int(paletteRow))
+	
 	# updating the physics
 	_physics_update()
 	
@@ -101,10 +106,11 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if GlobalVariables.marioInvinc == 0:
-		if GlobalVariables.marioPower > 0:
-			sprite_2d.material.set_shader_parameter("accessRow",GlobalVariables.marioPower)
-		else:
-			sprite_2d.material.set_shader_parameter("accessRow",1)
+		if !GlobalVariables.marioState == -5:
+			if GlobalVariables.marioPower > 0:
+				paletteRow = GlobalVariables.marioPower
+			else:
+				paletteRow = 1.0
 		
 	
 	if canPipe:
@@ -206,15 +212,15 @@ func _physics_process(delta: float) -> void:
 				GlobalVariables.marioState = -3
 
 	if GlobalVariables.marioState == -5:
-		sprite_2d.material.set_shader_parameter("accessRow",fmod(sprite_2d.material.get_shader_parameter("accessRow")+1,7)+(1/8))
+		paletteRow = (fmod(paletteRow,4)+(1.0/4.0))
 		if timer.is_stopped():
 			timer.start(1)
 		return
 	
 	if GlobalVariables.marioInvinc > 60:
-		sprite_2d.material.set_shader_parameter("accessRow",fmod(sprite_2d.material.get_shader_parameter("accessRow")+1,7)+(1/2))
+		paletteRow = fmod(paletteRow,4)+(1.0/2.0)
 	if GlobalVariables.marioInvinc < 60 and GlobalVariables.marioInvinc > 0:
-		sprite_2d.material.set_shader_parameter("accessRow",fmod(sprite_2d.material.get_shader_parameter("accessRow")+1,7)+(1/64))
+		paletteRow = fmod(paletteRow,4)+(1.0/4.0)
 	
 	
 	
@@ -268,14 +274,15 @@ func _physics_process(delta: float) -> void:
 		velocity.y = maxFall
 	
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or GlobalVariables.underwater):
-		velocity.y = -jumpSpeed
-		if GlobalVariables.underwater:
-			swim_sfx.play()
-		else:
-			if GlobalVariables.marioSize:
-				big_jump.play()
+		if inputAffects:
+			velocity.y = -jumpSpeed
+			if GlobalVariables.underwater:
+				swim_sfx.play()
 			else:
-				small_jump.play()
+				if GlobalVariables.marioSize:
+					big_jump.play()
+				else:
+					small_jump.play()
 	
 	if ((not GlobalVariables.underwater) and is_on_floor()) or GlobalVariables.underwater:
 		if direction < 0 and is_on_floor():
@@ -352,13 +359,13 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	
-	if GlobalVariables.marioPower == 2:
-		if Input.is_action_just_pressed("run"):
-			_projectile(load("res://scenes/entities/projectiles/fireball.tscn"),200,0)
-	if GlobalVariables.marioPower == 3:
-		if Input.is_action_just_pressed("run"):
-			_projectile(load("res://scenes/entities/projectiles/iceball.tscn"),100,0)
+	if inputAffects:
+		if GlobalVariables.marioPower == 2:
+			if Input.is_action_just_pressed("run"):
+				_projectile(load("res://scenes/entities/projectiles/fireball.tscn"),200,0)
+		if GlobalVariables.marioPower == 3:
+			if Input.is_action_just_pressed("run"):
+				_projectile(load("res://scenes/entities/projectiles/iceball.tscn"),100,0)
 	
 	
 	if throwFrames:
