@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://cy8kpwu3vcst5"]
+
+[ext_resource type="Script" uid="uid://bqjst4r0auxlt" path="res://scripts/bulletbill.gd" id="1_8jevf"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="1_fcpht"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="2_8jevf"]
+[ext_resource type="Texture2D" uid="uid://cfh3w4napj4d0" path="res://images/bulletbill.png" id="3_uytau"]
+[ext_resource type="AudioStream" uid="uid://co03e1id0a48i" path="res://audio/explode.mp3" id="5_uytau"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pedeo"]
+size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pibrl"]
+shader = ExtResource("1_fcpht")
+shader_parameter/palette = ExtResource("2_8jevf")
+shader_parameter/accessRow = 6
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_8jevf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pedeo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_pibrl")
+texture = ExtResource("3_uytau")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_uytau")
+autoplay = true

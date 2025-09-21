@@ -30,3 +30,18 @@ func _process(delta: float) -> void:
 			enemy.position.y += 128
 			enemy.position.x += randf_range(-128.0,128.0)
 			get_parent().add_child(enemy)
+		if direction == 0:
+			enemy.position = position
+			enemy.position.y -= 128
+			enemy.position.x += randf_range(-128.0,128.0)
+			get_parent().add_child(enemy)
+		if direction == 2:
+			enemy.position = position
+			enemy.position.x -= get_viewport_rect().size.x/5
+			enemy.position.y += floor(randf_range(-128.0,128.0)/16)*16
+			get_parent().add_child(enemy)
+		if direction == 3:
+			enemy.position = position
+			enemy.position.x += get_viewport_rect().size.x/4.9
+			enemy.position.y += floor(randf_range(-64.0,64.0)/16)*16
+			get_parent().add_child(enemy)
