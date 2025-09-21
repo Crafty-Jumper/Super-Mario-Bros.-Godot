@@ -133,8 +133,12 @@ func _process(delta: float) -> void:
 	
 	if GlobalVariables.marioState == -3 or GlobalVariables.marioState == -4:
 		Music.loadtrack("None",false)
+		overrideBgmVolume = true
+		Music.musicVolume([-80,-80,-80,-80,-80])
 	if mario.position.y > GlobalVariables.levelHeight * 16 + 100 and not GlobalVariables.bonus:
 		Music.loadtrack("None",false)
+		overrideBgmVolume = true
+		Music.musicVolume([-80,-80,-80,-80,-80])
 	
 	
 	if GlobalVariables.marioInvinc > 60:

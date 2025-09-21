@@ -16,7 +16,7 @@ var marioPower = 0
 var freecam : bool = false
 
 var paused : bool = false
-var world : int = 1
+var world : int = 3
 var level : int = 3
 var sub : int = 0
 var coin : int = 0
@@ -50,7 +50,7 @@ var pipescreen = []
 
 # user data stuff
 var levelpack = "SMB"
-var character = "luigi"
+var character = "mario"
 
 var levelPrefix = str(world) + "-" + str(level) + "." + str(sub)
 var levelPath = "res://Level Data/" + levelpack + "/" + levelPrefix + ".tmx"
