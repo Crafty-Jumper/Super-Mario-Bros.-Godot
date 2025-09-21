@@ -410,6 +410,9 @@ func _on_timer_timeout() -> void:
 
 
 func hurt() -> void:
+	if isPipe:
+		return
+	
 	if GlobalVariables.marioInvuln > 0:
 		return
 	if goal_walk or slidingOnPole:

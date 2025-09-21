@@ -62,7 +62,8 @@ func _ready() -> void:
 		audio_stream_player_2.play()
 	
 func _process(delta: float) -> void:
-	
+	if Input.is_action_just_pressed("reloadlevel"):
+		get_tree().change_scene_to_file("res://scenes/level.tscn")
 	if Input.is_action_just_pressed("worldup"):
 		GlobalVariables.world += 1
 		GlobalVariables.sub = 0
