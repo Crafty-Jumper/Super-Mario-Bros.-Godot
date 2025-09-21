@@ -10,7 +10,7 @@ var marioInvuln = 0
 var marioLives = 3
 var marioInvinc = 0
 var marioState = 0
-var marioSize = 1
+var marioSize = 0
 var marioPower = 2
 
 var freecam : bool = false
@@ -64,8 +64,7 @@ func _ready() -> void:
 	fixpath()
 
 func _process(delta: float) -> void:
-	
-	ProjectSettings.set_setting("application/config/icon","res://loading.png")
+	character = Save.config.get_value("Misc","character")
 	
 	if Input.is_action_just_pressed("pause"):
 		if pauseMenuOpen:

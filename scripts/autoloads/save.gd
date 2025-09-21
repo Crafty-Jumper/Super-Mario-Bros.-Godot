@@ -1,14 +1,14 @@
 extends Node
 
 var config = ConfigFile.new()
-const savePath = "user://data/settings.ini"
+const savePath = "user://resources/settings.ini"
 
 func _ready() -> void:
 	if not FileAccess.file_exists(savePath):
 		# misc
 		config.set_value("Misc","version",1)
 		config.set_value("Misc","levelPack","SMB")
-		config.set_value("Misc","character","MARIO")
+		config.set_value("Misc","character","mario")
 		config.set_value("Misc","mode","CLASSIC")
 		# audio
 		config.set_value("Audio","master",10)

@@ -49,13 +49,11 @@ var isDrain : bool = false
 var climbedDist = 0
 
 func _ready() -> void:
-	for i in 3:
-		physicsString = Files.get_file("characters/" + GlobalVariables.character + "/physics.json")
-	physics = JSON.parse_string(physicsString)
-	sprite_2d.texture = Files.load_image("characters/" + GlobalVariables.character + "/animations1.png")
-	sprite_2d.material.set_shader_parameter("palette",Files.load_image("characters/" + GlobalVariables.character + "/playerpalette.png"))
+	_reloadChar(GlobalVariables.character)
 
 func _physics_process(delta: float) -> void:
+	_reloadChar(GlobalVariables.character)
+	
 	if paletteRow <= 1:
 		paletteRow = 1
 	sprite_2d.material.set_shader_parameter("accessRow",int(paletteRow))
@@ -550,3 +548,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			GlobalVariables.paused = false
 	if anim_name == "swim" + GlobalVariables.marioVisual:
 		animation_player.current_animation = "swim" + GlobalVariables.marioVisual
+
+func _reloadChar(character:String):
+	for i in 2:
+		physicsString = Files.get_file("characters/" + character + "/physics.json")
+	physics = JSON.parse_string(physicsString)
+	sprite_2d.texture = Files.load_image("characters/" + character + "/animations1.png")
+	sprite_2d.material.set_shader_parameter("palette",Files.load_image("characters/" + character + "/playerpalette.png"))

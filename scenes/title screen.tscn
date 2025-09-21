@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://jdyx0sdk71r8"]
+[gd_scene load_steps=38 format=4 uid="uid://jdyx0sdk71r8"]
 
 [ext_resource type="Script" uid="uid://ctnt2olrhhc1f" path="res://scripts/title_screen.gd" id="1_h7nan"]
 [ext_resource type="PackedScene" uid="uid://u3rxnc0qfoau" path="res://scenes/HUD.tscn" id="2_kmjn6"]
@@ -15,9 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://k2r703mpq3t8" path="res://scenes/blocks/coin.tscn" id="14_jms7e"]
 [ext_resource type="Script" uid="uid://cpbm10o4slycl" path="res://scripts/level_read.gd" id="15_jsfa5"]
 [ext_resource type="Texture2D" uid="uid://3hopto2kro8a" path="res://images/Title.png" id="16_5hhym"]
+[ext_resource type="Shader" uid="uid://balppuiemyvlp" path="res://shaders/PaletteSwapScreen.gdshader" id="16_50bt7"]
 [ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Mystery Font.ttf" id="17_k7t25"]
+[ext_resource type="Texture2D" uid="uid://cvkk83sgj8en7" path="res://images/palettes/pipePalette.png" id="17_tf2d2"]
+[ext_resource type="Texture2D" uid="uid://d3c1w6yok68hp" path="res://images/palettes/groundPalette.png" id="18_qv6qq"]
 [ext_resource type="Texture2D" uid="uid://8a6r6esd3f0n" path="res://images/mushroom-select.png" id="18_vuke4"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="19_7q7jk"]
+[ext_resource type="Texture2D" uid="uid://fn8csw0hv184" path="res://images/palettes/cloudPalette.png" id="19_wnbcl"]
 [ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="20_tmweu"]
 [ext_resource type="Texture2D" uid="uid://cy6lqa6m54sj" path="res://images/tiles-bg.png" id="21_h7nan"]
 [ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://characters/mario/animations1.png" id="21_qoa36"]
@@ -99,11 +103,6 @@ texture = ExtResource("21_h7nan")
 
 [sub_resource type="TileSet" id="TileSet_c3a1m"]
 sources/0 = SubResource("TileSetAtlasSource_kmjn6")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_liahv"]
-shader = ExtResource("19_7q7jk")
-shader_parameter/palette = ExtResource("4_34fcq")
-shader_parameter/accessRow = 1
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_wc255"]
 tile_data = PackedInt32Array(0, 131075, 4, 1, 196611, 4, 2, 196611, 4, 3, 262147, 4)
@@ -266,6 +265,21 @@ sources/1 = SubResource("TileSetScenesCollectionSource_n6f6p")
 sources/0 = SubResource("TileSetAtlasSource_e4yps")
 pattern_0 = SubResource("TileMapPattern_wc255")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lw2sn"]
+shader = ExtResource("16_50bt7")
+shader_parameter/palette = ExtResource("17_tf2d2")
+shader_parameter/accessRow = 6
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_quc56"]
+shader = ExtResource("16_50bt7")
+shader_parameter/palette = ExtResource("18_qv6qq")
+shader_parameter/accessRow = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3atg"]
+shader = ExtResource("16_50bt7")
+shader_parameter/palette = ExtResource("19_wnbcl")
+shader_parameter/accessRow = 1
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7nan"]
 shader = ExtResource("19_7q7jk")
 shader_parameter/palette = ExtResource("4_34fcq")
@@ -280,21 +294,6 @@ shader_parameter/accessRow = 1
 shader = ExtResource("19_7q7jk")
 shader_parameter/palette = ExtResource("20_tmweu")
 shader_parameter/accessRow = 1
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4nob0"]
-atlas = ExtResource("21_qoa36")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6advc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4nob0")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_h7nan")
@@ -311,7 +310,6 @@ color = Color(0.580392, 0.580392, 1, 1)
 
 [node name="Tiles" type="TileMapLayer" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_liahv")
 tile_map_data = PackedByteArray("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")
 tile_set = SubResource("TileSet_0hog8")
 script = ExtResource("15_jsfa5")
@@ -323,6 +321,30 @@ zoom = Vector2(3, 3)
 limit_left = 0
 limit_top = 0
 limit_bottom = 240
+
+[node name="Pipes" type="CanvasLayer" parent="Camera2D"]
+
+[node name="PipePal" type="ColorRect" parent="Camera2D/Pipes"]
+material = SubResource("ShaderMaterial_lw2sn")
+offset_right = 2301.0
+offset_bottom = 2430.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Ground" type="CanvasLayer" parent="Camera2D"]
+
+[node name="GroundPal" type="ColorRect" parent="Camera2D/Ground"]
+material = SubResource("ShaderMaterial_quc56")
+offset_right = 2301.0
+offset_bottom = 2430.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Clouds" type="CanvasLayer" parent="Camera2D"]
+
+[node name="CloudPal" type="ColorRect" parent="Camera2D/Clouds"]
+material = SubResource("ShaderMaterial_h3atg")
+offset_right = 2301.0
+offset_bottom = 2430.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -355,11 +377,13 @@ texture = ExtResource("18_vuke4")
 
 [node name="Area2D" type="CharacterBody2D" parent="."]
 
-[node name="Mario" type="AnimatedSprite2D" parent="."]
+[node name="Mario" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_qvog1")
 position = Vector2(48, 192)
-sprite_frames = SubResource("SpriteFrames_6advc")
+texture = ExtResource("21_qoa36")
+hframes = 16
+vframes = 2
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 z_index = 263
