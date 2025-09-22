@@ -21,7 +21,6 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)
-	update_screen()
 	
 	if Input.is_action_just_pressed("down"):
 		selectedButton += 1

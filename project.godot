@@ -20,9 +20,9 @@ config/icon="uid://bojuvwbmeex17"
 
 [autoload]
 
+Save="*res://scripts/autoloads/save.gd"
 GlobalVariables="*res://scripts/autoloads/global_variables.gd"
 Music="*res://scripts/autoloads/music.gd"
-Save="*res://scripts/autoloads/save.gd"
 Files="*res://scripts/autoloads/file-mover.gd"
 
 [display]

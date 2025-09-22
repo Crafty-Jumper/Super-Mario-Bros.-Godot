@@ -5,7 +5,6 @@ extends Control
 @onready var coin_label: RichTextLabel = $CoinLabel
 @onready var character_label: RichTextLabel = $CharacterLabel
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var json
 	for i in 2:
@@ -14,6 +13,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	
 	if GlobalVariables.world == 36:
 		level_label.text = " -" + str(GlobalVariables.level)
 	else:

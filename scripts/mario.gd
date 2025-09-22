@@ -52,7 +52,6 @@ func _ready() -> void:
 	_reloadChar(GlobalVariables.character)
 
 func _physics_process(delta: float) -> void:
-	_reloadChar(GlobalVariables.character)
 	
 	if paletteRow <= 1:
 		paletteRow = 1

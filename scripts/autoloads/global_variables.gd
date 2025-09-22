@@ -10,15 +10,15 @@ var marioInvuln = 0
 var marioLives = 3
 var marioInvinc = 0
 var marioState = 0
-var marioSize = 0
-var marioPower = 2
+var marioSize = 1
+var marioPower = 3
 
 var freecam : bool = false
 
 var paused : bool = false
-var world : int = 1
+var world : int = 4
 var level : int = 2
-var sub : int = 1
+var sub : int = 2
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false
@@ -61,10 +61,11 @@ var levelBGColor = get_built_in_property(levelPath,"backgroundcolor")
 
 
 func _ready() -> void:
+	character = Save.config.get_value("Misc","character")
 	fixpath()
 
 func _process(delta: float) -> void:
-	character = Save.config.get_value("Misc","character")
+	
 	
 	if Input.is_action_just_pressed("pause"):
 		if pauseMenuOpen:

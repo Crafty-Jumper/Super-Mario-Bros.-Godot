@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="16" height="15" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#000000" nextlayerid="4" nextobjectid="3">
+ <editorsettings>
+  <export format="csv"/>
+ </editorsettings>
+ <properties>
+  <property name="bonus" type="bool" value="false"/>
+  <property name="intermission" type="bool" value="false"/>
+  <property name="marioX" type="int" value="32"/>
+  <property name="marioY" type="int" value="48"/>
+  <property name="paletteBLU" type="int" value="2"/>
+  <property name="paletteBRN" type="int" value="2"/>
+  <property name="paletteGRN" type="int" value="2"/>
+  <property name="pipes" value="1"/>
+  <property name="pipescreen" value="8"/>
+  <property name="song" type="int" value="2"/>
+  <property name="underwater" type="bool" value="false"/>
+ </properties>
+ <tileset firstgid="1" source="../tilesmb.tsx"/>
+ <tileset firstgid="257" source="../enemiessmb.tsx"/>
+ <layer id="1" name="Tiles" width="16" height="15">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+29,0,0,0,29,29,29,29,29,29,29,0,0,0,0,73,
+29,0,0,0,0,0,0,0,0,0,29,0,0,0,0,73,
+29,0,0,0,0,0,0,0,0,0,29,0,0,0,0,73,
+29,0,0,0,0,194,194,194,194,194,29,0,0,0,0,73,
+29,0,0,0,29,194,194,194,194,194,29,29,29,0,0,73,
+29,0,0,0,29,29,29,29,29,29,29,0,0,0,30,73,
+29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,
+29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,
+29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,
+29,0,0,0,0,0,0,0,0,0,0,0,0,90,92,94,
+29,0,0,0,0,0,0,0,0,0,0,0,0,91,93,95,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <layer id="3" name="Enemies" width="16" height="15">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
