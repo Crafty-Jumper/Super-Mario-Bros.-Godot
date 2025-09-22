@@ -4,6 +4,7 @@ extends Node
 var generatedEnemy : PackedScene
 var generatorDirection = 1
 var generatorActive : bool = false
+var lakituActive : bool = false
 
 var marioVisual = "Small"
 var marioInvuln = 0
@@ -17,8 +18,8 @@ var freecam : bool = false
 
 var paused : bool = false
 var world : int = 4
-var level : int = 2
-var sub : int = 2
+var level : int = 1
+var sub : int = 0
 var coin : int = 0
 var score : int = 0
 var pauseMenuOpen : bool = false

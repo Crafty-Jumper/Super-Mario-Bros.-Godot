@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5gjjnninrnbb"]
+
+[ext_resource type="PackedScene" uid="uid://bffcf7iwcgdw8" path="res://scenes/templates/enemy.tscn" id="1_mm1st"]
+[ext_resource type="Script" uid="uid://cqvo45xulimwr" path="res://scripts/spinyegg.gd" id="2_dut7e"]
+[ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="3_8ydjs"]
+[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="4_qr86x"]
+[ext_resource type="Texture2D" uid="uid://4bj44giwcxcw" path="res://images/spiny-egg.png" id="5_bouqx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hbs08"]
+resource_local_to_scene = true
+shader = ExtResource("3_8ydjs")
+shader_parameter/palette = ExtResource("4_qr86x")
+shader_parameter/accessRow = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbv4e"]
+atlas = ExtResource("5_bouqx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6sio"]
+atlas = ExtResource("5_bouqx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vp1iq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbv4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6sio")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="CharacterBody2D" instance=ExtResource("1_mm1st")]
+palette = 1
+gravity = 10
+maxFallSpeed = 400
+marioJumpAction = 2
+fireballAction = 1
+starAction = 1
+
+[node name="Node" type="Node" parent="." index="0"]
+script = ExtResource("2_dut7e")
+
+[node name="AnimatedSprite2D" parent="." index="3"]
+material = SubResource("ShaderMaterial_hbs08")
+sprite_frames = SubResource("SpriteFrames_vp1iq")
+frame_progress = 0.90478116

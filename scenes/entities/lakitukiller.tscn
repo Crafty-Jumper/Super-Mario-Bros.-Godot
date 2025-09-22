@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfstlka8dncgj"]
+
+[ext_resource type="Script" uid="uid://d4pghg72x08j" path="res://scripts/lakitukiller.gd" id="1_5a3u0"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_5a3u0")
