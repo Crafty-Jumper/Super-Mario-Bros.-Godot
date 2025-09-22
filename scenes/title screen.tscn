@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://jdyx0sdk71r8"]
+[gd_scene load_steps=36 format=4 uid="uid://jdyx0sdk71r8"]
 
 [ext_resource type="Script" uid="uid://ctnt2olrhhc1f" path="res://scripts/title_screen.gd" id="1_h7nan"]
 [ext_resource type="PackedScene" uid="uid://u3rxnc0qfoau" path="res://scenes/HUD.tscn" id="2_kmjn6"]
@@ -22,9 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://8a6r6esd3f0n" path="res://images/mushroom-select.png" id="18_vuke4"]
 [ext_resource type="Shader" uid="uid://dha41nql3qnc3" path="res://shaders/PaletteSwap.gdshader" id="19_7q7jk"]
 [ext_resource type="Texture2D" uid="uid://fn8csw0hv184" path="res://images/palettes/cloudPalette.png" id="19_wnbcl"]
-[ext_resource type="Texture2D" uid="uid://ddsqisbwi1hke" path="res://images/palettes/palette.png" id="20_tmweu"]
 [ext_resource type="Texture2D" uid="uid://cy6lqa6m54sj" path="res://images/tiles-bg.png" id="21_h7nan"]
-[ext_resource type="Texture2D" uid="uid://bmjw3of2usx6q" path="res://characters/mario/animations1.png" id="21_qoa36"]
+[ext_resource type="PackedScene" uid="uid://e0lmnsgvoln4" path="res://scenes/entities/player.tscn" id="23_34fcq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kmjn6"]
 texture = ExtResource("21_h7nan")
@@ -290,11 +289,6 @@ shader = ExtResource("19_7q7jk")
 shader_parameter/palette = ExtResource("4_34fcq")
 shader_parameter/accessRow = 1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvog1"]
-shader = ExtResource("19_7q7jk")
-shader_parameter/palette = ExtResource("20_tmweu")
-shader_parameter/accessRow = 1
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_h7nan")
 
@@ -377,20 +371,14 @@ texture = ExtResource("18_vuke4")
 
 [node name="Area2D" type="CharacterBody2D" parent="."]
 
-[node name="Mario" type="Sprite2D" parent="."]
-texture_filter = 1
-material = SubResource("ShaderMaterial_qvog1")
-position = Vector2(48, 192)
-texture = ExtResource("21_qoa36")
-hframes = 16
-vframes = 2
-
 [node name="ColorRect2" type="ColorRect" parent="."]
 z_index = 263
 offset_right = 37727.0
 offset_bottom = 10936.0
 size_flags_horizontal = 4
 color = Color(0, 0, 0, 0)
+
+[node name="Mario" parent="." instance=ExtResource("23_34fcq")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0

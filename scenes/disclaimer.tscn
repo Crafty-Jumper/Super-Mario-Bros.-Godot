@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://n1bwqxbsyvdt"]
+
+[ext_resource type="FontFile" uid="uid://drfy77opnvp3b" path="res://Mystery Font.ttf" id="1_ph5s3"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(128, 120)
+zoom = Vector2(3, 3)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 256.0
+offset_bottom = 240.0
+color = Color(0, 0, 0, 1)
+
+[node name="Disclaimer" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_right = 256.0
+offset_bottom = 240.0
+theme_override_fonts/normal_font = ExtResource("1_ph5s3")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "
+
+
+           [color=#ff0000]DISCLAIMER[/color]
+
+
+   This Game is [color=#ffff00]not[/color] part of
+ nintendo. This entire game is
+            [color=#0ff]fan-made.[/color]
+
+    This project was single
+        handedly made by
+         [color=#ffb900]Crafty Jumper.[/color]
+
+  Most sprites and assets are
+  by nintendo. Everything else
+        was made by me."

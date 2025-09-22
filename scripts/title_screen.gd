@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var mushroom_select: Sprite2D = $"Mushroom-select"
-@onready var mario: Sprite2D = $Mario
+@onready var mario: CharacterBody2D = $Mario
 @onready var title: Sprite2D = $Title
 @onready var color_rect: ColorRect = $ColorRect
 @onready var color_rect_2: ColorRect = $ColorRect2
@@ -18,9 +18,11 @@ var targetString : String = ""
 func _ready() -> void:
 	Music.loadtrack("None",false)
 	update_screen()
+	mario.inputAffects = false
+	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)
 
 func _process(_delta: float) -> void:
-	mario.position = Vector2(GlobalVariables.marioX,GlobalVariables.marioY)
+	mushroom_select.position.y = 132 + selectedButton * 16
 	
 	if Input.is_action_just_pressed("down"):
 		selectedButton += 1
@@ -40,11 +42,10 @@ func _process(_delta: float) -> void:
 		if selectedButton == 1:
 			fading = true
 			targetString = "res://scenes/settings.tscn"
+		if selectedButton == 3:
+			get_tree().queue_delete(get_tree())
 
 func update_screen():
-	mario.texture = Files.load_image("characters/" + GlobalVariables.character + "/animations1.png")
-	mario.material.set_shader_parameter("palette",Files.load_image("characters/" + GlobalVariables.character + "/playerPalette.png"))
-	mushroom_select.position.y = 132 + selectedButton * 16
 	title.material.set_shader_parameter("accessRow",GlobalVariables.theme)
 	color_rect.color = Color(GlobalVariables.levelBGColor)
 	pipe_pal.material.set_shader_parameter("accessRow",GlobalVariables.pipeTheme)
