@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Super Mario Bros. Godot"
-run/main_scene="uid://jdyx0sdk71r8"
+run/main_scene="uid://n1bwqxbsyvdt"
 config/custom_user_dir_name="mario-godot"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
